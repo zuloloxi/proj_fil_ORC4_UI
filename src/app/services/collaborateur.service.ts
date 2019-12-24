@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { CollaborateurDTO } from '../shared-data/collaborateur-dto';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,16 @@ export class CollaborateurService {
   };
   search = new Subject<any>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              @Inject('BACKEND_URL') private baseUrl: string) { }
 
   // observable
   getAllCollaborateurs(): Observable<CollaborateurDTO[]> {
 
-    return this.http.get<CollaborateurDTO[]>('http://localhost:8080/collaborateurs');
+    return this.http.get<CollaborateurDTO[]>(`${this.baseUrl}/inputs/`)
+      .pipe(
+        map((collaborateurArray: any[]) => collaborateurArray.map(collaborateur => new CollaborateurDTO(collaborateur)))
+      );
 
   }
 

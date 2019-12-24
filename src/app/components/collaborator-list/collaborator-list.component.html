@@ -1,31 +1,36 @@
-f,codisoicds
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<ng-container *ngIf="collaborateurs">
+
+  <h2>{{collaborateurs.length }} Collaborateurs </h2>
+  <p-table [value]="collaborateurs">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Uid</th>
+            <th colspan="2">Nom</th>
+            <th colspan="2">Prénom</th>
+            <th colspan="3">Fonction</th>
+            <th>code Agence</th>
+            <th>à Migrer</th>
+        </tr>
+    </ng-template>
+    {{collaborateurs.length }}
+
+      <ng-template pTemplate="body" let-collaborateur>
+          <tr>
+              <td>{{collaborateur.uid}}</td>
+              <td colspan="2">{{collaborateur.nom}}</td>
+              <td colspan="2">{{collaborateur.prenom}}</td>
+              <td colspan="3">{{collaborateur.fonction}}</td>
+              <td>{{collaborateur.codeAgence}}</td>
+              <td>{{collaborateur.aMigrer}}</td>
+              <td>
+                <i class="icone far fa-eye fa-lg"></i>&nbsp;&nbsp;
+                <i class="icone fas fa-exchange-alt fa-lg"></i>&nbsp;&nbsp;
+                <i class="icone far fa-file fa-lg"></i>
+              </td>
+          </tr>
+
+      </ng-template>
+
+  </p-table>
+
+</ng-container>

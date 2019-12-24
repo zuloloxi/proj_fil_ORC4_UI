@@ -29,6 +29,9 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": []
@@ -125,6 +128,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "CollecteCollaborateur"
+    }
+  },
+  "defaultProject": "CollecteCollaborateur",
+  "schematics": {
+    "@schematics/angular:component": {
+      "spec": false
+    }
+  }
 }

@@ -1,0 +1,45 @@
+<ng-container *ngIf="regles">
+
+    <h2>{{regles.length }} Règles </h2>
+    <p-table [value]="regles">
+      <ng-template pTemplate="header">
+          <tr>
+              <!-- <th>deploiement</th> -->
+              <th colspan="3">Métier</th>
+              <th colspan="3">Poste type</th>
+              <th colspan="1">Domaine</th>
+              <th colspan="2">Strates Équipes</th>
+              <th colspan="2">Profil</th>
+              <th colspan="1">Équipes Supervisées</th>
+              <th>Descriptif</th>
+              <th colspan="2">competences</th>
+          </tr>
+      </ng-template>
+      {{regles.length }}
+
+        <ng-template pTemplate="body" let-regle>
+            <tr>
+                <!-- <td>{{regle.deploiement}}</td> -->
+                <td colspan="3">{{regle.metier}}</td>
+                <td colspan="3">{{regle.posteType}}</td>
+                <td colspan="1">{{regle.domaine}}</td>
+                <td colspan="2">{{regle.stratesEquipes}}</td>
+                <td colspan="2">{{regle.profil}}</td>
+                <td colspan="1">{{regle.equipesSupervisees}}</td>
+                <td>{{regle.descriptifEquipesSupervisses}}</td>
+                <td colspan="2">
+                    <ng-container *ngFor="let competence of regle.competences">
+                        {{competence.competence}}
+                    </ng-container>
+                </td>
+                <td>
+                  <i class="icone far fa-eye fa-lg"></i>&nbsp;&nbsp;
+                  <i class="icone fas fa-fw fa-book fa-lg"></i>&nbsp;&nbsp;
+                </td>
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+
+  </ng-container>
