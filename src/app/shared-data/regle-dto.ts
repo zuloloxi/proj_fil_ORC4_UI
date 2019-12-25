@@ -1,15 +1,16 @@
+import { CompetenceDTO } from './competence-dto';
 
 export interface RegleOption {
     id?: string;
     deploiement: string;
-    metier: string;
+    metier?: string;
     posteType: string;
     domaine: string;
     stratesEquipes: string;
     profil: string;
     equipesSupervisees: string;
     descriptifEquipesSupervisses: string;
-    competences: string;
+    competences: CompetenceDTO;
 }
 
 export class RegleDTO {
@@ -22,12 +23,12 @@ export class RegleDTO {
     profil: string;
     equipesSupervisees: string;
     descriptifEquipesSupervisses: string;
-    competences: string;
+    competences: CompetenceDTO;
 
     constructor(options: RegleOption) {
         this.id = options.id;
         this.deploiement = options.deploiement;
-        this.metier = options.metier;
+        this.metier = options.metier || '';
         this.posteType = options.posteType;
         this.domaine = options.domaine;
         this.stratesEquipes = options.stratesEquipes;

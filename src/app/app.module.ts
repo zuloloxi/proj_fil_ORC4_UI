@@ -11,6 +11,8 @@ import {CheckboxModule} from 'primeng/checkbox';
 import { MenuComponent } from './components/menu/menu.component';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { ReglesListComponent } from './components/regles-list/regles-list.component';
+import {DialogModule} from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { ReglesListComponent } from './components/regles-list/regles-list.compon
     TableModule,
     CheckboxModule,
     TabMenuModule,
+    DialogModule,
+    BrowserAnimationsModule,
     HttpClientModule
 
   ],

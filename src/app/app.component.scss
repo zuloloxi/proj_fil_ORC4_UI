@@ -12,9 +12,14 @@ body {
 
 .icone {
     opacity: 50%;
-
 }
 
 .icone:hover{
     opacity: 100%;
+    cursor: pointer;
+    // font-size: 150%;
+}
+
+.icone-sort {
+    float:right
 }
