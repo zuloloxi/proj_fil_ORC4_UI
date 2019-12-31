@@ -1,0 +1,55 @@
+<form [formGroup]="regleForm" (ngSubmit)="saveRegle()">
+
+    <div class="line">
+        <label>Déploiement :
+                <input type="text" formControlName="deploiement" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Métier :
+                <input type="text" formControlName="metier" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Poste Type:
+                <input type="text" formControlName="posteType" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Domaine:
+                <input type="text" formControlName="domaine" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Strates équipes:
+                <input type="text" formControlName="stratesEquipes" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Profil:
+                <input type="text" formControlName="profil" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Equipes supervisées:
+                <input type="text" formControlName="equipesSupervisees" >
+        </label>
+    </div>
+    <div class="line">
+        <label>Descriptif équipes supervisées:
+                <input type="text" formControlName="descriptifEquipesSupervisses" >
+        </label>
+    </div>
+    <div class="line" >
+        <label> Compétences :
+                <select multiple formControlName="competences" >
+                <option *ngFor="let comp of competencesList" [ngValue]="comp">
+                    {{ comp.competence }}
+                   </option>
+                 </select>
+        <!-- <input type="text" formControlName="type"> -->
+        </label>
+    </div>
+    <button *ngIf="idUpdate"> Modifier </button>
+    <button *ngIf="!idUpdate"> Créer </button>
+    </form>

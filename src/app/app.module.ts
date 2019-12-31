@@ -14,6 +14,8 @@ import { ReglesListComponent } from './components/regles-list/regles-list.compon
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
+import { RegleFormComponent } from './components/regle-form/regle-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { CompetenceListComponent } from './components/competence-list/competence
     CollaboratorListComponent,
     MenuComponent,
     ReglesListComponent,
-    CompetenceListComponent
+    CompetenceListComponent,
+    RegleFormComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { CompetenceListComponent } from './components/competence-list/competence
     TabMenuModule,
     DialogModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [

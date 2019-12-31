@@ -55,4 +55,12 @@ export class ReglesListComponent implements OnInit {
 
   }
 
+  goUpdate(regle: RegleDTO) {
+    this.router.navigate(['/regleupdate', regle.id]);
+  }
+
+  goCreate() {
+    this.router.navigate(['/reglecreate']);
+}
+
 }
