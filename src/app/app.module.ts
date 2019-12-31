@@ -13,6 +13,7 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import { ReglesListComponent } from './components/regles-list/regles-list.component';
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     CollaboratorListComponent,
     MenuComponent,
-    ReglesListComponent
+    ReglesListComponent,
+    CompetenceListComponent
   ],
   imports: [
     BrowserModule,

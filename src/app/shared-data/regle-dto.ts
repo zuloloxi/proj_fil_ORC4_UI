@@ -1,7 +1,7 @@
 import { CompetenceDTO } from './competence-dto';
 
 export interface RegleOption {
-    id?: string;
+    id?: number;
     deploiement: string;
     metier?: string;
     posteType: string;
@@ -14,7 +14,7 @@ export interface RegleOption {
 }
 
 export class RegleDTO {
-    id: string;
+    id: number;
     deploiement: string;
     metier: string;
     posteType: string;

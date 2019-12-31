@@ -16,9 +16,13 @@ export class RegleService {
 
   getAllRegles(): Observable<RegleDTO[]> {
 
-    return this.http.get<RegleDTO[]>(`${this.baseUrl}/regle/`)
+    return this.http.get<RegleDTO[]>(`${this.baseUrl}/regles/`)
       .pipe(
         map((regleArray: any[]) => regleArray.map(regle => new RegleDTO(regle)))
       );
+  }
+
+  deleteRegle(id: number): Observable<RegleDTO> {
+    return this.http.delete<RegleDTO>(`${this.baseUrl}/regles/${id}`);
   }
 }

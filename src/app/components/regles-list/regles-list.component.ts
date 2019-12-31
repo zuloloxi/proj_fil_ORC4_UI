@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegleService } from 'src/app/services/regle.service';
 import { RegleDTO } from 'src/app/shared-data/regle-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regles-list',
@@ -12,13 +13,15 @@ export class ReglesListComponent implements OnInit {
   regles: RegleDTO[] = [];
   display: boolean;
   regleDetail: RegleDTO;
+  httpMessage: string;
 
-  constructor(private regleService: RegleService) { }
+  constructor(private router: Router,
+              private regleService: RegleService) { }
 
   ngOnInit() {
     this.regleService.getAllRegles().subscribe(
       regleList => this.regles = regleList,
-      error => console.log('erreur')
+      error => console.log(error)
     );
   }
 
@@ -26,6 +29,15 @@ export class ReglesListComponent implements OnInit {
     this.regleDetail = regle;
     this.display = !this.display;
   }
+
+  deleteRegle(id: number) {
+    return this.regleService.deleteRegle(id).subscribe(
+      () => {this.regles.splice(this.regles.findIndex(regle => regle.id === id), 1);
+             console.log("refresh");},
+      error =>  {this.httpMessage = 'Erreur ' + error.status + ' : ' + error.error.message;
+                 console.log('okkk ' + this.httpMessage); }
+  );
+}
 
   reformatMetier(metier: string) {
     const truncPosition = metier.indexOf('\n');

@@ -49,7 +49,7 @@ export class CollaborateurDTO {
     aMigrer: string;
 
     constructor(options: CollaborateurOption) {
-        this.id  = options.id;
+        this.id  = options.id  || 0;
         this.uid = options.uid;
         this.civilite = options.civilite;
         this.nom = options.nom ;
