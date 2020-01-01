@@ -12,7 +12,6 @@ export class CollaboratorItemComponent implements OnInit {
 
   collaborateur : CollaborateurDTO;
   display=true;
-  collaborateurItem : CollaborateurDTO;
 
   constructor(private activateRoute: ActivatedRoute, private collaborateurService: CollaborateurService) { }
 
@@ -20,11 +19,6 @@ export class CollaboratorItemComponent implements OnInit {
     const collaborateurUid = +this.activateRoute.snapshot.paramMap.get('collaborateurUid');
     this.collaborateurService.getOneCollaborateur(collaborateurUid).subscribe(collaborateur => this.collaborateur = collaborateur);
     console.log(this.collaborateur);
-  }
-
-  viewDetail(collaborateur: CollaborateurDTO) {
-    this.collaborateurItem = collaborateur;
-    this.display = !this.display;
   }
 
   showDialog() {
