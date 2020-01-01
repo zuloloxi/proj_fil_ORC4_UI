@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CollaboratorListComponent } from './components/collaborator-list/collaborator-list.component';
 import { ReglesListComponent } from './components/regles-list/regles-list.component';
+import { CollaboratorItemComponent } from './components/collaborator-item/collaborator-item.component';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 
 
 const routes: Routes = [
   { path: 'collaborateurs', component: CollaboratorListComponent },
+  { path: 'collaborateurs/:collaborateurUid', component: CollaboratorItemComponent },
   { path: 'regles', component: ReglesListComponent },
-  { path: 'competences', component: CompetenceListComponent },
+  { path: 'competences', component: ReglesListComponent },
   { path: 'fichier', component: ReglesListComponent },
   { path: 'reglecreate', component: RegleFormComponent },
   { path: 'regleupdate/:id', component: RegleFormComponent },

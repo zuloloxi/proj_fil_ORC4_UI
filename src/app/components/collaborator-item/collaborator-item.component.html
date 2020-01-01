@@ -1,0 +1,48 @@
+
+ <ng-container *ngIf="collaborateur">
+   <p-dialog header="Détail du collaborateur" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
+
+    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '700px'}" styleClass="ui-card-shadow">
+        <p-header>
+            <b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
+        </p-header>
+
+        <div>
+            {{collaborateur.telephone}} , {{collaborateur.mail}}
+         <br><br>
+         LOCALISATION : {{collaborateur.localisationCollaborateur}}
+        <br>
+        PJ : {{collaborateur.pj}}
+        <br>
+        UO AFFECTATION : {{collaborateur.uoAffectation}}
+        <br>
+        ETAGE: {{collaborateur.etage}}
+        <br>
+        CODE: {{collaborateur.codeImmeubleEmplacementCollaborateur}}
+        <br>
+        REGION : {{collaborateur.region}} &nbsp;&nbsp;
+        CODE REGION : {{collaborateur.codeRegion}}
+        <br>
+        TERRITOIRE : {{collaborateur.niveauTerritoire}} &nbsp;&nbsp;
+        CODE TERRITOIRE : {{collaborateur.codeTerritoire}}
+        <br>
+        ENTITE : {{collaborateur.niveauEntite}} &nbsp;&nbsp;
+        CODE ENTITE : {{collaborateur.codeEntite}}
+        <br>
+        AGENCE : {{collaborateur.niveauAgence}} &nbsp;&nbsp;
+        CODE AGENCE : {{collaborateur.codeAgence}}
+        </div>
+
+        <p-footer>
+            <b> A MIGRER :</b> {{collaborateur.aMigrer}}
+            &nbsp;&nbsp; (<a [routerLink]="['/collaborateurs']"> Retour... </a>)
+        </p-footer>
+    </p-card>
+       
+    </p-dialog>
+  
+<br><br>
+<b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}} <a class="a-prop" (click)="showDialog()"> Voir le détail ... </a>&nbsp;&nbsp; ou &nbsp;&nbsp; 
+<a [routerLink]="['/collaborateurs']"> Retour... </a>
+   
+</ng-container>

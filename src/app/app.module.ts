@@ -13,6 +13,9 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import { ReglesListComponent } from './components/regles-list/regles-list.component';
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CollaboratorItemComponent } from './components/collaborator-item/collaborator-item.component';
+import {CardModule} from 'primeng/card';
+
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -23,6 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     CollaboratorListComponent,
     MenuComponent,
+    ReglesListComponent,
+    CollaboratorItemComponent,
     ReglesListComponent,
     CompetenceListComponent,
     RegleFormComponent
@@ -35,6 +40,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabMenuModule,
     DialogModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    CardModule,
     HttpClientModule,
     ReactiveFormsModule
 

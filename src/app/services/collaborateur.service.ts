@@ -26,4 +26,10 @@ export class CollaborateurService {
 
   }
 
+  getOneCollaborateur(collaborateurUid: number): Observable<CollaborateurDTO> {
+    return this.http.get(`${this.baseUrl}/inputs/uid/${collaborateurUid}`) .pipe(
+      map((collaborateurInfos: any) => new CollaborateurDTO(collaborateurInfos))
+      );
+  }
+
 }
