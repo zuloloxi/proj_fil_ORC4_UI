@@ -20,6 +20,7 @@ import { CompetenceListComponent } from './components/competence-list/competence
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {ButtonModule} from 'primeng/button';
 
 
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
@@ -50,6 +51,7 @@ import { CompetencePipe } from './pipes/competence.pipe';
     MessagesModule,
     MessageModule,
     MultiSelectModule,
+    ButtonModule,
     CardModule,
     HttpClientModule,
     ReactiveFormsModule,

@@ -11,5 +11,4 @@ export class CompetencePipe implements PipeTransform {
     competences.forEach(competence => competenceLibelle.push(competence.competence));
     return competenceLibelle.toString();
   }
-
 }
