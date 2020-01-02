@@ -13,9 +13,14 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import { ReglesListComponent } from './components/regles-list/regles-list.component';
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CollaboratorItemComponent } from './components/collaborator-item/collaborator-item.component';
+import {CardModule} from 'primeng/card';
+
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import { RegleFormComponent } from './components/regle-form/regle-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +29,10 @@ import {MessageModule} from 'primeng/message';
     CollaboratorListComponent,
     MenuComponent,
     ReglesListComponent,
-    CompetenceListComponent
+    CollaboratorItemComponent,
+    ReglesListComponent,
+    CompetenceListComponent,
+    RegleFormComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,9 @@ import {MessageModule} from 'primeng/message';
     BrowserAnimationsModule,
     MessagesModule,
     MessageModule,
-    HttpClientModule
+    CardModule,
+    HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [

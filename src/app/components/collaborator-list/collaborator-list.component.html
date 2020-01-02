@@ -23,8 +23,8 @@
               <td>{{collaborateur.codeAgence}}</td>
               <td>{{collaborateur.aMigrer}}</td>
               <td>
-                <i class="icone far fa-eye fa-lg"></i>&nbsp;&nbsp;
-                <i class="icone fas fa-exchange-alt fa-lg"></i>&nbsp;&nbsp;
+                <a [routerLink]="['/collaborateurs',collaborateur.uid]"> <i class="icone far fa-eye fa-lg"> </i> </a> &nbsp;&nbsp;
+                <i class="icone fas fa-exchange-alt fa-lg" ></i>&nbsp;&nbsp;
                 <i class="icone far fa-file fa-lg"></i>
               </td>
           </tr>
