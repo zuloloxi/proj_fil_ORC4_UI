@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RegleService } from 'src/app/services/regle.service';
 import { CompetenceService } from 'src/app/services/competence.service';
 
+
+
 @Component({
   selector: 'app-regle-form',
   templateUrl: './regle-form.component.html',
@@ -61,7 +63,6 @@ export class RegleFormComponent implements OnInit {
 
     }
     saveRegle() {
-    //  console.log(this.regleForm.get('metier').value);
       this.regleToCreate = new RegleDTO(
         {
         id: this.idUpdate ? this.idUpdate : 0,
@@ -75,14 +76,12 @@ export class RegleFormComponent implements OnInit {
         descriptifEquipesSupervisses: this.regleForm.get('descriptifEquipesSupervisses').value,
         competences: this.regleForm.get('competences').value}
       );
-
-      if (this.regleToCreate.competences == null) {alert('liste de compétence obligatoire'); } else {
-        console.log(this.regleToCreate);
-        this.regleService.saveRegle(this.regleToCreate);
-        this.regleService.refreshRegles.subscribe(
+      if (this.regleToCreate.competences == null) {this.regleToCreate.competences = [] }  ;
+      this.regleService.saveRegle(this.regleToCreate);
+      this.regleService.refreshRegles.subscribe(
         refresh => this.router.navigate(['/regles'])
       );
-     }
+
     }
 
 }

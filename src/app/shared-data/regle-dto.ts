@@ -10,7 +10,7 @@ export interface RegleOption {
     profil: string;
     equipesSupervisees: string;
     descriptifEquipesSupervisses: string;
-    competences: CompetenceDTO;
+    competences: CompetenceDTO[];
 }
 
 export class RegleDTO {
@@ -23,7 +23,7 @@ export class RegleDTO {
     profil: string;
     equipesSupervisees: string;
     descriptifEquipesSupervisses: string;
-    competences: CompetenceDTO;
+    competences: CompetenceDTO[];
 
     constructor(options: RegleOption) {
         this.id = options.id;

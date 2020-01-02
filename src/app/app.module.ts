@@ -19,8 +19,12 @@ import {CardModule} from 'primeng/card';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {MultiSelectModule} from 'primeng/multiselect';
+
+
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CompetencePipe } from './pipes/competence.pipe';
 
 
 @NgModule({
@@ -32,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CollaboratorItemComponent,
     ReglesListComponent,
     CompetenceListComponent,
-    RegleFormComponent
+    RegleFormComponent,
+    CompetencePipe
   ],
   imports: [
     BrowserModule,
@@ -44,9 +49,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MessagesModule,
     MessageModule,
+    MultiSelectModule,
     CardModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   providers: [

@@ -40,16 +40,13 @@
                 <input type="text" formControlName="descriptifEquipesSupervisses" >
         </label>
     </div>
-    <div class="line" >
-        <label> Compétences :
-                <select multiple formControlName="competences" >
-                <option *ngFor="let comp of competencesList" [ngValue]="comp">
-                    {{ comp.competence }}
-                   </option>
-                 </select>
-        <!-- <input type="text" formControlName="type"> -->
-        </label>
-    </div>
+                 <p class="first"><b>Compétences</b></p>
+                 <p-multiSelect [options]="competencesList" formControlName="competences" optionLabel="competence" [panelStyle]="{minWidth:'12em'}"></p-multiSelect>
+                 <p >Compétences sélectionnées:
+                     <span *ngIf="regleForm.value.competences"> {{regleForm.value.competences  | competence}} </span></p>
+
+
+
     <button *ngIf="idUpdate"> Modifier </button>
     <button *ngIf="!idUpdate"> Créer </button>
     </form>
