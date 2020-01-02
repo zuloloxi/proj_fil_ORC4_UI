@@ -2,7 +2,7 @@
  <ng-container *ngIf="collaborateur">
    <p-dialog header="Détail du collaborateur" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
 
-    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '700px'}" styleClass="ui-card-shadow">
+    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '100%'}" styleClass="ui-card-shadow">
         <p-header>
             <b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
         </p-header>
@@ -10,27 +10,27 @@
         <div>
             {{collaborateur.telephone}} , {{collaborateur.mail}}
          <br><br>
-         LOCALISATION : {{collaborateur.localisationCollaborateur}}
+        <b> LOCALISATION </b>: {{collaborateur.localisationCollaborateur}}
         <br>
-        PJ : {{collaborateur.pj}}
+        <b>PJ </b>: {{collaborateur.pj}}
         <br>
-        UO AFFECTATION : {{collaborateur.uoAffectation}}
+        <b>UO AFFECTATION </b>: {{collaborateur.uoAffectation}}
         <br>
-        ETAGE: {{collaborateur.etage}}
+        <b>ETAGE </b>: {{collaborateur.etage}}
         <br>
-        CODE: {{collaborateur.codeImmeubleEmplacementCollaborateur}}
+        <b>CODE </b>: {{collaborateur.codeImmeubleEmplacementCollaborateur}}
         <br>
-        REGION : {{collaborateur.region}} &nbsp;&nbsp;
-        CODE REGION : {{collaborateur.codeRegion}}
+        <b>REGION </b>: {{collaborateur.region}} &nbsp;&nbsp;
+        <b>CODE REGION </b>: {{collaborateur.codeRegion}}
         <br>
-        TERRITOIRE : {{collaborateur.niveauTerritoire}} &nbsp;&nbsp;
-        CODE TERRITOIRE : {{collaborateur.codeTerritoire}}
+        <b>TERRITOIRE </b>: {{collaborateur.niveauTerritoire}} &nbsp;&nbsp;
+        <b>CODE TERRITOIRE </b>: {{collaborateur.codeTerritoire}}
         <br>
-        ENTITE : {{collaborateur.niveauEntite}} &nbsp;&nbsp;
-        CODE ENTITE : {{collaborateur.codeEntite}}
+        <b>ENTITE </b>: {{collaborateur.niveauEntite}} &nbsp;&nbsp;
+        <b>CODE ENTITE </b>: {{collaborateur.codeEntite}}
         <br>
-        AGENCE : {{collaborateur.niveauAgence}} &nbsp;&nbsp;
-        CODE AGENCE : {{collaborateur.codeAgence}}
+        <b>AGENCE </b>: {{collaborateur.niveauAgence}} &nbsp;&nbsp;
+        <b>CODE AGENCE </b>: {{collaborateur.codeAgence}}
         </div>
 
         <p-footer>
@@ -38,11 +38,11 @@
             &nbsp;&nbsp; (<a [routerLink]="['/collaborateurs']"> Retour... </a>)
         </p-footer>
     </p-card>
-       
+
     </p-dialog>
-  
+
 <br><br>
-<b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}} <a class="a-prop" (click)="showDialog()"> Voir le détail ... </a>&nbsp;&nbsp; ou &nbsp;&nbsp; 
+<b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}} <a class="a-prop" (click)="showDialog()"> Voir le détail ... </a>&nbsp;&nbsp; ou &nbsp;&nbsp;
 <a [routerLink]="['/collaborateurs']"> Retour... </a>
-   
+
 </ng-container>
