@@ -12,12 +12,18 @@ export class ErrorService {
     'ERR_0001.3' : 'Compétence non trouvée',
     'ERR_0002' : 'Changement depuis la demande de mise à jour',
     'ERR_0002.1' : 'La compétence sélectionnée a changé',
-    'ERR_0003' : 'La compétence à supprimer est encore utilisée par une règle'
+    'ERR_0002.2' : 'La compétence à supprimer est encore utilisée par une règle',
+    'ERR_0002.3' : 'La compétence à créer existe déjà'
   };
 
   constructor() { }
 
-  getMessage(errorCode: string): string {
-    return this.errors[errorCode];
+  getMessage(error: any): string {
+    const messageFonctionnel = this.errors[error.error[0]];
+    if (messageFonctionnel.length > 0){
+      return error.error[0] + ' : ' + messageFonctionnel;
+    } else {
+      return 'Erreur ' + error.status + ' : ' + error.error.message;
+    }
   }
 }
