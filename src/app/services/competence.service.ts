@@ -31,4 +31,8 @@ export class CompetenceService {
   saveCompetence(competence: CompetenceDTO): Observable<CompetenceDTO> {
     return this.http.post<CompetenceDTO>(`${this.baseUrl}/competences`, competence);
   }
+
+  modifyCompetence(id: number, competence: CompetenceDTO): Observable<CompetenceDTO> {
+    return this.http.put<CompetenceDTO>(`${this.baseUrl}/competences/${id}`, competence);
+  }
 }

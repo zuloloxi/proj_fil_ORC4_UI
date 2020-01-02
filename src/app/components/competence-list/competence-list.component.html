@@ -5,7 +5,7 @@
     <h2>{{competences.length }} Compétences </h2>
 
     <ng-container *ngIf="!addCompetence">
-        <h5><i class="icone far fa-plus-square fa-md" (click)="addCompetence=!addCompetence"></i> Ajouter une Compétence</h5>
+        <h5><i class="icone far fa-plus-square fa-md" (click)="addCompetence=!addCompetence"> <span style="opacity:unset"> Ajouter une Compétence</span></i></h5>
     </ng-container>
     <ng-container *ngIf="addCompetence">
         <h5><i class="icone far fa-minus-square fa-md" (click)="addCompetence=!addCompetence"></i> </h5>
@@ -14,18 +14,26 @@
                 <ng-template pTemplate="header">
                         <th colspan="3"><input type="text" formControlName="competence" placeholder="Competence" (keyup.enter)="saveCompetence()"></th>
                         <th colspan="9"><input type="text" formControlName="descriptif" placeholder="Descriptif" (keyup.enter)="saveCompetence()"></th>
-                        <th><i class="icone far fa-check-square" (click)="saveCompetence()"></i></th>
+                        <th>&nbsp;&nbsp; <i class="icone far fa-check-square" (click)="saveCompetence()"></i></th>
                 </ng-template>
             </p-table>
         </form>
     </ng-container>
     <br>
 
+    <form [formGroup]="descriptifForm">
+
     <p-table [value]="competences">
         <ng-template pTemplate="header">
             <tr>
-                <th colspan="3">Competence<i class="icone-sort pi pi-sort-alpha-down-alt"></i></th>
-                <th colspan="9">Descriptif<i class="icone-sort pi pi-sort-alpha-down-alt"></i></th>
+                <th colspan="3">Competence
+                    <i class="icone icone-sort pi pi-sort-down" [hidden]="competenceSort" (click)="sortBy('COMPETENCE')"></i>
+                    <i class="icone icone-sort pi pi-sort-up" [hidden]="!competenceSort" (click)="sortBy('COMPETENCE')"></i>
+                </th>
+                <th colspan="9">Descriptif
+                    <i class="icone icone-sort pi pi-sort-down" [hidden]=descriptifSort (click)="sortBy('DESCRIPTIF')"></i>
+                    <i class="icone icone-sort pi pi-sort-up" [hidden]=!descriptifSort (click)="sortBy('DESCRIPTIF')"></i>
+                </th>
             </tr>
         </ng-template>
 
@@ -33,21 +41,31 @@
 
 
         {{competences.length }}
-
         <ng-template pTemplate="body" let-competence>
             <tr>
                 <td colspan="3">{{competence.competence}}</td>
-                <td colspan="9">{{competence.descriptif}}</td>
+                <td colspan="9">
+                    <ng-container *ngIf="competence !== competenceToModify; else modifyDescriptif">
+                        {{competence.descriptif}}
+                    </ng-container>
+                    <ng-template #modifyDescriptif>
+                        <input type="text" formControlName="descriptif" [value]="competence.descriptif" (keyup.enter)="modifyCompetence()">
+                    </ng-template>
+                </td>
+
                 <td>
                     <!-- <i class="icone far fa-eye fa-lg" (click)="viewDetail(regle)"></i>&nbsp;&nbsp; -->
                     <!-- <i class="icone fas fa-fw fa-book fa-lg"></i>&nbsp; -->
-                    <i class="icone far fa-edit"></i>&nbsp;&nbsp;
-                    <i class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></i>&nbsp;
-
+                    <i class="icone far fa-edit" [hidden]="competence === competenceToModify" (click)="competenceToModify=competence"></i>&nbsp;&nbsp;
+                    <i class="icone far fa-trash-alt" [hidden]="competence === competenceToModify" (click)="deleteCompetence(competence.id)"></i>&nbsp;&nbsp;
+                    <i class="icone far fa-check-square" [hidden]="competence !== competenceToModify" (click)="modifyCompetence()"></i>
                 </td>
             </tr>
         </ng-template>
 
-    </p-table>
 
+    </p-table>
+</form>
   </ng-container>
+  <br>
+  <br>

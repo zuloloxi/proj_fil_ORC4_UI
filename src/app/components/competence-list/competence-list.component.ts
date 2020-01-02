@@ -16,12 +16,18 @@ export class CompetenceListComponent implements OnInit {
     competence: new FormControl('', [Validators.required, Validators.minLength(1)]),
     descriptif: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
+  descriptifForm = new FormGroup({
+    descriptif: new FormControl('', [Validators.required, Validators.minLength(1)])
+  });
   addCompetence = false;
   competences: CompetenceDTO[] = [];
   display: boolean;
   competenceDetail: CompetenceDTO;
   httpMessage: string;
   msgs: Message[] = [];
+  competenceSort: boolean;
+  descriptifSort: boolean;
+  competenceToModify: CompetenceDTO;
 
 
   constructor(private competenceService: CompetenceService,
@@ -39,7 +45,7 @@ export class CompetenceListComponent implements OnInit {
 
   deleteCompetence(id: number) {
     return this.competenceService.deleteCompetence(id).subscribe(
-      () => {this.competences.splice(this.competences.findIndex(regle => regle.id === id), 1);
+      () => {this.competences.splice(this.competences.findIndex(competence => competence.id === id), 1);
              },
       error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
     );
@@ -51,10 +57,12 @@ export class CompetenceListComponent implements OnInit {
         competence: this.competenceForm.get('competence').value,
         descriptif: this.competenceForm.get('descriptif').value})
       return this.competenceService.saveCompetence(newCompetence).subscribe(
-        competenceDTO => this.showCompetenceInBeginningOfList(competenceDTO),
+        competenceDTO => {
+          this.showCompetenceInBeginningOfList(competenceDTO);
+          this.addCompetence = false;
+        },
         error => this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
       );
-
     }
   }
 
@@ -62,4 +70,40 @@ export class CompetenceListComponent implements OnInit {
     this.competences.unshift(competenceDTO);
   }
 
+  modifyCompetence() {
+    console.log('tot')
+    if (this.descriptifForm.get('descriptif').valid) {
+      console.log('tot2')
+      const modifiedCompetence = new CompetenceDTO({
+        competence: this.competenceToModify.competence,
+        descriptif: this.descriptifForm.get('descriptif').value})
+      return this.competenceService.modifyCompetence(this.competenceToModify.id, modifiedCompetence).subscribe(
+        competenceDTO => {
+          const index = this.competences.findIndex(competence => competence.id === this.competenceToModify.id);
+          this.competences[index].descriptif = competenceDTO.descriptif;
+          this.competenceToModify = null;
+        },
+        error => this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
+      );
+    }
+  }
+
+  sortBy(field: string) {
+    switch (field) {
+
+      case 'COMPETENCE' : {
+        const coef = this.competenceSort ? 1 : -1;
+        this.competences = this.competences.sort((a, b) => (a.competence.toUpperCase() >= b.competence.toUpperCase()) ? coef : -coef);
+        this.competenceSort = !this.competenceSort;
+        break;
+      }
+      case 'DESCRIPTIF' : {
+        const coef = this.descriptifSort ? 1 : -1;
+        this.competences = this.competences.sort((a, b) => (a.descriptif.toUpperCase() >= b.descriptif.toUpperCase()) ? coef : -coef);
+        this.descriptifSort = !this.descriptifSort;
+        break;
+      }
+    }
+
+  }
 }
