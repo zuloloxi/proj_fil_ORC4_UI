@@ -23,4 +23,8 @@ export class CompetenceService {
       );
 
   }
+
+  deleteCompetence(id: number): Observable<CompetenceDTO> {
+    return this.http.delete<CompetenceDTO>(`${this.baseUrl}/competences/${id}`);
+  }
 }

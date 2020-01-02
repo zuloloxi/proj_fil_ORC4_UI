@@ -1,3 +1,5 @@
+<p-messages [(value)]="msgs"></p-messages>
+
 <ng-container *ngIf="competences">
 
     <h2>{{competences.length }} Compétences </h2>
@@ -17,17 +19,17 @@
 
         {{competences.length }}
 
-        <ng-template pTemplate="body" let-competenc>
+        <ng-template pTemplate="body" let-competence>
             <tr>
                 <!-- <td>{{regle.deploiement}}</td> -->
-                <td colspan="3">{{competenc.competence}}</td>
+                <td colspan="3">{{competence.competence}}</td>
                 <!-- <td colspan="1">{{}}</td> -->
-                <td colspan="9">{{competenc.descriptif}}</td>
+                <td colspan="9">{{competence.descriptif}}</td>
                 <td>
                     <!-- <i class="icone far fa-eye fa-lg" (click)="viewDetail(regle)"></i>&nbsp;&nbsp; -->
                     <!-- <i class="icone fas fa-fw fa-book fa-lg"></i>&nbsp; -->
                     <i class="icone far fa-edit"></i>&nbsp;&nbsp;
-                    <i class="icone far fa-trash-alt"></i>&nbsp;
+                    <i class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></i>&nbsp;
 
                 </td>
             </tr>

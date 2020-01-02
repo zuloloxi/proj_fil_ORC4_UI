@@ -14,6 +14,8 @@ import { ReglesListComponent } from './components/regles-list/regles-list.compon
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { CompetenceListComponent } from './components/competence-list/competence
     TabMenuModule,
     DialogModule,
     BrowserAnimationsModule,
+    MessagesModule,
+    MessageModule,
     HttpClientModule
 
   ],
