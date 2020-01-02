@@ -4,26 +4,39 @@
 
     <h2>{{competences.length }} Compétences </h2>
 
-    <h2><i class="icone far fa-plus-square fa-lg"></i> Ajouter une Compétence</h2>
+    <ng-container *ngIf="!addCompetence">
+        <h5><i class="icone far fa-plus-square fa-md" (click)="addCompetence=!addCompetence"></i> Ajouter une Compétence</h5>
+    </ng-container>
+    <ng-container *ngIf="addCompetence">
+        <h5><i class="icone far fa-minus-square fa-md" (click)="addCompetence=!addCompetence"></i> </h5>
+        <form [formGroup]="competenceForm" (ngSubmit)="saveCompetence()">
+            <p-table [value]="competences">
+                <ng-template pTemplate="header">
+                        <th colspan="3"><input type="text" formControlName="competence" placeholder="Competence" (keyup.enter)="saveCompetence()"></th>
+                        <th colspan="9"><input type="text" formControlName="descriptif" placeholder="Descriptif" (keyup.enter)="saveCompetence()"></th>
+                        <th><i class="icone far fa-check-square" (click)="saveCompetence()"></i></th>
+                </ng-template>
+            </p-table>
+        </form>
+    </ng-container>
+    <br>
 
     <p-table [value]="competences">
         <ng-template pTemplate="header">
             <tr>
-                <!-- <th>deploiement</th> -->
                 <th colspan="3">Competence<i class="icone-sort pi pi-sort-alpha-down-alt"></i></th>
                 <th colspan="9">Descriptif<i class="icone-sort pi pi-sort-alpha-down-alt"></i></th>
             </tr>
-
         </ng-template>
+
+
 
 
         {{competences.length }}
 
         <ng-template pTemplate="body" let-competence>
             <tr>
-                <!-- <td>{{regle.deploiement}}</td> -->
                 <td colspan="3">{{competence.competence}}</td>
-                <!-- <td colspan="1">{{}}</td> -->
                 <td colspan="9">{{competence.descriptif}}</td>
                 <td>
                     <!-- <i class="icone far fa-eye fa-lg" (click)="viewDetail(regle)"></i>&nbsp;&nbsp; -->

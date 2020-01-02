@@ -3,6 +3,7 @@ import { CompetenceDTO } from 'src/app/shared-data/competence-dto';
 import { CompetenceService } from 'src/app/services/competence.service';
 import { Message } from 'primeng/api/primeng-api';
 import { ErrorService } from 'src/app/services/error.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-competence-list',
@@ -11,6 +12,11 @@ import { ErrorService } from 'src/app/services/error.service';
 })
 export class CompetenceListComponent implements OnInit {
 
+  competenceForm = new FormGroup({
+    competence: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    descriptif: new FormControl('', [Validators.required, Validators.minLength(1)])
+  });
+  addCompetence = false;
   competences: CompetenceDTO[] = [];
   display: boolean;
   competenceDetail: CompetenceDTO;
@@ -35,14 +41,25 @@ export class CompetenceListComponent implements OnInit {
     return this.competenceService.deleteCompetence(id).subscribe(
       () => {this.competences.splice(this.competences.findIndex(regle => regle.id === id), 1);
              },
-      error =>  {const messageFonctionnel = this.errorService.getMessage(error.error[0]);
-                 if (messageFonctionnel.length > 0){
-                   this.httpMessage = error.error[0] + ' : ' + messageFonctionnel;
-                 }else{
-                   this.httpMessage = 'Erreur ' + error.status + ' : ' + error.error.message;
-                 }
-                 this.msgs.push({severity: 'error', summary: '', detail: this.httpMessage});
-                }
+      error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
     );
   }
+
+  saveCompetence() {
+    if (this.competenceForm.get('competence').valid && this.competenceForm.get('descriptif').valid) {
+      const newCompetence = new CompetenceDTO({
+        competence: this.competenceForm.get('competence').value,
+        descriptif: this.competenceForm.get('descriptif').value})
+      return this.competenceService.saveCompetence(newCompetence).subscribe(
+        competenceDTO => this.showCompetenceInBeginningOfList(competenceDTO),
+        error => this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
+      );
+
+    }
+  }
+
+  showCompetenceInBeginningOfList(competenceDTO){
+    this.competences.unshift(competenceDTO);
+  }
+
 }

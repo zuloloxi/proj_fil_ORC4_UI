@@ -27,4 +27,8 @@ export class CompetenceService {
   deleteCompetence(id: number): Observable<CompetenceDTO> {
     return this.http.delete<CompetenceDTO>(`${this.baseUrl}/competences/${id}`);
   }
+
+  saveCompetence(competence: CompetenceDTO): Observable<CompetenceDTO> {
+    return this.http.post<CompetenceDTO>(`${this.baseUrl}/competences`, competence);
+  }
 }
