@@ -35,14 +35,19 @@
 
         <p-footer>
             <b> A MIGRER :</b> {{collaborateur.aMigrer}}
-            &nbsp;&nbsp; (<a [routerLink]="['/collaborateurs']"> Retour... </a>)
+            &nbsp;&nbsp;
+            <br><br>
+            <p-button label="Retour" [routerLink]="['/collaborateurs']"></p-button>
         </p-footer>
     </p-card>
 
     </p-dialog>
 
 <br><br>
-<b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}} <a class="a-prop" (click)="showDialog()"> Voir le détail ... </a>&nbsp;&nbsp; ou &nbsp;&nbsp;
-<a [routerLink]="['/collaborateurs']"> Retour... </a>
+<b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
+<br>
+<p-button label="Détail" (click)="showDialog()"></p-button>
+&nbsp;&nbsp; ou &nbsp;&nbsp;
+<p-button label="Retour" [routerLink]="['/collaborateurs']"></p-button>
 
 </ng-container>
