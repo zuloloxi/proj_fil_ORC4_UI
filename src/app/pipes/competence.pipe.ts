@@ -8,7 +8,7 @@ export class CompetencePipe implements PipeTransform {
 
   transform(competences: CompetenceDTO[]): string {
     const competenceLibelle: string[] = [];
-    competences.forEach(competence => competenceLibelle.push(competence.competence));
+    competences.forEach(competence => competenceLibelle.push(competence.competence + '\n'));
     return competenceLibelle.toString();
   }
 }

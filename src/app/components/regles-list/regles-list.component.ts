@@ -3,6 +3,8 @@ import { RegleService } from 'src/app/services/regle.service';
 import { RegleDTO } from 'src/app/shared-data/regle-dto';
 import { Router } from '@angular/router';
 import { Message } from 'primeng/api/message';
+import { CompetenceDTO } from 'src/app/shared-data/competence-dto';
+import { CompetenceService } from 'src/app/services/competence.service';
 
 @Component({
   selector: 'app-regles-list',
@@ -16,15 +18,31 @@ export class ReglesListComponent implements OnInit {
   regleDetail: RegleDTO;
   httpMessage: string;
   msgs: Message[] = [];
+  cols: any[];
+
 
   constructor(private router: Router,
-              private regleService: RegleService) { }
+              private regleService: RegleService,
+              private competenceService: CompetenceService) { }
 
   ngOnInit() {
     this.regleService.getAllRegles().subscribe(
       regleList => this.regles = regleList,
       error => console.log(error)
     );
+
+    this.cols = [
+      { field: 'metier', header: 'Métier' },
+      { field: 'posteType', header: 'Poste Type' },
+      { field: 'domaine', header: 'Domaine' },
+      { field: 'stratesEquipes', header: 'Strates Équipes' },
+      { field: 'profil', header: 'Profil' },
+      { field: 'equipesSupervisees', header: 'Équipes Supervisées' },
+      { field: 'descriptifEquipesSupervisses', header: 'Descriptif' },
+      { field: 'competences', header: 'Compétences' },
+      { field: 'actions', header: 'Actions'}
+  ];
+
   }
 
   viewDetail(regle: RegleDTO) {
@@ -44,7 +62,7 @@ export class ReglesListComponent implements OnInit {
   }
 
   reformatMetier(metier: string) {
-    const truncPosition = metier.indexOf('\n');
+    const truncPosition = metier.indexOf('(');
     return (truncPosition > 0) ? metier.substring(0, truncPosition) : '';
   }
 
