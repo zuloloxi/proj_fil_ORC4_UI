@@ -15,7 +15,7 @@ import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollaboratorItemComponent } from './components/collaborator-item/collaborator-item.component';
 import {CardModule} from 'primeng/card';
-
+import {DragDropModule} from 'primeng/dragdrop';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
@@ -26,7 +26,6 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompetencePipe } from './pipes/competence.pipe';
-import { OutputListComponent } from './components/output-list/output-list.component';
 
 
 @NgModule({
@@ -40,7 +39,7 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     CompetenceListComponent,
     RegleFormComponent,
     CompetencePipe,
-    OutputListComponent
+    OutputListComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +56,8 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     CardModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DragDropModule,
 
   ],
   providers: [

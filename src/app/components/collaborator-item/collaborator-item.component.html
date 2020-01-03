@@ -1,53 +1,27 @@
 
  <ng-container *ngIf="collaborateur">
-   <p-dialog header="Détail du collaborateur" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
 
-    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '100%'}" styleClass="ui-card-shadow">
-        <p-header>
-            <b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
-        </p-header>
+COLLABORATEUR : {{collaborateur.uid}}
 
-        <div>
-            {{collaborateur.telephone}} , {{collaborateur.mail}}
-         <br><br>
-        <b> LOCALISATION </b>: {{collaborateur.localisationCollaborateur}}
-        <br>
-        <b>PJ </b>: {{collaborateur.pj}}
-        <br>
-        <b>UO AFFECTATION </b>: {{collaborateur.uoAffectation}}
-        <br>
-        <b>ETAGE </b>: {{collaborateur.etage}}
-        <br>
-        <b>CODE </b>: {{collaborateur.codeImmeubleEmplacementCollaborateur}}
-        <br>
-        <b>REGION </b>: {{collaborateur.region}} &nbsp;&nbsp;
-        <b>CODE REGION </b>: {{collaborateur.codeRegion}}
-        <br>
-        <b>TERRITOIRE </b>: {{collaborateur.niveauTerritoire}} &nbsp;&nbsp;
-        <b>CODE TERRITOIRE </b>: {{collaborateur.codeTerritoire}}
-        <br>
-        <b>ENTITE </b>: {{collaborateur.niveauEntite}} &nbsp;&nbsp;
-        <b>CODE ENTITE </b>: {{collaborateur.codeEntite}}
-        <br>
-        <b>AGENCE </b>: {{collaborateur.niveauAgence}} &nbsp;&nbsp;
-        <b>CODE AGENCE </b>: {{collaborateur.codeAgence}}
-        </div>
+<form [formGroup]="collaborateurForm" (ngSubmit)="saveCollaborator()">
 
-        <p-footer>
-            <b> A MIGRER :</b> {{collaborateur.aMigrer}}
-            &nbsp;&nbsp;
-            <br><br>
-            <p-button label="Retour" [routerLink]="['/collaborateurs']"></p-button>
-        </p-footer>
-    </p-card>
+    <div class="form-group">
+        <label>Civilité :
+                <input class="form-control" size="60" type="text" formControlName="civilite" >
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Nom:
+                <input class="form-control"  size="60" type="text" formControlName="nom" >
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Prénom:
+                <input class="form-control"  size="60" type="text" formControlName="prenom" >
+        </label>
+    </div>
 
-    </p-dialog>
 
-<br><br>
-<b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
-<br>
-<p-button label="Détail" (click)="showDialog()"></p-button>
-&nbsp;&nbsp; ou &nbsp;&nbsp;
-<p-button label="Retour" [routerLink]="['/collaborateurs']"></p-button>
-
+    <button  *ngIf="collaborateurUid" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveCollaborator()"></button>
+    </form>
 </ng-container>

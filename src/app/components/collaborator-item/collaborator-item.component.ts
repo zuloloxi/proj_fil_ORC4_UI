@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollaborateurService } from 'src/app/services/collaborateur.service';
 import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-collaborator-item',
@@ -10,19 +11,27 @@ import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
 })
 export class CollaboratorItemComponent implements OnInit {
 
-  collaborateur : CollaborateurDTO;
-  display=true;
+  collaborateur: CollaborateurDTO;
+  collaborateurForm: FormGroup;
+  collaborateurUid: number;
 
-  constructor(private activateRoute: ActivatedRoute, private collaborateurService: CollaborateurService) { }
+
+  constructor(private fb: FormBuilder, private activateRoute: ActivatedRoute, private collaborateurService: CollaborateurService) { }
 
   ngOnInit() {
-    const collaborateurUid = +this.activateRoute.snapshot.paramMap.get('collaborateurUid');
-    this.collaborateurService.getOneCollaborateur(collaborateurUid).subscribe(collaborateur => this.collaborateur = collaborateur);
+    this.collaborateurUid = +this.activateRoute.snapshot.paramMap.get('collaborateurUid');
+    this.collaborateurService.getOneCollaborateur(this.collaborateurUid).subscribe(collaborateur => this.collaborateur = collaborateur);
     console.log(this.collaborateur);
+
+    this.collaborateurForm = this.fb.group ({
+      civilite: [],
+      nom: [],
+      prenom: [],
+    });
   }
 
-  showDialog() {
-    this.display = true;
-}
+  saveCollaborator() {
+     console.log("save");
+   }
 
 }

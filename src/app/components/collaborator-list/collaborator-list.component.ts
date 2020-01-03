@@ -13,6 +13,13 @@ export class CollaboratorListComponent implements OnInit {
 
   collaborateurs: CollaborateurDTO[] = [];
 
+  collaborateur: CollaborateurDTO;
+  display = false;
+
+  trash = false;
+  draggedCollaborateurDTO: null;
+  droped = [];
+
   constructor(private collaborateurService: CollaborateurService) { }
 
   ngOnInit() {
@@ -25,4 +32,69 @@ export class CollaboratorListComponent implements OnInit {
     });
 
   }
+
+  viewDetailCollaborator(collaborateur: CollaborateurDTO){
+    this.collaborateur = collaborateur;
+    this.display = true;
+  }
+
+  viewDetailCollaboratorClose() {
+    this.display = false;
+  }
+
+  dragStart(event, collaborateur) {
+    this.draggedCollaborateurDTO = collaborateur;
+    console.log("start");
+    console.log(this.draggedCollaborateurDTO);
+
+  }
+
+  dragEnd(event) {
+    this.draggedCollaborateurDTO = null;
+    console.log(this.draggedCollaborateurDTO);
+    console.log("end");
+  }
+
+  dropView(event){
+    if (this.draggedCollaborateurDTO) {
+      this.collaborateur = this.draggedCollaborateurDTO;
+      this.draggedCollaborateurDTO = null;
+      this.display = true;
+    }
+  }
+
+  dropTrash(event) {
+    console.log(this.draggedCollaborateurDTO);
+    console.log("ici");
+    if (this.draggedCollaborateurDTO) {
+     this.collaborateur = this.draggedCollaborateurDTO;
+     this.droped.push("trash");
+     this.draggedCollaborateurDTO = null;
+     console.log(this.droped);
+     this.trash = true;
+    }
+  }
+
+  openTrash(collaborateur: CollaborateurDTO) {
+    this.collaborateur = collaborateur;
+    console.log(this.collaborateur);
+    this.trash = true;
+  }
+
+  closeTrash() {
+    this.trash = false;
+  }
+
+  onDelete(collaborateur: CollaborateurDTO) {
+    this.collaborateur = collaborateur;
+   // const collaborateurUid = +this.activateRoute.snapshot.paramMap.get('collaborateurUid');
+    const collaborateurUid = +this.collaborateur.uid;
+    this.collaborateurService.deleteCollaborateutUId(collaborateurUid).subscribe(item => this.collaborateur = item);
+
+    console.log("delete" + collaborateurUid);
+    console.log(this.collaborateur);
+    console.log(this.draggedCollaborateurDTO);
+    this.closeTrash();
+  }
+
 }

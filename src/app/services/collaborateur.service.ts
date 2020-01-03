@@ -32,4 +32,9 @@ export class CollaborateurService {
       );
   }
 
+
+  deleteCollaborateutUId(collaborateurUid: number): Observable<CollaborateurDTO> {
+    return this.http.delete<CollaborateurDTO>(`${this.baseUrl}/inputs/deleteuid/${collaborateurUid}`);
+  }
+
 }
