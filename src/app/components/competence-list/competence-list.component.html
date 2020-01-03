@@ -1,5 +1,5 @@
 <p-messages [(value)]="msgs"></p-messages>
-
+<p-confirmDialog header="Delete" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <ng-container *ngIf="competences">
 
     <h2>{{competences.length }} Compétences </h2>
@@ -54,11 +54,15 @@
                 </td>
 
                 <td>
-                    <!-- <i class="icone far fa-eye fa-lg" (click)="viewDetail(regle)"></i>&nbsp;&nbsp; -->
-                    <!-- <i class="icone fas fa-fw fa-book fa-lg"></i>&nbsp; -->
-                    <i class="icone far fa-edit" [hidden]="competence === competenceToModify" (click)="competenceToModify=competence"></i>&nbsp;&nbsp;
-                    <i class="icone far fa-trash-alt" [hidden]="competence === competenceToModify" (click)="deleteCompetence(competence.id)"></i>&nbsp;&nbsp;
-                    <i class="icone far fa-check-square" [hidden]="competence !== competenceToModify" (click)="modifyCompetence()"></i>
+                    <ng-container *ngIf="competence !== competenceToModify; else modifyIcones">
+                        <i class="icone far fa-edit" (click)="competenceToModify=competence"></i>&nbsp;&nbsp;
+
+                            <i class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></i>&nbsp;&nbsp;
+                    </ng-container>
+                    <ng-template #modifyIcones>
+                        <i class="icone pi pi-times" (click)="competenceToModify=null"></i>&nbsp;&nbsp;
+                        <i class="icone pi pi-check" (click)="modifyCompetence()"></i>&nbsp;&nbsp;
+                    </ng-template>
                 </td>
             </tr>
         </ng-template>
