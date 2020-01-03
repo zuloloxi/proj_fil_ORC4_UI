@@ -1,7 +1,13 @@
 <ng-container *ngIf="collaborateurs">
 
   <h2>{{collaborateurs.length }} Collaborateurs </h2>
-  <p-table [value]="collaborateurs" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both">
+  <p-table #dt [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th [pSortableColumn]= "'uid'">Uid
