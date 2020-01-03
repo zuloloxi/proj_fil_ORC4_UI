@@ -1,66 +1,28 @@
-<ng-container *ngIf="collaborateur">
-
-  <p-dialog header="Détail du collaborateur" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
-
-   <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '100%'}" styleClass="ui-card-shadow">
-       <p-header>
-           <b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
-       </p-header>
-
-       <div>
-           {{collaborateur.telephone}} , {{collaborateur.mail}}
-        <br><br>
-       <b> LOCALISATION </b>: {{collaborateur.localisationCollaborateur}}
-       <br>
-       <b>PJ </b>: {{collaborateur.pj}}
-       <br>
-       <b>UO AFFECTATION </b>: {{collaborateur.uoAffectation}}
-       <br>
-       <b>ETAGE </b>: {{collaborateur.etage}}
-       <br>
-       <b>CODE </b>: {{collaborateur.codeImmeubleEmplacementCollaborateur}}
-       <br>
-       <b>REGION </b>: {{collaborateur.region}} &nbsp;&nbsp;
-       <b>CODE REGION </b>: {{collaborateur.codeRegion}}
-       <br>
-       <b>TERRITOIRE </b>: {{collaborateur.niveauTerritoire}} &nbsp;&nbsp;
-       <b>CODE TERRITOIRE </b>: {{collaborateur.codeTerritoire}}
-       <br>
-       <b>ENTITE </b>: {{collaborateur.niveauEntite}} &nbsp;&nbsp;
-       <b>CODE ENTITE </b>: {{collaborateur.codeEntite}}
-       <br>
-       <b>AGENCE </b>: {{collaborateur.niveauAgence}} &nbsp;&nbsp;
-       <b>CODE AGENCE </b>: {{collaborateur.codeAgence}}
-       </div>
-
-       <p-footer>
-           <b> A MIGRER :</b> {{collaborateur.aMigrer}}
-           &nbsp;&nbsp;
-           <br><br>
-           <p-button label="Retour"  (onClick)="viewDetailCollaboratorClose()"></p-button>
-       </p-footer>
-   </p-card>
-
-   </p-dialog>
-
-
-
-</ng-container>
-
-
-
 <ng-container *ngIf="collaborateurs">
 
   <h2>{{collaborateurs.length }} Collaborateurs </h2>
-  <p-table [value]="collaborateurs">
+  <p-table #dt [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Uid</th>
-            <th colspan="2">Nom</th>
-            <th colspan="2">Prénom</th>
-            <th colspan="3">Fonction</th>
-            <th>code Agence</th>
-            <th>à Migrer</th>
+            <th [pSortableColumn]= "'uid'">Uid
+              <p-sortIcon [field]="'uid'"></p-sortIcon>
+            </th>
+            <th colspan="2" [pSortableColumn]= "'nom'">Nom<p-sortIcon [field]="'nom'"></p-sortIcon></th>
+
+            <th colspan="2" [pSortableColumn]= "'prenom'">Prénom<p-sortIcon [field]="'prenom'"></p-sortIcon></th>
+
+            <th colspan="3" [pSortableColumn]= "'fonction'">Fonction<p-sortIcon [field]="'fonction'"></p-sortIcon></th>
+
+            <th [pSortableColumn]= "'codeAgence'">code Agence<p-sortIcon [field]="'codeAgence'"></p-sortIcon></th>
+
+            <th  [pSortableColumn]= "'aMigrer'">à Migrer<p-sortIcon [field]="'aMigrer'"></p-sortIcon></th>
+
         </tr>
     </ng-template>
     {{collaborateurs.length }}

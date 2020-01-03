@@ -4,11 +4,14 @@ import { CompetenceService } from 'src/app/services/competence.service';
 import { Message } from 'primeng/api/primeng-api';
 import { ErrorService } from 'src/app/services/error.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {ConfirmationService} from 'primeng/api';
+
 
 @Component({
   selector: 'app-competence-list',
   templateUrl: './competence-list.component.html',
-  styleUrls: ['./competence-list.component.scss', '../../app.component.scss']
+  styleUrls: ['./competence-list.component.scss', '../../app.component.scss'],
+  providers: [ConfirmationService]
 })
 export class CompetenceListComponent implements OnInit {
 
@@ -30,7 +33,8 @@ export class CompetenceListComponent implements OnInit {
   competenceToModify: CompetenceDTO;
 
 
-  constructor(private competenceService: CompetenceService,
+  constructor(private confirmationService: ConfirmationService,
+              private competenceService: CompetenceService,
               private errorService: ErrorService) { }
 
   ngOnInit() {
@@ -44,11 +48,16 @@ export class CompetenceListComponent implements OnInit {
   }
 
   deleteCompetence(id: number) {
-    return this.competenceService.deleteCompetence(id).subscribe(
-      () => {this.competences.splice(this.competences.findIndex(competence => competence.id === id), 1);
-             },
-      error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
-    );
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to perform this action?',
+      accept: () => {
+                      return this.competenceService.deleteCompetence(id).subscribe(
+                      () => {this.competences.splice(this.competences.findIndex(competence => competence.id === id), 1);
+                            },
+                      error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
+                      );
+                    }
+      });
   }
 
   saveCompetence() {
@@ -71,9 +80,7 @@ export class CompetenceListComponent implements OnInit {
   }
 
   modifyCompetence() {
-    console.log('tot')
     if (this.descriptifForm.get('descriptif').valid) {
-      console.log('tot2')
       const modifiedCompetence = new CompetenceDTO({
         competence: this.competenceToModify.competence,
         descriptif: this.descriptifForm.get('descriptif').value})
@@ -85,6 +92,8 @@ export class CompetenceListComponent implements OnInit {
         },
         error => this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
       );
+    } else {
+      this.msgs.push({severity: 'warn', summary: '', detail: 'descriptif non renseigné'});
     }
   }
 

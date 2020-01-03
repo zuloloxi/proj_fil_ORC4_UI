@@ -21,7 +21,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ButtonModule} from 'primeng/button';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +38,8 @@ import { CompetencePipe } from './pipes/competence.pipe';
     ReglesListComponent,
     CompetenceListComponent,
     RegleFormComponent,
-    CompetencePipe
+    CompetencePipe,
+    OutputListComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,7 @@ import { CompetencePipe } from './pipes/competence.pipe';
     CardModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ConfirmDialogModule,
     DragDropModule,
 
   ],
