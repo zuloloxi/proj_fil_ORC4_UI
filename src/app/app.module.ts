@@ -26,6 +26,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompetencePipe } from './pipes/competence.pipe';
+import { OutputListComponent } from './components/output-list/output-list.component';
 
 
 @NgModule({
