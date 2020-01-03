@@ -15,19 +15,19 @@ import {ConfirmationService} from 'primeng/api';
 })
 export class CompetenceListComponent implements OnInit {
 
-  competenceForm = new FormGroup({
+  competencePostForm = new FormGroup({
     competence: new FormControl('', [Validators.required, Validators.minLength(1)]),
     descriptif: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
-  descriptifForm = new FormGroup({
+  descriptifPutForm = new FormGroup({
     descriptif: new FormControl('', [Validators.required, Validators.minLength(1)])
   });
   addCompetence = false;
   competences: CompetenceDTO[] = [];
-  display: boolean;
   competenceDetail: CompetenceDTO;
   httpMessage: string;
   msgs: Message[] = [];
+  // display: boolean;
   competenceSort: boolean;
   descriptifSort: boolean;
   competenceToModify: CompetenceDTO;
@@ -40,7 +40,7 @@ export class CompetenceListComponent implements OnInit {
   ngOnInit() {
     this.competenceService.getAllCompetences().subscribe(
       competenceList => {
-          console.log(competenceList);
+          // console.log(competenceList);
           return this.competences = competenceList;
         },
       error => console.log(error)
@@ -49,7 +49,7 @@ export class CompetenceListComponent implements OnInit {
 
   deleteCompetence(id: number) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to perform this action?',
+      message: 'Voulez-vous supprimer cette compétence ?',
       accept: () => {
                       return this.competenceService.deleteCompetence(id).subscribe(
                       () => {this.competences.splice(this.competences.findIndex(competence => competence.id === id), 1);
@@ -61,10 +61,10 @@ export class CompetenceListComponent implements OnInit {
   }
 
   saveCompetence() {
-    if (this.competenceForm.get('competence').valid && this.competenceForm.get('descriptif').valid) {
+    if (this.competencePostForm.get('competence').valid && this.competencePostForm.get('descriptif').valid) {
       const newCompetence = new CompetenceDTO({
-        competence: this.competenceForm.get('competence').value,
-        descriptif: this.competenceForm.get('descriptif').value})
+        competence: this.competencePostForm.get('competence').value,
+        descriptif: this.competencePostForm.get('descriptif').value})
       return this.competenceService.saveCompetence(newCompetence).subscribe(
         competenceDTO => {
           this.showCompetenceInBeginningOfList(competenceDTO);
@@ -80,10 +80,10 @@ export class CompetenceListComponent implements OnInit {
   }
 
   modifyCompetence() {
-    if (this.descriptifForm.get('descriptif').valid) {
+    if (this.descriptifPutForm.get('descriptif').valid) {
       const modifiedCompetence = new CompetenceDTO({
         competence: this.competenceToModify.competence,
-        descriptif: this.descriptifForm.get('descriptif').value})
+        descriptif: this.descriptifPutForm.get('descriptif').value})
       return this.competenceService.modifyCompetence(this.competenceToModify.id, modifiedCompetence).subscribe(
         competenceDTO => {
           const index = this.competences.findIndex(competence => competence.id === this.competenceToModify.id);

@@ -1,5 +1,5 @@
 <p-messages [(value)]="msgs"></p-messages>
-<p-confirmDialog header="Delete" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog header="Suppression de Compétence" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <ng-container *ngIf="competences">
 
     <h2>{{competences.length }} Compétences </h2>
@@ -9,7 +9,7 @@
     </ng-container>
     <ng-container *ngIf="addCompetence">
         <h5><i class="icone far fa-minus-square fa-md" (click)="addCompetence=!addCompetence"></i> </h5>
-        <form [formGroup]="competenceForm" (ngSubmit)="saveCompetence()">
+        <form [formGroup]="competencePostForm" (ngSubmit)="saveCompetence()">
             <p-table [value]="competences">
                 <ng-template pTemplate="header">
                         <th colspan="3"><input type="text" formControlName="competence" placeholder="Competence" (keyup.enter)="saveCompetence()"></th>
@@ -21,7 +21,7 @@
     </ng-container>
     <br>
 
-    <form [formGroup]="descriptifForm">
+    <form [formGroup]="descriptifPutForm">
 
     <p-table [value]="competences">
         <ng-template pTemplate="header">
@@ -56,8 +56,7 @@
                 <td>
                     <ng-container *ngIf="competence !== competenceToModify; else modifyIcones">
                         <i class="icone far fa-edit" (click)="competenceToModify=competence"></i>&nbsp;&nbsp;
-
-                            <i class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></i>&nbsp;&nbsp;
+                        <i class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></i>&nbsp;&nbsp;
                     </ng-container>
                     <ng-template #modifyIcones>
                         <i class="icone pi pi-times" (click)="competenceToModify=null"></i>&nbsp;&nbsp;
