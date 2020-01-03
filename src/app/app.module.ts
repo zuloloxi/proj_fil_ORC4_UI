@@ -27,6 +27,7 @@ import { RegleFormComponent } from './components/regle-form/regle-form.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompetencePipe } from './pipes/competence.pipe';
 import { OutputListComponent } from './components/output-list/output-list.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     CompetenceListComponent,
     RegleFormComponent,
     CompetencePipe,
-    OutputListComponent,
+    OutputListComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,7 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     ReactiveFormsModule,
     ConfirmDialogModule,
     DragDropModule,
-
+    DropdownModule
   ],
   providers: [
     { provide: 'BACKEND_URL', useValue: 'http://localhost:8080'}

@@ -1,23 +1,32 @@
 <div class="content-section implementation ui-fluid">
-  {{rejets.length }} enregistrements en erreur
-  <p-table [paginator]="true" [value]="rejets"  [rows]="5" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both">
+  <h2>{{rejets.length }} enregistrements en erreur</h2>
+  <p-table #dt1 [columns]="cols" [paginator]="true" [value]="rejets" [globalFilterFields]="['identifiant','nom','prenom','email','domaine','equipe','competences','profil']"
+           [rows]="5"
+           [rowsPerPageOptions]="[5,10,50,100]"
+           paginatorPosition="both">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt1.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
 
     <ng-template pTemplate="header">
       <tr>
         <th class = "ui-datatable-thead">Identifiant</th>
-        <th [pSortableColumn]= "'nom'">Nom
-          <p-sortIcon [field]="'nom'"></p-sortIcon>
+        <th [pSortableColumn]= "'Nom'">Nom
+          <p-sortIcon [field]="'Nom'"></p-sortIcon>
         </th>
         <th>Prenom</th>
         <th>Mail</th>
-        <th [pSortableColumn]= "'domaine'">Domaine
-          <p-sortIcon [field]="'domaine'"></p-sortIcon></th>
-        <th [pSortableColumn]= "'equipe'">Equipe
-          <p-sortIcon [field]="'equipe'"></p-sortIcon></th>
-        <th [pSortableColumn]= "'competences'">Compétences
-          <p-sortIcon [field]="'competences'"></p-sortIcon></th>
-        <th [pSortableColumn]= "'profil'">Profil
-          <p-sortIcon [field]="'profil'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'Domaine'">Domaine
+          <p-sortIcon [field]="'Domaine'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'Equipe'">Equipe
+          <p-sortIcon [field]="'Equipe'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'Competences'">Compétences
+          <p-sortIcon [field]="'Competences'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'Profil'">Profil
+          <p-sortIcon [field]="'Profil'"></p-sortIcon></th>
       </tr>
     </ng-template>
 
@@ -37,13 +46,13 @@
 
 </div>
 
-{{valids.length }} enregistrements valides
-<p-table #dt [columns]="cols" [value]="valids" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both">
+<h2>{{valids.length }} enregistrements valides</h2>
+<p-table #dt2 [columns]="cols" [value]="valids" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both">
   <ng-template pTemplate="caption">
-    <div style="text-align: right">
-      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-    </div>
+<!--    <div style="text-align: right">-->
+<!--      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>-->
+<!--      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">-->
+<!--    </div>-->
   </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -53,15 +62,15 @@
     </tr>
     <tr>
       <th *ngFor="let col of columns" [ngSwitch]="col.field">
-        <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt.filter($event.target.value, 'contains')">
-        <div *ngSwitchCase="'year'">
-          Value > {{yearFilter}}
-          <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="yearFilter"></i>
-          <!--          <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="1970" [max]="2010" (onChange)="onYearChange($event, dt)"></p-slider>-->
-        </div>
-<!--        <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>-->
+        <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt2.filter($event.target.value, 'contains')">
+<!--        <div *ngSwitchCase="'year'">-->
+<!--          Value > {{yearFilter}}-->
+<!--          <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="yearFilter"></i>-->
+<!--                    <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="1970" [max]="2010" (onChange)="onYearChange($event, dt)"></p-slider>-->
+<!--        </div>-->
+        <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt2.filter($event.value, col.field, 'equals')"></p-dropdown>
         <!--        <p-multiSelect *ngSwitchCase="'color'" [options]="colors" defaultLabel="All Colors" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>-->
-        <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt.filter($event.target.value, col.field, 'custom')">
+        <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt2.filter($event.target.value, col.field, 'custom')">
       </th>
     </tr>
   </ng-template>
