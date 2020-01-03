@@ -15,7 +15,7 @@ import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollaboratorItemComponent } from './components/collaborator-item/collaborator-item.component';
 import {CardModule} from 'primeng/card';
-
+import {DragDropModule} from 'primeng/dragdrop';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
@@ -55,6 +55,7 @@ import { CompetencePipe } from './pipes/competence.pipe';
     CardModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DragDropModule,
 
   ],
   providers: [
