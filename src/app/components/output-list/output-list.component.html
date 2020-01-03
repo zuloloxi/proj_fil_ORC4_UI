@@ -13,20 +13,22 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th class = "ui-datatable-thead">Identifiant</th>
-        <th [pSortableColumn]= "'Nom'">Nom
-          <p-sortIcon [field]="'Nom'"></p-sortIcon>
+        <th class = "ui-datatable-thead" [pSortableColumn]= "'identifiant'">Identifiant
+          <p-sortIcon [field]="'identifiant'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]= "'nom'">Nom
+          <p-sortIcon [field]="'nom'"></p-sortIcon>
         </th>
         <th>Prenom</th>
         <th>Mail</th>
-        <th [pSortableColumn]= "'Domaine'">Domaine
-          <p-sortIcon [field]="'Domaine'"></p-sortIcon></th>
-        <th [pSortableColumn]= "'Equipe'">Equipe
-          <p-sortIcon [field]="'Equipe'"></p-sortIcon></th>
-        <th [pSortableColumn]= "'Competences'">Compétences
-          <p-sortIcon [field]="'Competences'"></p-sortIcon></th>
-        <th [pSortableColumn]= "'Profil'">Profil
-          <p-sortIcon [field]="'Profil'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'domaine'">Domaine
+          <p-sortIcon [field]="'domaine'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'equipe'">Equipe
+          <p-sortIcon [field]="'equipe'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'competences'">Compétences
+          <p-sortIcon [field]="'competences'"></p-sortIcon></th>
+        <th [pSortableColumn]= "'profil'">Profil
+          <p-sortIcon [field]="'profil'"></p-sortIcon></th>
       </tr>
     </ng-template>
 
@@ -47,12 +49,12 @@
 </div>
 
 <h2>{{valids.length }} enregistrements valides</h2>
-<p-table #dt2 [columns]="cols" [value]="valids" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both">
+<p-table #dt2 [columns]="cols" [value]="valids" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both">
   <ng-template pTemplate="caption">
-<!--    <div style="text-align: right">-->
-<!--      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>-->
-<!--      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">-->
-<!--    </div>-->
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt2.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
   </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
