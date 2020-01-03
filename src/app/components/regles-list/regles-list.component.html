@@ -58,47 +58,48 @@
 
     <h2>{{regles.length }} Règles </h2>
     <span style="color:#FF0000;cursor:pointer" (click) ="goCreate()"> <b>Créer une règle</b></span>
-    <p-table [value]="regles">
-      <ng-template pTemplate="header">
-          <tr>
-              <!-- <th>deploiement</th> -->
-              <th colspan="1">Métier<i class="icone-sort pi pi-sort-alpha-down-alt" (click)="sortBy('METIER')"></i></th>
-              <th colspan="3">Poste type<i class="icone-sort pi pi-sort-alpha-down-alt" (click)="sortBy('POSTE')"></i></th>
-              <th colspan="1">Domaine</th>
-              <th colspan="2">Strates Équipes<i class="icone-sort pi pi-sort-alpha-down-alt" (click)="sortBy('STRATE')"></i></th>
-              <th colspan="2">Profil<i class="icone-so  rt pi pi-sort-alpha-down-alt"></i></th>
-              <th colspan="1">Équipes Supervisées<i class="icone-sort pi pi-sort-alpha-down-alt"></i></th>
-              <th>Descriptif<i class="icone-sort pi pi-sort-alpha-down-alt"></i></th>
-              <th colspan="2">Competences<i class="icone-sort pi pi-sort-alpha-down-alt" (click)="sortBy('COMPETENCE')"></i></th>
-          </tr>
-      </ng-template>
-      {{regles.length }}
 
-        <ng-template pTemplate="body" let-regle>
-            <tr>
-                <!-- <td>{{regle.deploiement}}</td> -->
-                <td colspan="1">{{reformatMetier(regle.metier)}}</td>
-                <!-- <td colspan="1">{{}}</td> -->
-                <td colspan="3">{{regle.posteType}}</td>
-                <td colspan="1">{{regle.domaine}}</td>
-                <td colspan="2">{{regle.stratesEquipes}}</td>
-                <td colspan="2">{{regle.profil}}</td>
-                <td colspan="1">{{regle.equipesSupervisees}}</td>
-                <td>{{regle.descriptifEquipesSupervisses}}</td>
-                <td colspan="2">
-                    <ng-container *ngFor="let competence of regle.competences">
-                        {{competence.competence}}<br>
-                    </ng-container>
-                </td>
-                <td>
-                  <i class="icone far fa-eye fa-lg" (click)="viewDetail(regle)"></i>&nbsp;&nbsp;
-                  <!-- <i class="icone fas fa-fw fa-book fa-lg"></i>&nbsp; -->
-                  <i class="icone far fa-edit" (click)="goUpdate(regle)" ></i>&nbsp;
-                  <i class="icone icone far fa-trash-alt" (click)="deleteRegle(regle.id)"></i>&nbsp;
-                </td>
-            </tr>
+    <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="regles.length" [rowsPerPageOptions]="[10,20,30]" paginatorPosition="both" [resizableColumns]="true">
 
-        </ng-template>
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" pResizableColumn>
+                {{col.header}}
+            </th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input *ngSwitchCase="'metier'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'posteType'" pInputText type="text" size="15"  (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'domaine'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'stratesEquipes'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'profil'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'equipesSupervisees'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'descriptifEquipesSupervisses'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns; let i=index" class="ui-resizable-column" >
+            <span *ngIf="col.field === 'metier'"> {{reformatMetier(rowData.metier)}} </span>
+            <span *ngIf="col.field !== 'competences' && col.field !=='metier' && col.field !=='actions'">  {{rowData[col.field]}} </span>
+            <span *ngIf="col.field === 'competences'"> {{rowData.competences| competence}} </span>
+            <span *ngIf="col.field === 'actions'">
+              <i class="icone far fa-eye fa-lg" (click)="viewDetail(rowData)"></i>&nbsp;&nbsp;
+              <i class="icone far fa-edit" (click)="goUpdate(rowData)" ></i>&nbsp;
+              <i class="icone icone far fa-trash-alt" (click)="deleteRegle(rowData.id)"></i>&nbsp; </span>
+          </td>
+      </tr>
+  </ng-template>
 
     </p-table>
 

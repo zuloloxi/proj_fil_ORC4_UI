@@ -1,53 +1,62 @@
 
 <ng-container>
+    <br><br>
 <form [formGroup]="regleForm" (ngSubmit)="saveRegle()">
 
-    <div class="form-group">
-        <label>Déploiement :
-                <input class="form-control" size="60" type="text" formControlName="deploiement" >
-        </label>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Déploiement</label>
+        <div class="col-sm-4">
+                <input class="form-control "  size="30" type="text" formControlName="deploiement" >
+       </div>
     </div>
-    <div class="form-group">
-        <label>Métier :
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Métier</label>
+        <div class="col-sm-4">
                 <input class="form-control" size="60" type="text" formControlName="metier" >
-        </label>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Poste Type:
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Poste Type</label>
+        <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="posteType" >
-        </label>
     </div>
-    <div class="form-group">
-        <label>Domaine:
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Domaine</label>
+        <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="domaine" >
-        </label>
+            </div>
     </div>
-    <div class="form-group">
-        <label>Strates équipes:
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Strates équipes</label>
+        <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="stratesEquipes" >
-        </label>
+   </div>
     </div>
-    <div class="form-group">
-        <label>Profil:
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Profil</label>
+        <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="profil" >
-        </label>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Equipes supervisées:
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Equipes supervisées</label>
+        <div class="col-sm-4">
                 <input class="form-control"  size="60"  type="text" formControlName="equipesSupervisees" >
-        </label>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Descriptif équipes supervisées:
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Descriptif équipes supervisées</label>
+        <div class="col-sm-4">
                 <input class="form-control"  size="60"  type="text" formControlName="descriptifEquipesSupervisses" >
-        </label>
+        </div>
     </div>
                  <p class="first"><b>Compétences</b></p>
                  <p-multiSelect [options]="competencesList" formControlName="competences" optionLabel="competence" [panelStyle]="{minWidth:'30em'}"></p-multiSelect>
                  <p >Compétences sélectionnées:
-                     <span *ngIf="regleForm.value.competences"> {{regleForm.value.competences  | competence}} </span></p>
-
-
+                     <span *ngIf="regleForm.value.competences"> {{regleForm.value.competences | competence}} </span></p>
 
     <button  *ngIf="idUpdate" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveRegle()"></button>
     <button *ngIf="!idUpdate" pButton type="button" label="Créer" class="ui-button-rounded" (click)="saveRegle()"></button>
