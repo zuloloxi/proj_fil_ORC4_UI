@@ -1,6 +1,13 @@
 
 <ng-container>
     <br><br>
+    <div *ngIf="(regleForm.get('posteType').dirty || regleForm.get('posteType').touched)  && regleForm.get('posteType').invalid" >
+        <div *ngIf="regleForm.get('posteType').errors.required"  class="alert col-sm-2 col-form-label">Le poste type est obligatoire</div>
+     </div>
+     <div *ngIf="(regleForm.get('domaine').dirty || regleForm.get('domaine').touched)  && regleForm.get('domaine').invalid" >
+        <div *ngIf="regleForm.get('domaine').errors.required"  class="alert col-sm-2 col-form-label">Le domaine est obligatoire</div>
+     </div>
+
 <form [formGroup]="regleForm" (ngSubmit)="saveRegle()">
 
     <div class="form-group row">
@@ -9,26 +16,28 @@
                 <input class="form-control "  size="30" type="text" formControlName="deploiement" >
        </div>
     </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"><span style="color:violet">* </span>Poste Type</label>
+        <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="posteType" >
+        </div>
+
+    </div>
+
+
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Métier</label>
         <div class="col-sm-4">
                 <input class="form-control" size="60" type="text" formControlName="metier" >
         </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Poste Type</label>
-        <div class="col-sm-4">
-                <input class="form-control"  size="60" type="text" formControlName="posteType" >
-    </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Domaine</label>
+        <label class="col-sm-2 col-form-label"><span style="color:violet">* </span>Domaine</label>
         <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="domaine" >
             </div>
     </div>
+
+
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Strates équipes</label>
         <div class="col-sm-4">
@@ -46,8 +55,6 @@
         <div class="col-sm-4">
                 <input class="form-control"  size="60"  type="text" formControlName="equipesSupervisees" >
         </div>
-    </div>
-    <div class="form-group row">
         <label class="col-sm-2 col-form-label">Descriptif équipes supervisées</label>
         <div class="col-sm-4">
                 <input class="form-control"  size="60"  type="text" formControlName="descriptifEquipesSupervisses" >
@@ -58,7 +65,7 @@
                  <p >Compétences sélectionnées:
                      <span *ngIf="regleForm.value.competences"> {{regleForm.value.competences | competence}} </span></p>
 
-    <button  *ngIf="idUpdate" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveRegle()"></button>
-    <button *ngIf="!idUpdate" pButton type="button" label="Créer" class="ui-button-rounded" (click)="saveRegle()"></button>
+    <button  *ngIf="idUpdate" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
+    <button *ngIf="!idUpdate" pButton type="button" label="Créer" class="ui-button-rounded" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
     </form>
 </ng-container>

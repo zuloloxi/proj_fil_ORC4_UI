@@ -43,18 +43,15 @@ export class RegleService {
 
   const method = regle.id === 0 ? 'post' : 'put';
 
-  console.log(method + url +  regle);
 
   return this.http.request(method, url, {body: regle}).subscribe(
     () => {
-      console.log('Enregistrement terminé !');
       this.refreshRegles.next('refresh');
     },
     (error) => {
       console.log('Erreur ! : ' + error);
     }
   );
-
 }
 
   deleteRegle(id: number): Observable<RegleDTO> {

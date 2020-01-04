@@ -55,7 +55,7 @@
 </ng-container>
 
 <ng-container *ngIf="regles">
-
+  <p-confirmDialog header="Suppression" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <h2>{{regles.length }} Règles </h2>
     <span style="color:#FF0000;cursor:pointer" (click) ="goCreate()"> <b>Créer une règle</b></span>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompetenceDTO } from 'src/app/shared-data/competence-dto';
 import { RegleDTO } from 'src/app/shared-data/regle-dto';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -26,7 +26,6 @@ export class RegleFormComponent implements OnInit {
 
     ngOnInit() {
       this.idUpdate = +this.route.snapshot.paramMap.get('id');
-      console.log(this.idUpdate);
       this.competenceService.getAllCompetences().subscribe(
         competencesList => {
           this.competencesList = competencesList;
@@ -36,8 +35,8 @@ export class RegleFormComponent implements OnInit {
       this.regleForm = this.fb.group ({
         deploiement: [],
         metier: [],
-        posteType: [],
-        domaine: [],
+        posteType: [[], [Validators.required, Validators.minLength(1)]],
+        domaine: [[], [Validators.required, Validators.minLength(1)]],
         stratesEquipes: [],
         profil: [],
         equipesSupervisees: [],
@@ -50,8 +49,8 @@ export class RegleFormComponent implements OnInit {
           regle => this.regleForm = this.fb.group ({
             deploiement: [regle.deploiement],
             metier: [regle.metier],
-            posteType: [regle.posteType],
-            domaine: [regle.domaine],
+            posteType: [regle.posteType, [Validators.required, Validators.minLength(1)]],
+            domaine: [regle.domaine, [Validators.required, Validators.minLength(1)]],
             stratesEquipes: [regle.stratesEquipes],
             profil: [regle.profil],
             equipesSupervisees: [regle.equipesSupervisees],
@@ -63,7 +62,9 @@ export class RegleFormComponent implements OnInit {
 
     }
     saveRegle() {
-      this.regleToCreate = new RegleDTO(
+
+      if (this.regleForm.get('posteType').valid && this.regleForm.get('domaine').valid ) {
+         this.regleToCreate = new RegleDTO(
         {
         id: this.idUpdate ? this.idUpdate : 0,
         deploiement: this.regleForm.get('deploiement').value,
@@ -76,12 +77,12 @@ export class RegleFormComponent implements OnInit {
         descriptifEquipesSupervisses: this.regleForm.get('descriptifEquipesSupervisses').value,
         competences: this.regleForm.get('competences').value}
       );
-      if (this.regleToCreate.competences == null) {this.regleToCreate.competences = [] }  ;
-      this.regleService.saveRegle(this.regleToCreate);
-      this.regleService.refreshRegles.subscribe(
-        refresh => this.router.navigate(['/regles'])
-      );
+         if (this.regleToCreate.competences == null) {this.regleToCreate.competences = [] }  ;
+         this.regleService.saveRegle(this.regleToCreate);
+         this.regleService.refreshRegles.subscribe(
+           refresh => this.router.navigate(['/regles']) );
+         }
 
-    }
+      }
 
 }
