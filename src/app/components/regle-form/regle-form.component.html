@@ -1,64 +1,79 @@
 
 <ng-container>
     <br><br>
+    <div *ngIf="(regleForm.get('posteType').dirty || regleForm.get('posteType').touched)  && regleForm.get('posteType').invalid" >
+        <div *ngIf="regleForm.get('posteType').errors.required"  class="alert col-sm-2 col-form-label">Le poste type est obligatoire</div>
+     </div>
+     <div *ngIf="(regleForm.get('domaine').dirty || regleForm.get('domaine').touched)  && regleForm.get('domaine').invalid" >
+        <div *ngIf="regleForm.get('domaine').errors.required"  class="alert col-sm-2 col-form-label">Le domaine est obligatoire</div>
+     </div>
+     <p-confirmDialog header="Suppression" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <form [formGroup]="regleForm" (ngSubmit)="saveRegle()">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Déploiement</label>
         <div class="col-sm-4">
-                <input class="form-control "  size="30" type="text" formControlName="deploiement" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control "  size="30" type="text" formControlName="deploiement" (keyup.enter)="saveRegle()" >
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control "  size="30" type="text" formControlName="deploiement" disabled="disabled" >
        </div>
+
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"><span style="color:violet" *ngIf="regleAction=='create'||regleAction=='update'">* </span>Poste Type</label>
+        <div class="col-sm-4">
+                <input *ngIf="regleAction=='create'||regleAction=='update'"  class="form-control"  size="60" type="text" formControlName="posteType" (keyup.enter)="saveRegle()" >
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control"  size="60" type="text" formControlName="posteType"  disabled="disabled" >
+        </div>
+
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Métier</label>
         <div class="col-sm-4">
-                <input class="form-control" size="60" type="text" formControlName="metier" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control" size="60" type="text" formControlName="metier" (keyup.enter)="saveRegle()">
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control" size="60" type="text" formControlName="metier" disabled="disabled">
         </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Poste Type</label>
+        <label class="col-sm-2 col-form-label"><span style="color:violet" *ngIf="regleAction=='create'||regleAction=='update'">* </span>Domaine</label>
         <div class="col-sm-4">
-                <input class="form-control"  size="60" type="text" formControlName="posteType" >
-    </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Domaine</label>
-        <div class="col-sm-4">
-                <input class="form-control"  size="60" type="text" formControlName="domaine" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control"  size="60" type="text" formControlName="domaine" (keyup.enter)="saveRegle()">
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control"  size="60" type="text" formControlName="domaine"  disabled="disabled">
             </div>
     </div>
+
+
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Strates équipes</label>
         <div class="col-sm-4">
-                <input class="form-control"  size="60" type="text" formControlName="stratesEquipes" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control"  size="60" type="text" formControlName="stratesEquipes" (keyup.enter)="saveRegle()" >
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control"  size="60" type="text" formControlName="stratesEquipes" disabled="disabled" >
    </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Profil</label>
         <div class="col-sm-4">
-                <input class="form-control"  size="60" type="text" formControlName="profil" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control"  size="60" type="text" formControlName="profil"  (keyup.enter)="saveRegle()">
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control"  size="60" type="text" formControlName="profil"  disabled="disabled">
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Equipes supervisées</label>
         <div class="col-sm-4">
-                <input class="form-control"  size="60"  type="text" formControlName="equipesSupervisees" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control"  size="60"  type="text" formControlName="equipesSupervisees"  (keyup.enter)="saveRegle()">
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control"  size="60"  type="text" formControlName="equipesSupervisees"  disabled="disabled">
         </div>
-    </div>
-    <div class="form-group row">
         <label class="col-sm-2 col-form-label">Descriptif équipes supervisées</label>
         <div class="col-sm-4">
-                <input class="form-control"  size="60"  type="text" formControlName="descriptifEquipesSupervisses" >
+                <input *ngIf="regleAction=='create'||regleAction=='update'" class="form-control"  size="60"  type="text" formControlName="descriptifEquipesSupervisses" (keyup.enter)="saveRegle()">
+                <input *ngIf="regleAction=='delete'||regleAction=='view'" class="form-control"  size="60"  type="text" formControlName="descriptifEquipesSupervisses" disabled="disabled">
         </div>
     </div>
                  <p class="first"><b>Compétences</b></p>
-                 <p-multiSelect [options]="competencesList" formControlName="competences" optionLabel="competence" [panelStyle]="{minWidth:'30em'}"></p-multiSelect>
+                 <p-multiSelect *ngIf="regleAction=='create'||regleAction=='update'" [options]="competencesList" formControlName="competences" optionLabel="competence" [panelStyle]="{minWidth:'30em'}"></p-multiSelect>
                  <p >Compétences sélectionnées:
                      <span *ngIf="regleForm.value.competences"> {{regleForm.value.competences | competence}} </span></p>
 
-    <button  *ngIf="idUpdate" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveRegle()"></button>
-    <button *ngIf="!idUpdate" pButton type="button" label="Créer" class="ui-button-rounded" (click)="saveRegle()"></button>
+    <button *ngIf="regleAction=='update'" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
+    <button *ngIf="regleAction=='create'" pButton type="button" label="Créer" class="ui-button-rounded" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
+    <button *ngIf="regleAction=='delete'" pButton type="button" label="Supprimer" class="ui-button-rounded ui-button-danger" (click)="deleteRegle()" ></button>
     </form>
 </ng-container>

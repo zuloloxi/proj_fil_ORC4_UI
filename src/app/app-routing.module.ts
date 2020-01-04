@@ -19,6 +19,8 @@ const routes: Routes = [
   { path: 'regleupdate/:id', component: RegleFormComponent },
   { path: 'allTransformed', component: TransformListComponent },
   { path: 'resultat', component: OutputListComponent },
+  { path: 'regledelete/:id', component: RegleFormComponent },
+  { path: 'allTransformed', component: OutputListComponent },
   { path: '', redirectTo: '/regles', pathMatch: 'full' }   // page par défaut
 ];
 
