@@ -23,7 +23,6 @@ export class ReglesListComponent implements OnInit {
 
   constructor(private router: Router,
               private regleService: RegleService,
-              private confirmationService: ConfirmationService,
               private errorService: ErrorService) { }
 
   ngOnInit() {
@@ -52,16 +51,20 @@ export class ReglesListComponent implements OnInit {
   }
 
   deleteRegle(id: number) {
-    this.confirmationService.confirm({
-      message: 'Êtes vous sur de vouloir supprimer la règle ?',
-      accept: () => {
-      return this.regleService.deleteRegle(id).subscribe(
-         () => {this.regles.splice(this.regles.findIndex(regle => regle.id === id), 1);
-               },
-               error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
-         );
-       }
-      });
+    // this.confirmationService.confirm({
+    //   message: 'Êtes vous sur de vouloir supprimer la règle ?',
+    //   accept: () => {
+    //   return this.regleService.deleteRegle(id).subscribe(
+    //      () => {this.regles.splice(this.regles.findIndex(regle => regle.id === id), 1);
+    //            },
+    //            error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
+    //      );
+    //    }
+    //   });
+    this.regleService.getRegle(id).subscribe (
+      regleAPI => this.router.navigate(['/regledelete', regleAPI.id]),
+      error => {this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)}); }
+    );
   }
 
   reformatMetier(metier: string) {

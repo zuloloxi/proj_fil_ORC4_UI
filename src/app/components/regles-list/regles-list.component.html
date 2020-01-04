@@ -59,7 +59,7 @@
     <h2>{{regles.length }} Règles </h2>
     <span style="color:#FF0000;cursor:pointer" (click) ="goCreate()"> <b>Créer une règle</b></span>
 
-    <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="regles.length" [rowsPerPageOptions]="[10,20,30]" paginatorPosition="both" [resizableColumns]="true">
+    <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="20" paginatorPosition="both" [resizableColumns]="true">
 
       <ng-template pTemplate="caption">
         <div style="text-align: right">
