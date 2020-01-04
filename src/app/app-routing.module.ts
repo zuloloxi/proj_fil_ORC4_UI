@@ -5,6 +5,7 @@ import { ReglesListComponent } from './components/regles-list/regles-list.compon
 import { CollaboratorItemComponent } from './components/collaborator-item/collaborator-item.component';
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
+import { TransformListComponent } from './components/transform-list/transform-list.component';
 import { OutputListComponent } from './components/output-list/output-list.component';
 
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'fichier', component: ReglesListComponent },
   { path: 'reglecreate', component: RegleFormComponent },
   { path: 'regleupdate/:id', component: RegleFormComponent },
-  { path: 'allTransformed', component: OutputListComponent },
+  { path: 'allTransformed', component: TransformListComponent },
+  { path: 'resultat', component: OutputListComponent },
   { path: '', redirectTo: '/regles', pathMatch: 'full' }   // page par défaut
 ];
 

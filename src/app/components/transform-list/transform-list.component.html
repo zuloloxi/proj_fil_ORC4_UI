@@ -1,23 +1,11 @@
-<h2>{{rejets.length }} enregistrements en erreur</h2>
-  <p-table #dt1 [columns]="cols" [frozenColumns]="scrollableCols" [value]="rejets" [scrollable]="true" scrollHeight="300px" frozenWidth="300px"
-           [paginator]="true" [rows]="100" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both" sortMode="multiple">
+<div class="content-section implementation ui-fluid">
+  <h2>{{rejets.length }} enregistrements en erreur</h2>
+  <p-table #dt1 [columns]="cols" [value]="rejets" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="both" sortMode="multiple">
     <ng-template pTemplate="caption">
       <div style="text-align: right">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt1.filterGlobal($event.target.value, 'contains')" style="width:auto">
       </div>
-    </ng-template>
-    <ng-template pTemplate="colgroup" let-columns>
-      <colgroup>
-        <col *ngFor="let col of columns" style="width:300px">
-      </colgroup>
-    </ng-template>
-    <ng-template pTemplate="frozenrows" let-rowData let-columns="columns">
-      <tr>
-        <td *ngFor="let col of columns">
-          <b>{{rowData[col.field]}}</b>
-        </td>
-      </tr>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -26,13 +14,13 @@
           <p-sortIcon [field]="col.field"></p-sortIcon>
         </th>
       </tr>
-<!--      <tr>-->
-<!--        <th *ngFor="let col of columns" [ngSwitch]="col.field">-->
-<!--          <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt1.filter($event.target.value, col.field, 'contains')">-->
-<!--          <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt1.filter($event.value, col.field, 'equals')"></p-dropdown>-->
-<!--&lt;!&ndash;          <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt1.filter($event.target.value, col.field, 'custom')">&ndash;&gt;-->
-<!--        </th>-->
-<!--      </tr>-->
+      <tr>
+        <th *ngFor="let col of columns" [ngSwitch]="col.field">
+          <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt1.filter($event.target.value, col.field, 'contains')">
+          <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt1.filter($event.value, col.field, 'equals')"></p-dropdown>
+          <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt1.filter($event.target.value, col.field, 'custom')">
+        </th>
+      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData">
@@ -73,3 +61,4 @@
       </tr>
     </ng-template>
   </p-table>
+</div>
