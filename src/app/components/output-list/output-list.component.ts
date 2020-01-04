@@ -17,6 +17,7 @@ export class OutputListComponent implements OnInit {
   domaines: SelectItem[];
   valids: Output[] = [];
   total: Output[][];
+  selectedOutputs: Output[];
 
   constructor(private outputService: OutputService) { }
 
@@ -30,7 +31,7 @@ export class OutputListComponent implements OnInit {
       ];
 
       this.cols = [
-        { field: 'action', header: 'action' },
+        { field: 'action', header: 'action', display: 'none' },
         { field: 'identifiant', header: 'identifiant' },
         { field: 'nom', header: 'nom' },
         { field: 'prenom', header: 'prenom' },
