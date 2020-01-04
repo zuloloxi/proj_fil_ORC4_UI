@@ -145,9 +145,9 @@ export class OutputListComponent implements OnInit {
                                                outputs.equipe.substr(0,6) !== 'ERREUR' &&
                                                outputs.competences.substr(0,6) !== 'ERREUR');
       this.rejets = this.outputs.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
-                                                     outputs.domaine.substr(0,6) === 'ERREUR' ||
-                                                     outputs.equipe.substr(0,6) === 'ERREUR' ||
-                                                     outputs.competences.substr(0,6) === 'ERREUR');
+                                               outputs.domaine.substr(0,6) === 'ERREUR' ||
+                                               outputs.equipe.substr(0,6) === 'ERREUR' ||
+                                               outputs.competences.substr(0,6) === 'ERREUR');
       return this.total = [this.rejets, this.valids];
     });
 
