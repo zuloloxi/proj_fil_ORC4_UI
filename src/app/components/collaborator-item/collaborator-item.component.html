@@ -145,3 +145,10 @@
  
    </form>
 </ng-container>
+
+<p-dialog header="Confirmation" [(visible)]="sauvegardeOK" [style]="{width: '20%'}" [modal]="true">
+   Collaborateur sauvegardé ! 
+   <br><br>
+   <p-button label="OK" (onClick)="onOK()"></p-button>
+ </p-dialog>
+

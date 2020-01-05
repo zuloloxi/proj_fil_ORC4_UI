@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CollaborateurService } from 'src/app/services/collaborateur.service';
 import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -15,10 +15,14 @@ export class CollaboratorItemComponent implements OnInit {
   updateCollaborateur : CollaborateurDTO;
   collaborateurForm: FormGroup;
   collaborateurUid: string;
+  sauvegardeOK = false;
 
 
 
-  constructor(private fb: FormBuilder, private activateRoute: ActivatedRoute, private collaborateurService: CollaborateurService) { }
+  constructor(private router: Router, 
+             private fb: FormBuilder, 
+             private activateRoute: ActivatedRoute, 
+             private collaborateurService: CollaborateurService) { }
 
   ngOnInit() {
     this.collaborateurUid = this.activateRoute.snapshot.paramMap.get('collaborateurUid');
@@ -107,6 +111,12 @@ export class CollaboratorItemComponent implements OnInit {
 
       this.collaborateurService.updateCollaborateurUid(this.collaborateurUid, this.updateCollaborateur).subscribe();
       console.log("save");
+      this.sauvegardeOK=true;
+   }
+
+   onOK() {
+    this.router.navigate(['/collaborateurs/']);  
+     
    }
 
 }
