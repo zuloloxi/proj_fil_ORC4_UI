@@ -26,15 +26,18 @@ export class CollaborateurService {
 
   }
 
-  getOneCollaborateur(collaborateurUid: number): Observable<CollaborateurDTO> {
+  getOneCollaborateur(collaborateurUid: string): Observable<CollaborateurDTO> {
     return this.http.get(`${this.baseUrl}/inputs/uid/${collaborateurUid}`) .pipe(
       map((collaborateurInfos: any) => new CollaborateurDTO(collaborateurInfos))
       );
   }
 
-
-  deleteCollaborateutUId(collaborateurUid: number): Observable<CollaborateurDTO> {
+  deleteCollaborateutUid(collaborateurUid: string): Observable<CollaborateurDTO> {
     return this.http.delete<CollaborateurDTO>(`${this.baseUrl}/inputs/deleteuid/${collaborateurUid}`);
+  }
+
+  updateCollaborateurUid(collaborateurUid: string, collaborateurDTO: CollaborateurDTO) : Observable<void>{
+    return this.http.put<void>(`${this.baseUrl}/inputs/updateuid/${collaborateurUid}`, collaborateurDTO);
   }
 
 }
