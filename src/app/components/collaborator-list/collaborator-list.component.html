@@ -52,7 +52,8 @@
 
   <h2>{{collaborateurs.length }} Collaborateurs </h2>
 
-  
+<ng-container *ngIf="showIcons"> 
+
   <span class="drop" pDroppable="collaborateur" (onDrop)="dropView($event)" ><i class="icone far fa-eye fa-lg" > </i></span>
   &nbsp;&nbsp;
   <span class="drop" pDroppable="collaborateur" (onDrop)="dropEdit($event)" >
@@ -60,6 +61,8 @@
  </span>
  &nbsp;&nbsp;
  <span class="drop" pDroppable="collaborateur" (onDrop)="dropTrash($event)" ><i class="icone icone far fa-trash-alt"></i></span>
+
+</ng-container>
 
 <br>
 

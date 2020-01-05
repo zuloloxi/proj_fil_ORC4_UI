@@ -15,6 +15,7 @@ export class CollaboratorListComponent implements OnInit {
   collaborateur: CollaborateurDTO;
   display = false;
   trash = false;
+  showIcons=false;
   draggedCollaborateurDTO: null;
 
 
@@ -38,11 +39,13 @@ export class CollaboratorListComponent implements OnInit {
 
   dragStart(event, collaborateur) {
     this.draggedCollaborateurDTO = collaborateur;
+    this.showIcons=true;
     console.log("start");
   }
 
   dragEnd(event) {
     this.draggedCollaborateurDTO = null;
+    this.showIcons=false;
     console.log("end");
   }
 
