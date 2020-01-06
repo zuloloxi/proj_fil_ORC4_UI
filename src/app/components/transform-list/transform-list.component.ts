@@ -3,6 +3,8 @@ import { OutputDto } from 'src/app/shared-data/output-dto';
 import { Output } from 'src/app/shared-data/output';
 import { OutputService } from 'src/app/services/output.service';
 import { SelectItem } from 'primeng/api';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+// import { FormsModule }   from '@angular/forms';
 
 @Component({
   selector: 'app-transform-list',
@@ -18,100 +20,106 @@ export class TransformListComponent implements OnInit {
   valids: OutputDto[] = [];
   total: OutputDto[][];
   selectedOutputs: Output[];
+  checked1: boolean= true;
+  isChecked: boolean = true;
 
   constructor(private outputService: OutputService) { }
 
   ngOnInit() {
-
-      this.domaines = [
-        { label: 'Tous les domaines', value: null },
-        { label: 'ResBPFCBP', value: 'ResBPFCBP' },
-        { label: 'ResRetail', value: 'ResRetail' },
-        { label: 'ResCorpo', value: 'ResCorpo' }
-       ];
-
-//       this.cols = [
-//         { field: 'identifiant', header: 'identifiant' },
-//         { field: 'nom', header: 'nom' },
-//         { field: 'prenom', header: 'prenom' },
-//         { field: 'email', header: 'email' },
-//         { field: 'domaine', header: 'domaine' },
-//         { field: 'equipe', header: 'equipe' },
-//         { field: 'competences', header: 'competences' },
-//         { field: 'profil', header: 'profil' }
-//       ];
-
-      this.cols = [
-              { field: 'action', header: 'action', hidden:true },
-              { field: 'identifiant', header: 'identifiant', hidden:false },
-              { field: 'nom', header: 'nom', hidden:false },
-              { field: 'prenom', header: 'prenom', hidden:false },
-              { field: 'email', header: 'email', hidden:false },
-              { field: 'emailCommerciale', header: 'emailCommerciale', hidden:true },
-              { field: 'langue', header: 'langue', hidden:true },
-              { field: 'domaine', header: 'domaine', hidden:false },
-              { field: 'equipe', header: 'equipe', hidden:false },
-              { field: 'groupeCompetence', header: 'groupeCompetence', hidden:true },
-              { field: 'groupesReporting', header: 'groupesReporting', hidden:true },
-              { field: 'profil', header: 'profil', hidden:false },
-              { field: 'administration', header: 'administration', hidden:true },
-              { field: 'supervision', header: 'supervision', hidden:true },
-              { field: 'agent', header: 'agent', hidden:true },
-              { field: 'statistiques', header: 'statistiques', hidden:true },
-              { field: 'enregistrement', header: 'enregistrement', hidden:true },
-              { field: 'campagnes', header: 'campagnes', hidden:true },
-              { field: 'scripting', header: 'scripting', hidden:true },
-              { field: 'historique', header: 'historique', hidden:true },
-              { field: 'suiviActions', header: 'suiviActions', hidden:true },
-              { field: 'suiviAppels', header: 'suiviAppels', hidden:true },
-              { field: 'configurationAfficheursMuraux', header: 'configurationAfficheursMuraux', hidden:true },
-              { field: 'hypervision', header: 'hypervision', hidden:true },
-              { field: 'competences', header: 'competences', hidden:false },
-              { field: 'site', header: 'site', hidden:true },
-              { field: 'positionPrivee', header: 'positionPrivee', hidden:true },
-              { field: 'positionCommerciale', header: 'positionCommerciale', hidden:true },
-              { field: 'mobile', header: 'mobile', hidden:true },
-              { field: 'domainesSupervises', header: 'domainesSupervises', hidden:true },
-              { field: 'equipesSupervisees', header: 'equipesSupervisees', hidden:true },
-              { field: 'fluxSupervises', header: 'fluxSupervises', hidden:true },
-              { field: 'competencesSupervisees', header: 'competencesSupervisees', hidden:true },
-              { field: 'groupesSupervises', header: 'groupesSupervises', hidden:true },
-              { field: 'sitesSupervises', header: 'sitesSupervises', hidden:true },
-              { field: 'canauxExternes', header: 'canauxExternes', hidden:true },
-              { field: 'pausesSupervisees', header: 'pausesSupervisees', hidden:true },
-              { field: 'tachesSupervisees', header: 'tachesSupervisees', hidden:true },
-              { field: 'compteursSupervises', header: 'compteursSupervises', hidden:true },
-              { field: 'servicesSupervises', header: 'servicesSupervises', hidden:true },
-              { field: 'alertesSeuilSupervisees', header: 'alertesSeuilSupervisees', hidden:true },
-              { field: 'categoriesAlertes', header: 'categoriesAlertes', hidden:true },
-              { field: 'modelesAlertes', header: 'modelesAlertes', hidden:true },
-              { field: 'panneauxSupervises', header: 'panneauxSupervises', hidden:true },
-              { field: 'missionsSupervisees', header: 'missionsSupervisees', hidden:true },
-              { field: 'annuairesSupervises', header: 'annuairesSupervises', hidden:true },
-              { field: 'strategiesRoutageSupervisees', header: 'strategiesRoutageSupervisees', hidden:true },
-              { field: 'profilsSupervises', header: 'profilsSupervises', hidden:true },
-              { field: 'planningsSupervises', header: 'planningsSupervises', hidden:true },
-              { field: 'commentaires', header: 'commentaires', hidden:true }
-            ];
-
-      this.outputService.getAlltransformInputs().subscribe((outputs) =>
-         { this.outputs = outputs;
-           this.outputService.publishResults(outputs).subscribe();
-           this.outputService.deleteOutputs().subscribe();
-           this.outputService.getAllOutputs().subscribe((outputList) => {
-                  this.outputList = outputList;
-                  this.valids = this.outputs.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
-                                                               outputs.domaine.substr(0,6) !== 'ERREUR' &&
-                                                               outputs.equipe.substr(0,6) !== 'ERREUR' &&
-                                                               outputs.competences.substr(0,6) !== 'ERREUR');
-                  this.rejets = this.outputs.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
-                                                               outputs.domaine.substr(0,6) === 'ERREUR' ||
-                                                               outputs.equipe.substr(0,6) === 'ERREUR' ||
-                                                               outputs.competences.substr(0,6) === 'ERREUR');
-                  return this.total = [this.valids, this.rejets];
-           });
-          }
-      );
+    this.transform();
   }
 
+  transform(){
+    this.domaines = [
+            { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+            { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+            { label: 'ResRetail', value: 'ResRetail' },
+            { label: 'ResCorpo', value: 'ResCorpo' }
+           ];
+
+          this.updateCols();
+
+          this.outputService.getAlltransformInputs().subscribe((outputs) =>
+             { this.outputs = outputs;
+               this.outputService.publishResults(outputs).subscribe();
+               this.outputService.deleteOutputs().subscribe();
+               this.outputService.getAllOutputs().subscribe((outputList) => {
+                      this.outputList = outputList;
+                      this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
+                                                                   outputs.domaine.substr(0,6) !== 'ERREUR' &&
+                                                                   outputs.equipe.substr(0,6) !== 'ERREUR' &&
+                                                                   outputs.competences.substr(0,6) !== 'ERREUR');
+                      this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
+                                                                   outputs.domaine.substr(0,6) === 'ERREUR' ||
+                                                                   outputs.equipe.substr(0,6) === 'ERREUR' ||
+                                                                   outputs.competences.substr(0,6) === 'ERREUR');
+                      return this.total = [this.valids, this.rejets];
+               });
+              }
+          );
+  }
+
+  handleChange(e) {
+          console.log(this.isChecked);
+          this.isChecked = e.checked;
+          console.log(this.isChecked);
+          this.updateCols();
+//           window.location.reload();
+
+  }
+
+  updateCols(){
+  this.cols = [
+                { field: 'action', header: 'action', hidden:this.checked1 },
+                { field: 'identifiant', header: 'identifiant', hidden:false },
+                { field: 'nom', header: 'nom', hidden:false },
+                { field: 'prenom', header: 'prenom', hidden:false },
+                { field: 'email', header: 'email', hidden:false },
+                { field: 'emailCommerciale', header: 'emailCommerciale', hidden:this.checked1 },
+                { field: 'langue', header: 'langue', hidden:this.checked1 },
+                { field: 'domaine', header: 'domaine', hidden:false },
+                { field: 'equipe', header: 'equipe', hidden:false },
+                { field: 'groupeCompetence', header: 'groupeCompetence', hidden:this.checked1 },
+                { field: 'groupesReporting', header: 'groupesReporting', hidden:this.checked1 },
+                { field: 'profil', header: 'profil', hidden:false },
+                { field: 'administration', header: 'administration', hidden:this.checked1 },
+                { field: 'supervision', header: 'supervision', hidden:this.checked1 },
+                { field: 'agent', header: 'agent', hidden:this.checked1 },
+                { field: 'statistiques', header: 'statistiques', hidden:this.checked1 },
+                { field: 'enregistrement', header: 'enregistrement', hidden:this.checked1 },
+                { field: 'campagnes', header: 'campagnes', hidden:this.checked1 },
+                { field: 'scripting', header: 'scripting', hidden:this.checked1 },
+                { field: 'historique', header: 'historique', hidden:this.checked1 },
+                { field: 'suiviActions', header: 'suiviActions', hidden:this.checked1 },
+                { field: 'suiviAppels', header: 'suiviAppels', hidden:this.checked1 },
+                { field: 'configurationAfficheursMuraux', header: 'configurationAfficheursMuraux', hidden:this.checked1 },
+                { field: 'hypervision', header: 'hypervision', hidden:this.checked1 },
+                { field: 'competences', header: 'competences', hidden:false },
+                { field: 'site', header: 'site', hidden:this.checked1 },
+                { field: 'positionPrivee', header: 'positionPrivee', hidden:this.checked1 },
+                { field: 'positionCommerciale', header: 'positionCommerciale', hidden:this.checked1 },
+                { field: 'mobile', header: 'mobile', hidden:this.checked1 },
+                { field: 'domainesSupervises', header: 'domainesSupervises', hidden:this.checked1 },
+                { field: 'equipesSupervisees', header: 'equipesSupervisees', hidden:this.checked1 },
+                { field: 'fluxSupervises', header: 'fluxSupervises', hidden:this.checked1 },
+                { field: 'competencesSupervisees', header: 'competencesSupervisees', hidden:this.checked1 },
+                { field: 'groupesSupervises', header: 'groupesSupervises', hidden:this.checked1 },
+                { field: 'sitesSupervises', header: 'sitesSupervises', hidden:this.checked1 },
+                { field: 'canauxExternes', header: 'canauxExternes', hidden:this.checked1 },
+                { field: 'pausesSupervisees', header: 'pausesSupervisees', hidden:this.checked1 },
+                { field: 'tachesSupervisees', header: 'tachesSupervisees', hidden:this.checked1 },
+                { field: 'compteursSupervises', header: 'compteursSupervises', hidden:this.checked1 },
+                { field: 'servicesSupervises', header: 'servicesSupervises', hidden:this.checked1 },
+                { field: 'alertesSeuilSupervisees', header: 'alertesSeuilSupervisees', hidden:this.checked1 },
+                { field: 'categoriesAlertes', header: 'categoriesAlertes', hidden:this.checked1 },
+                { field: 'modelesAlertes', header: 'modelesAlertes', hidden:this.checked1 },
+                { field: 'panneauxSupervises', header: 'panneauxSupervises', hidden:this.checked1 },
+                { field: 'missionsSupervisees', header: 'missionsSupervisees', hidden:this.checked1 },
+                { field: 'annuairesSupervises', header: 'annuairesSupervises', hidden:this.checked1 },
+                { field: 'strategiesRoutageSupervisees', header: 'strategiesRoutageSupervisees', hidden:this.checked1 },
+                { field: 'profilsSupervises', header: 'profilsSupervises', hidden:this.checked1 },
+                { field: 'planningsSupervises', header: 'planningsSupervises', hidden:this.checked1 },
+                { field: 'commentaires', header: 'commentaires', hidden:this.checked1 }
+              ];
+  }
 }
