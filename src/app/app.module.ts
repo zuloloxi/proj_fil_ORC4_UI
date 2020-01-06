@@ -29,6 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CompetencePipe } from './pipes/competence.pipe';
 import { TransformListComponent } from './components/transform-list/transform-list.component';
 import { OutputListComponent } from './components/output-list/output-list.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { FormsModule }   from '@angular/forms';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     ReactiveFormsModule,
     ConfirmDialogModule,
     DragDropModule,
-    DropdownModule
+    DropdownModule,
+    ToggleButtonModule,
+    FormsModule
   ],
   providers: [
     { provide: 'BACKEND_URL', useValue: 'http://localhost:8080'}

@@ -1,21 +1,39 @@
 <h2>{{valids.length }} enregistrements valides</h2>
+
+
 <p-table #dt2 [columns]="cols" [value]="valids" [scrollable]="true" scrollHeight="300px"
          [paginator]="true" [rows]="100" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="bottom" sortMode="multiple"
          selectionMode="multiple" [(selection)]="selectedOutputs">
   <ng-template pTemplate="caption">
-    <div style="text-align: left">
-      <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt2.exportCSV()" style="margin-right: 0.5em;"></button>
-<!--      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>-->
-<!--      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning" style="margin-right: 0.5em;"></button>-->
-      <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt2.exportCSV({selectionOnly:true})"></button>
-      <span>
-              </span>
-      <span style="width:auto;float:right">
-                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt2.filterGlobal($event.target.value, 'contains')">
-              </span>
+    <div style="display:flex;justify-content:space-between">
+
+      <div>
+        <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt2.exportCSV()" style="margin-right: 0.5em;"></button>
+  <!--      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>-->
+  <!--      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning" style="margin-right: 0.5em;"></button>-->
+        <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt2.exportCSV({selectionOnly:true})" style="margin-right: 0.5em;"></button>
+      </div>
+<!--      <h3 class="first">Basic - ({{checked1}})</h3>-->
+<!--      <p-toggleButton [(ngModel)]="checked1" [style]="{'width':'150px'}"></p-toggleButton>-->
+      <div style="width:auto;font-weight:400">
+        <p-toggleButton [(ngModel)]="checked1" onLabel="format court" offLabel="format étendu" onIcon="fas fa-compress-arrows-alt" offIcon="fas fa-expand-arrows-alt" [style]="{'width':'150px'}" (onChange)="handleChange($event)"></p-toggleButton>
+      </div>
+
+      <div style="width:auto">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt2.filterGlobal($event.target.value, 'contains')">
+      </div>
+
     </div>
   </ng-template>
+
+  <ng-template pTemplate="colgroup" let-columns *ngIf="checked1">
+    <colgroup>
+      <col *ngFor="let col of columns" style="width:198px">
+    </colgroup>
+  </ng-template>
+
+
   <ng-template pTemplate="header" let-columns>
     <tr>
       <ng-container *ngFor="let col of columns">
@@ -25,16 +43,19 @@
         </th>
       </ng-container>
     </tr>
+
     <tr>
       <ng-container *ngFor="let col of columns">
         <th [ngSwitch]="col.field"  *ngIf="!col.hidden">
           <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt2.filter($event.target.value, col.field, 'contains')">
-          <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt2.filter($event.value, col.field, 'equals')"></p-dropdown>
-          <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt2.filter($event.target.value, col.field, 'custom')">
+<!--          <span *ngIf="checked1">-->
+<!--            <p-dropdown [ngSwitch]="col.field" *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt2.filter($event.value, col.field, 'equals')"></p-dropdown>-->
+<!--          </span>-->
         </th>
       </ng-container>
     </tr>
   </ng-template>
+
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
       <ng-container *ngFor="let col of columns">
@@ -46,24 +67,59 @@
   </ng-template>
 </p-table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h2>{{rejets.length }} enregistrements en erreur</h2>
+
 <p-table #dt1 [columns]="cols" [value]="rejets" [scrollable]="true" scrollHeight="300px"
          [paginator]="true" [rows]="100" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="bottom" sortMode="multiple"
          selectionMode="multiple" [(selection)]="selectedOutputs">
   <ng-template pTemplate="caption">
-    <div style="text-align: left">
-      <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="margin-right: 0.5em;"></button>
-<!--      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>-->
-<!--      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning" style="margin-right: 0.5em;"></button>-->
-      <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt1.exportCSV({selectionOnly:true})"></button>
-      <span>
-              </span>
-      <span style="width:auto;float:right">
-                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt1.filterGlobal($event.target.value, 'contains')">
-              </span>
+    <div style="display:flex;justify-content:space-between">
+
+      <div>
+        <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="margin-right: 0.5em;"></button>
+        <!--      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>-->
+        <!--      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning" style="margin-right: 0.5em;"></button>-->
+        <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt1.exportCSV({selectionOnly:true})" style="margin-right: 0.5em;"></button>
+      </div>
+<!--      <h3 class="first">Basic - ({{checked1}})</h3>-->
+<!--      &lt;!&ndash;      <p-toggleButton [(ngModel)]="checked1" [style]="{'width':'150px'}"></p-toggleButton>&ndash;&gt;-->
+<!--      <div style="width:auto;font-weight:400">-->
+<!--        <p-toggleButton [(ngModel)]="checked1" onLabel="format court" offLabel="format étendu" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'150px'}" (onChange)="handleChange($event)"></p-toggleButton>-->
+<!--      </div>-->
+
+
+      <div style="width:auto">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt1.filterGlobal($event.target.value, 'contains')">
+      </div>
+
     </div>
   </ng-template>
+
+  <ng-template pTemplate="colgroup" let-columns *ngIf="checked1">
+    <colgroup>
+      <col *ngFor="let col of columns" style="width:198px">
+    </colgroup>
+  </ng-template>
+
+
   <ng-template pTemplate="header" let-columns>
     <tr>
       <ng-container *ngFor="let col of columns">
@@ -73,16 +129,19 @@
         </th>
       </ng-container>
     </tr>
+
     <tr>
       <ng-container *ngFor="let col of columns">
         <th [ngSwitch]="col.field"  *ngIf="!col.hidden">
           <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt1.filter($event.target.value, col.field, 'contains')">
-          <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt1.filter($event.value, col.field, 'equals')"></p-dropdown>
-          <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt1.filter($event.target.value, col.field, 'custom')">
+          <!--          <span *ngIf="checked1">-->
+          <!--            <p-dropdown [ngSwitch]="col.field" *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt1.filter($event.value, col.field, 'equals')"></p-dropdown>-->
+          <!--          </span>-->
         </th>
       </ng-container>
     </tr>
   </ng-template>
+
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
       <ng-container *ngFor="let col of columns">
@@ -93,3 +152,49 @@
     </tr>
   </ng-template>
 </p-table>
+<!--<p-table #dt1 [columns]="cols" [value]="rejets" [scrollable]="true" scrollHeight="300px"-->
+<!--         [paginator]="true" [rows]="100" [rowsPerPageOptions]="[5,10,50,100]" paginatorPosition="bottom" sortMode="multiple"-->
+<!--         selectionMode="multiple" [(selection)]="selectedOutputs">-->
+<!--  <ng-template pTemplate="caption">-->
+<!--    <div style="text-align: left">-->
+<!--      <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="margin-right: 0.5em;"></button>-->
+<!--&lt;!&ndash;      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf()" class="ui-button-warning" style="margin-right: 0.5em;"></button>&ndash;&gt;-->
+<!--      <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - Selection Only" (click)="dt1.exportCSV({selectionOnly:true})"></button>-->
+<!--      <span>-->
+<!--              </span>-->
+<!--      <span style="width:auto;float:right">-->
+<!--                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>-->
+<!--                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt1.filterGlobal($event.target.value, 'contains')">-->
+<!--              </span>-->
+<!--    </div>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate="header" let-columns>-->
+<!--    <tr>-->
+<!--      <ng-container *ngFor="let col of columns">-->
+<!--        <th [pSortableColumn]="col.field" *ngIf="!col.hidden">-->
+<!--          {{col.header}}-->
+<!--          <p-sortIcon [field]="col.field"></p-sortIcon>-->
+<!--        </th>-->
+<!--      </ng-container>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <ng-container *ngFor="let col of columns">-->
+<!--        <th [ngSwitch]="col.field"  *ngIf="!col.hidden">-->
+<!--          <input *ngSwitchCase="'nom'" pInputText type="text" (input)="dt1.filter($event.target.value, col.field, 'contains')">-->
+<!--          <p-dropdown *ngSwitchCase="'domaine'" [options]="domaines" [style]="{'width':'100%'}" (onChange)="dt1.filter($event.value, col.field, 'equals')"></p-dropdown>-->
+<!--          <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt1.filter($event.target.value, col.field, 'custom')">-->
+<!--        </th>-->
+<!--      </ng-container>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate="body" let-rowData let-columns="columns">-->
+<!--    <tr [pSelectableRow]="rowData">-->
+<!--      <ng-container *ngFor="let col of columns">-->
+<!--        <td *ngIf="!col.hidden">-->
+<!--          {{rowData[col.field]}}-->
+<!--        </td>-->
+<!--      </ng-container>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--</p-table>-->
