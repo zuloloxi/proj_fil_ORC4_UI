@@ -25,6 +25,7 @@ export class CollaboratorListComponent implements OnInit {
   displayTransform = false;
   displayTransformError = false;
   msgs: Message[] = [];
+  error: string;
 
   constructor( private router: Router,
                private errorService: ErrorService,
@@ -126,6 +127,8 @@ export class CollaboratorListComponent implements OnInit {
     },
     error => {this.msgs.push({severity: 'error', summary: '', detail:             this.errorService.getMessage(error)});
               console.log(this.msgs);
+           //   console.log(this.errorService.getMessage(error));
+              this.onViewError(this.errorService.getMessage(error));
 
 
   });
@@ -134,6 +137,16 @@ export class CollaboratorListComponent implements OnInit {
 
   viewTransformClose() {
     this.displayTransform = false;
+  }
+
+  onViewError(error :string) {
+    console.log(error);
+    this.displayTransformError = true;
+    this.error = error;
+  }
+
+  viewTransformErrorClose() {
+    this.displayTransformError = false;
   }
 
 

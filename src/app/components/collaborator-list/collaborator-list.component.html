@@ -131,7 +131,7 @@
   </p-dialog>
 
 
-  <p-dialog *ngIf="output" header="Détail de la Transformation" [(visible)]="displayTransform" [style]="{width: '50%'}" [modal]="true" [maximizable]=true>
+  <p-dialog *ngIf="output" header="Détail de la Transformation" [(visible)]="displayTransform" [style]="{width: '40%'}" [modal]="true" [maximizable]=true>
     <b>COLLABORATEUR :</b> {{output.identifiant}}
     <br>
     <b>NOM :</b> {{output.nom}}
@@ -148,6 +148,18 @@
     <br><br>
     <p-button label="Retour"  (onClick)="viewTransformClose()"></p-button>
   </p-dialog>
+
+  
+
+    <p-dialog  header="Erreur sur la transformation" [(visible)]="displayTransformError" [style]="{width: '40%'}" [modal]="true">
+        <br>
+        {{error}}
+        <br><br>
+        <b>Message détaillé dans l'onglet Transformation</b>
+        <br><br>
+        <p-button label="Retour"  (onClick)="viewTransformErrorClose()"></p-button>
+
+    </p-dialog>
 
 
 </ng-container>
