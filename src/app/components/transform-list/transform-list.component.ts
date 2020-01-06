@@ -41,8 +41,8 @@ export class TransformListComponent implements OnInit {
 
           this.outputService.getAlltransformInputs().subscribe((outputs) =>
              { this.outputs = outputs;
-               this.outputService.publishResults(outputs).subscribe();
                this.outputService.deleteOutputs().subscribe();
+               this.outputService.publishResults(outputs).subscribe();
                this.outputService.getAllOutputs().subscribe((outputList) => {
                       this.outputList = outputList;
                       this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
@@ -64,8 +64,6 @@ export class TransformListComponent implements OnInit {
           this.isChecked = e.checked;
           console.log(this.isChecked);
           this.updateCols();
-//           window.location.reload();
-
   }
 
   updateCols(){
