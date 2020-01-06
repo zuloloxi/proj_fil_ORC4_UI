@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { RegleDTO } from '../shared-data/regle-dto';
+import { RegleDTO, RegleViewList } from '../shared-data/regle-dto';
 import { Observable, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -17,12 +17,18 @@ export class RegleService {
   constructor(private http: HttpClient,
               @Inject('BACKEND_URL') private baseUrl: string) { }
 
-  getAllRegles(): Observable<RegleDTO[]> {
+  getAllRegles(): Observable<RegleViewList[]> {
 
     return this.http.get<RegleDTO[]>(`${this.baseUrl}/regles/`)
       .pipe(
-        map((regleArray: any[]) => regleArray.map(regle => new RegleDTO(regle)))
-      );
+        map((regleArray: any[]) => regleArray.map(regle => {
+          const regex = /,/gi;
+          const competencesLibelle: string[] = [] ;
+          regle.competences.forEach(competence => competencesLibelle.push(competence.competence + '\n'));
+          return new RegleViewList(regle.id, regle.deploiement, regle.metier, regle.posteType, regle.domaine, regle.stratesEquipes,
+            regle.profil, regle.equipesSupervisees, regle.descriptifEquipesSupervisses, regle.competences,
+            competencesLibelle.toString().replace(regex, '') )}
+      )));
   }
 
   getRegle(id: number): Observable<RegleDTO> {
