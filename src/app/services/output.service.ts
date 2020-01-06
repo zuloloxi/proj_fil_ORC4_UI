@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { OutputDto } from '../shared-data/output-dto';
+import { Output } from '../shared-data/output';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -21,8 +22,8 @@ export class OutputService {
     }
 
     // observable
-      getAllOutputs(): Observable<OutputDto[]> {
-      return this.http.get<OutputDto[]>('http://localhost:8080/outputs');
+      getAllOutputs(): Observable<Output[]> {
+      return this.http.get<Output[]>('http://localhost:8080/outputs');
     }
 
     // observable

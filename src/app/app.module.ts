@@ -20,12 +20,14 @@ import { CompetenceListComponent } from './components/competence-list/competence
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CompetencePipe } from './pipes/competence.pipe';
+import { TransformListComponent } from './components/transform-list/transform-list.component';
 import { OutputListComponent } from './components/output-list/output-list.component';
 
 
@@ -40,7 +42,8 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     CompetenceListComponent,
     RegleFormComponent,
     CompetencePipe,
-    OutputListComponent,
+    TransformListComponent,
+    OutputListComponent
   ],
   imports: [
     BrowserModule,
@@ -54,12 +57,13 @@ import { OutputListComponent } from './components/output-list/output-list.compon
     MessageModule,
     MultiSelectModule,
     ButtonModule,
+    DropdownModule,
     CardModule,
     HttpClientModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
     DragDropModule,
-
+    DropdownModule
   ],
   providers: [
     { provide: 'BACKEND_URL', useValue: 'http://localhost:8080'}

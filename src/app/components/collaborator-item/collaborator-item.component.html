@@ -1,27 +1,154 @@
 
  <ng-container *ngIf="collaborateur">
 
-COLLABORATEUR : {{collaborateur.uid}}
-
+<br><br>
+   <b>COLLABORATEUR : </b>  {{collaborateur.uid}}
+<br><br>
 <form [formGroup]="collaborateurForm" (ngSubmit)="saveCollaborator()">
 
-    <div class="form-group">
-        <label>Civilité :
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Civilité : </label>
+            <div class="col-sm-2">
                 <input class="form-control" size="60" type="text" formControlName="civilite" >
-        </label>
+            </div>
+       
     </div>
-    <div class="form-group">
-        <label>Nom:
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Nom : </label>
+            <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="nom" >
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Prénom:
+            </div>
+        <label class="col-sm-2 col-form-label"> Prénom : </label>
+            <div class="col-sm-4">
                 <input class="form-control"  size="60" type="text" formControlName="prenom" >
-        </label>
+            </div>
     </div>
 
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Fonction : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="fonction" >
+            </div>
+    </div>
 
-    <button  *ngIf="collaborateurUid" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveCollaborator()"></button>
-    </form>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Téléphone : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="telephone" >
+            </div>
+
+        <label class="col-sm-2 col-form-label"> eMail: </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="mail" >
+            </div>    
+    </div>
+
+    <br> <br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Etage : </label>
+            <div class="col-sm-2">
+                <input class="form-control"  size="20" type="text" formControlName="etage" >
+            </div>
+
+        <label class="col-sm-2 col-form-label"> UO Affectation: </label>
+            <div class="col-sm-2">
+                <input class="form-control"  size="20" type="text" formControlName="uoAffectation" >
+            </div>  
+            
+        <label class="col-sm-2 col-form-label"> Code Immeuble: </label>
+            <div class="col-sm-2">
+                <input class="form-control"  size="20" type="text" formControlName="codeImmeubleEmplacementCollaborateur" >
+            </div>  
+    </div>
+
+    <br><br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Région : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="region" >
+            </div>
+        <label class="col-sm-2 col-form-label"> Code Région : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="codeRegion" >
+            </div>
+    </div>
+
+    <br><br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Niveau Territoire : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="niveauTerritoire" >
+            </div>
+        <label class="col-sm-2 col-form-label"> Code Territoire : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="codeTerritoire" >
+            </div>
+    </div>
+
+    <br><br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Niveau Entité : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="niveauEntite" >
+            </div>
+        <label class="col-sm-2 col-form-label"> Code Entité : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="codeEntite" >
+            </div>
+    </div>
+    
+    
+    <br><br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Niveau Agence : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="niveauAgence" >
+            </div>
+        <label class="col-sm-2 col-form-label"> Code Agence : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="codeAgence" >
+            </div>
+    </div>
+    
+    <br><br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> Localisation Collaborateur : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="localisationCollaborateur" >
+            </div>
+        <label class="col-sm-2 col-form-label"> PJ : </label>
+            <div class="col-sm-4">
+                <input class="form-control"  size="60" type="text" formControlName="pj" >
+            </div>
+    </div>
+    
+    <br><br>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label"> A Migrer : </label>
+            <div class="col-sm-2">
+                <input class="form-control" size="60" type="text" formControlName="aMigrer" >
+            </div>
+       
+    </div>
+
+    <button  *ngIf="collaborateurUid" pButton type="button" label="Sauvegarder" class="ui-button-rounded" (click)="saveCollaborator()"></button>
+    &nbsp;&nbsp;
+    <button  *ngIf="collaborateurUid" pButton type="button" label="Retour" class="ui-button-rounded ui-button-success" [routerLink]="['/collaborateurs']"></button>
+ 
+   </form>
 </ng-container>
+
+<p-dialog header="Confirmation" [(visible)]="sauvegardeOK" [style]="{width: '20%'}" [modal]="true">
+   Collaborateur sauvegardé ! 
+   <br><br>
+   <p-button label="OK" (onClick)="onOK()"></p-button>
+ </p-dialog>
+
