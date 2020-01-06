@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body .ui-button.ui-button-text-icon-left .ui-button-text {
+    padding: .25em 1em .25em 2.1em;
+}
+
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+
