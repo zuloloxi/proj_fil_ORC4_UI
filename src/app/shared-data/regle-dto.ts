@@ -38,3 +38,33 @@ export class RegleDTO {
         this.competences = options.competences;
     }
 }
+
+export class RegleViewList {
+    id: number;
+    deploiement: string;
+    metier: string;
+    posteType: string;
+    domaine: string;
+    stratesEquipes: string;
+    profil: string;
+    equipesSupervisees: string;
+    descriptifEquipesSupervisses: string;
+    competences: CompetenceDTO[];
+    competencesForSearch: string;
+
+    constructor(id: number, deploiement: string, metier: string, posteType: string, domaine: string, stratesEquipes: string,
+                profil: string, equipesSupervisees: string, descriptifEquipesSupervisses: string, competences: CompetenceDTO[],
+                competencesForSearch: string) {
+        this.id = id;
+        this.deploiement = deploiement;
+        this.metier = metier || '';
+        this.posteType = posteType;
+        this.domaine = domaine;
+        this.stratesEquipes = stratesEquipes;
+        this.profil = profil;
+        this.equipesSupervisees = equipesSupervisees;
+        this.descriptifEquipesSupervisses = descriptifEquipesSupervisses;
+        this.competences = competences;
+        this.competencesForSearch = competencesForSearch;
+    }
+}

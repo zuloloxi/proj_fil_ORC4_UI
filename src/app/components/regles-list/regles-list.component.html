@@ -83,6 +83,7 @@
                 <input *ngSwitchCase="'profil'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
                 <input *ngSwitchCase="'equipesSupervisees'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
                 <input *ngSwitchCase="'descriptifEquipesSupervisses'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <input *ngSwitchCase="'competencesForSearch'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
             </th>
         </tr>
     </ng-template>
@@ -92,7 +93,7 @@
           <td *ngFor="let col of columns; let i=index" class="ui-resizable-column" >
             <span *ngIf="col.field === 'metier'"> {{reformatMetier(rowData.metier)}} </span>
             <span *ngIf="col.field !== 'competences' && col.field !=='metier' && col.field !=='actions'">  {{rowData[col.field]}} </span>
-            <span *ngIf="col.field === 'competences'"> {{rowData.competences| competence}} </span>
+            <span *ngIf="col.field === 'competences'"> {{rowData.competences}} </span>
             <span *ngIf="col.field === 'actions'">
               <i class="icone far fa-eye fa-lg" (click)="viewDetail(rowData)"></i>&nbsp;&nbsp;
               <i class="icone far fa-edit" (click)="goUpdate(rowData)" ></i>&nbsp;

@@ -2,7 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { CollaborateurDTO } from '../shared-data/collaborateur-dto';
-import { map, catchError } from 'rxjs/operators';
+import { map} from 'rxjs/operators';
+import { OutputDto } from '../shared-data/output-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class CollaborateurService {
 
   updateCollaborateurUid(collaborateurUid: string, collaborateurDTO: CollaborateurDTO) : Observable<void>{
     return this.http.put<void>(`${this.baseUrl}/inputs/updateuid/${collaborateurUid}`, collaborateurDTO);
+  }
+
+  getOnetransformInput(collaborateurUid: string): Observable<OutputDto> {
+    return this.http.get<OutputDto>(`${this.baseUrl}/inputs/transform/uid/${collaborateurUid}`);
   }
 
 }

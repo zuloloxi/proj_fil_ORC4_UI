@@ -1,6 +1,6 @@
 <ng-container *ngIf="collaborateur">
 
-  <p-dialog header="Détail du collaborateur" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
+  <p-dialog header="Détail du collaborateur" [(visible)]="displayDetail" [style]="{width: '70%'}" [modal]="true" [maximizable]=true>
 
    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '100%'}" styleClass="ui-card-shadow">
        <p-header>
@@ -52,9 +52,11 @@
 
   <h2>{{collaborateurs.length }} Collaborateurs </h2>
 
-<ng-container *ngIf="showIcons"> 
+<ng-container *ngIf="showIcons">
 
   <span class="drop" pDroppable="collaborateur" (onDrop)="dropView($event)" ><i class="icone far fa-eye fa-lg" > </i></span>
+  &nbsp;&nbsp;
+  <span class="drop" pDroppable="collaborateur" (onDrop)="dropTransform($event)" ><i class="icone fas fa-exchange-alt fa-lg"></i> </span>
   &nbsp;&nbsp;
   <span class="drop" pDroppable="collaborateur" (onDrop)="dropEdit($event)" >
     <i class="icone far fa-file fa-lg"></i>
@@ -102,14 +104,12 @@
               <td colspan="2">{{collaborateur.prenom}}</td>
               <td colspan="3">{{collaborateur.fonction}}</td>
               <td>{{collaborateur.codeAgence}}</td>
-              <td>{{collaborateur.aMigrer}}</td> 
+              <td>{{collaborateur.aMigrer}}</td>
               <td>
-                <span class="drop" pDroppable="collaborateur" (onDrop)="dropView($event)" ><i class="icone far fa-eye fa-lg" (click)="viewDetailCollaborator(collaborateur)"> </i></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="icone fas fa-exchange-alt fa-lg" ></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="drop" pDroppable="collaborateur" (onDrop)="dropEdit($event)" >
-                   <a [routerLink]="['/collaborateurs',collaborateur.uid]"><i class="icone far fa-file fa-lg"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-                <span class="drop" pDroppable="collaborateur" (onDrop)="dropTrash($event)" ><i class="icone icone far fa-trash-alt" (click)="openTrash(collaborateur)"></i></span>
+                <i class="icone far fa-eye fa-lg" (click)="viewDetailCollaborator(collaborateur)"> </i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="icone fas fa-exchange-alt fa-lg" (click)="getTransformByUid(collaborateur)" ></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="icone far fa-file fa-lg" [routerLink]="['/collaborateurs',collaborateur.uid]"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="icone icone far fa-trash-alt" (click)="openTrash(collaborateur)"></i>
               </td>
           </tr>
 
@@ -131,7 +131,35 @@
   </p-dialog>
 
 
+  <p-dialog *ngIf="output" header="Détail de la Transformation" [(visible)]="displayTransform" [style]="{width: '40%'}" [modal]="true" [maximizable]=true>
+    <b>COLLABORATEUR :</b> {{output.identifiant}}
+    <br>
+    <b>NOM :</b> {{output.nom}}
+    <br>
+    <b>PRENOM :</b> {{output.prenom}}
+    <br>
+    <b>MAIL :</b> {{output.email}}
+    <br>
+    <b>EQUIPE :</b> {{output.equipe}}
+    <br>
+    <b>PROFIL :</b> {{output.profil}}
+    <br>
+    <b>COMPETENCES :</b> {{output.competences}}
+    <br><br>
+    <p-button label="Retour"  (onClick)="viewTransformClose()"></p-button>
+  </p-dialog>
 
+  
+
+    <p-dialog  header="Erreur sur la transformation" [(visible)]="displayTransformError" [style]="{width: '40%'}" [modal]="true">
+        <br>
+        {{error}}
+        <br><br>
+        <b>Message détaillé dans l'onglet Transformation</b>
+        <br><br>
+        <p-button label="Retour"  (onClick)="viewTransformErrorClose()"></p-button>
+
+    </p-dialog>
 
 
 </ng-container>
