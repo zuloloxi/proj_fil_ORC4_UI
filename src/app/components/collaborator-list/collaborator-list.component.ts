@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CollaborateurService } from 'src/app/services/collaborateur.service';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
 
 
@@ -12,23 +12,18 @@ import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
 export class CollaboratorListComponent implements OnInit {
 
   collaborateurs: CollaborateurDTO[] = [];
-
   collaborateur: CollaborateurDTO;
   display = false;
-
   trash = false;
+  showIcons=false;
   draggedCollaborateurDTO: null;
-  droped = [];
 
-  constructor(private collaborateurService: CollaborateurService) { }
+
+  constructor( private router: Router,private collaborateurService: CollaborateurService) { }
 
   ngOnInit() {
-    // this.collaborateurs = this.collaborateurBouchon;
-    // console.log(this.collaborateurs.toString)
     this.collaborateurService.getAllCollaborateurs().subscribe((collab) => {
       this.collaborateurs = collab;
-      // console.log(this.collaborateurs);
-      // console.log(typeof this.collaborateurs);
     });
 
   }
@@ -44,18 +39,18 @@ export class CollaboratorListComponent implements OnInit {
 
   dragStart(event, collaborateur) {
     this.draggedCollaborateurDTO = collaborateur;
+    this.showIcons=true;
     console.log("start");
-    console.log(this.draggedCollaborateurDTO);
-
   }
 
   dragEnd(event) {
     this.draggedCollaborateurDTO = null;
-    console.log(this.draggedCollaborateurDTO);
+    this.showIcons=false;
     console.log("end");
   }
 
   dropView(event){
+    console.log("view");
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
@@ -64,20 +59,27 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   dropTrash(event) {
-    console.log(this.draggedCollaborateurDTO);
-    console.log("ici");
+    console.log("trash");
     if (this.draggedCollaborateurDTO) {
      this.collaborateur = this.draggedCollaborateurDTO;
-     this.droped.push("trash");
      this.draggedCollaborateurDTO = null;
-     console.log(this.droped);
      this.trash = true;
+    }
+  }
+
+
+  dropEdit(event){
+    console.log("edit");
+    if (this.draggedCollaborateurDTO) {
+      this.collaborateur = this.draggedCollaborateurDTO;
+      this.draggedCollaborateurDTO = null;
+      const collaborateurUid = this.collaborateur.uid;
+      this.router.navigate(['/collaborateurs/'+collaborateurUid]);      
     }
   }
 
   openTrash(collaborateur: CollaborateurDTO) {
     this.collaborateur = collaborateur;
-    console.log(this.collaborateur);
     this.trash = true;
   }
 
@@ -87,14 +89,11 @@ export class CollaboratorListComponent implements OnInit {
 
   onDelete(collaborateur: CollaborateurDTO) {
     this.collaborateur = collaborateur;
-   // const collaborateurUid = +this.activateRoute.snapshot.paramMap.get('collaborateurUid');
-    const collaborateurUid = +this.collaborateur.uid;
-    this.collaborateurService.deleteCollaborateutUId(collaborateurUid).subscribe(item => this.collaborateur = item);
-
-    console.log("delete" + collaborateurUid);
-    console.log(this.collaborateur);
-    console.log(this.draggedCollaborateurDTO);
+    const collaborateurUid = this.collaborateur.uid;
+    this.collaborateurService.deleteCollaborateutUid(collaborateurUid).subscribe(item => this.collaborateur = item);
+    console.log("delete: " + collaborateurUid);
     this.closeTrash();
+    location.reload(); 
   }
 
 }
