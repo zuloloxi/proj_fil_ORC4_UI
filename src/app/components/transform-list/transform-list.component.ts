@@ -41,19 +41,23 @@ export class TransformListComponent implements OnInit {
 
           this.outputService.getAlltransformInputs().subscribe((outputs) =>
              { this.outputs = outputs;
-               this.outputService.deleteOutputs().subscribe();
-               this.outputService.publishResults(outputs).subscribe();
-               this.outputService.getAllOutputs().subscribe((outputList) => {
-                      this.outputList = outputList;
-                      this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
-                                                                   outputs.domaine.substr(0,6) !== 'ERREUR' &&
-                                                                   outputs.equipe.substr(0,6) !== 'ERREUR' &&
-                                                                   outputs.competences.substr(0,6) !== 'ERREUR');
-                      this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
-                                                                   outputs.domaine.substr(0,6) === 'ERREUR' ||
-                                                                   outputs.equipe.substr(0,6) === 'ERREUR' ||
-                                                                   outputs.competences.substr(0,6) === 'ERREUR');
-                      return this.total = [this.valids, this.rejets];
+               this.outputService.deleteOutputs().subscribe(
+                 ()=> {
+                  this.outputService.publishResults(outputs).subscribe(
+                    ()=> {
+                      this.outputService.getAllOutputs().subscribe((outputList) => {
+                          this.outputList = outputList;
+                          this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
+                                                                      outputs.domaine.substr(0,6) !== 'ERREUR' &&
+                                                                      outputs.equipe.substr(0,6) !== 'ERREUR' &&
+                                                                      outputs.competences.substr(0,6) !== 'ERREUR');
+                          this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
+                                                                      outputs.domaine.substr(0,6) === 'ERREUR' ||
+                                                                      outputs.equipe.substr(0,6) === 'ERREUR' ||
+                                                                      outputs.competences.substr(0,6) === 'ERREUR');
+                          return this.total = [this.valids, this.rejets];
+                  });
+                });
                });
               }
           );

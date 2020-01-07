@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'regledelete/:id', component: RegleFormComponent },
   { path: 'allTransformed', component: OutputListComponent },
   { path: 'saisie', component: SaisieListComponent },
+  { path: 'saisie/output', component: SaisieListComponent },
   { path: '', redirectTo: '/regles', pathMatch: 'full' }   // page par défaut
 ];
 
