@@ -30,7 +30,8 @@ export class RegleFormComponent implements OnInit {
               private competenceService: CompetenceService,
               private confirmationService: ConfirmationService,
               private errorService: ErrorService,
-              private router: Router, private route: ActivatedRoute ) { }
+              private router: Router,
+              private route: ActivatedRoute ) { }
 
     ngOnInit() {
       this.idUpdate = +this.route.snapshot.paramMap.get('id');

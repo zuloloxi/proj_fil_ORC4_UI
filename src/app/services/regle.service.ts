@@ -31,6 +31,21 @@ export class RegleService {
       )));
   }
 
+  getReglesByCompetenceId(competenceId: number): Observable<RegleViewList[]> {
+
+    return this.http.get<RegleDTO[]>(`${this.baseUrl}/regles/competenceId/` + competenceId)
+      .pipe(
+        map((regleArray: any[]) => regleArray.map(regle => {
+          const regex = /,/gi;
+          const competencesLibelle: string[] = [] ;
+          regle.competences.forEach(competence => competencesLibelle.push(competence.competence + '\n'));
+          return new RegleViewList(regle.id, regle.deploiement, regle.metier, regle.posteType, regle.domaine, regle.stratesEquipes,
+            regle.profil, regle.equipesSupervisees, regle.descriptifEquipesSupervisses, regle.competences,
+            competencesLibelle.toString().replace(regex, '') )}
+      )));
+  }
+
+
   getRegle(id: number): Observable<RegleDTO> {
 
     return this.http.get<RegleDTO>(`${this.baseUrl}/regles/` + id)
