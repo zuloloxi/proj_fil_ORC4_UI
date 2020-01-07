@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegleService } from 'src/app/services/regle.service';
 import { RegleDTO, RegleViewList } from 'src/app/shared-data/regle-dto';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Message } from 'primeng/api/message';
 import { ConfirmationService } from 'primeng/api';
 import { ErrorService } from 'src/app/services/error.service';
@@ -19,17 +19,27 @@ export class ReglesListComponent implements OnInit {
   regleDetail: RegleViewList;
   httpMessage: string;
   msgs: Message[] = [];
+  comptetenceID: number;
   cols: any[];
 
   constructor(private router: Router,
               private regleService: RegleService,
-              private errorService: ErrorService) { }
+              private errorService: ErrorService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.comptetenceID = +this.route.snapshot.paramMap.get('competenceId');
+    if (this.comptetenceID) {
+      this.regleService.getReglesByCompetenceId(this.comptetenceID).subscribe(
+        regleList => this.regles = regleList,
+        error => console.log(error)
+      );
+    } else {
     this.regleService.getAllRegles().subscribe(
       regleList => this.regles = regleList,
       error => console.log(error)
     );
+   }
 
     this.cols = [
       { field: 'metier', header: 'Métier' },
