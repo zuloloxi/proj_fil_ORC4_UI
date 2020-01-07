@@ -29,6 +29,10 @@ export class TransformListComponent implements OnInit {
     this.transform();
   }
 
+  maMethode(param){
+    console.log(param);
+  }
+
   transform(){
       this.started = !this.started;
       this.domaines = [
@@ -60,7 +64,7 @@ export class TransformListComponent implements OnInit {
                   });
                 });
                });
-              }
+             }
           );
   }
 
