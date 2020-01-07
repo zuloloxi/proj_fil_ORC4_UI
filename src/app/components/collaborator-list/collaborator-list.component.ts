@@ -3,7 +3,6 @@ import { CollaborateurService } from 'src/app/services/collaborateur.service';
 import { Router} from '@angular/router';
 import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
 import { OutputDto } from 'src/app/shared-data/output-dto';
-import { OutputService } from 'src/app/services/output.service';
 import { Message } from 'primeng/api/message';
 import { ErrorService } from 'src/app/services/error.service';
 
@@ -19,7 +18,7 @@ export class CollaboratorListComponent implements OnInit {
   collaborateur: CollaborateurDTO;
   displayDetail = false;
   trash = false;
-  showIcons=false;
+  showIcons = false;
   draggedCollaborateurDTO: null;
   output: OutputDto;
   displayTransform = false;
@@ -29,8 +28,7 @@ export class CollaboratorListComponent implements OnInit {
 
   constructor( private router: Router,
                private errorService: ErrorService,
-               private collaborateurService: CollaborateurService,
-               private outputService: OutputService) { }
+               private collaborateurService: CollaborateurService) { }
 
   ngOnInit() {
     this.collaborateurService.getAllCollaborateurs().subscribe((collab) => {
@@ -38,29 +36,20 @@ export class CollaboratorListComponent implements OnInit {
     });
   }
 
-  viewDetailCollaborator(collaborateur: CollaborateurDTO){
-    this.collaborateur = collaborateur;
-    this.displayDetail = true;
-  }
-
-  viewDetailCollaboratorClose() {
-    this.displayDetail = false;
-  }
-
   dragStart(event, collaborateur) {
     this.draggedCollaborateurDTO = collaborateur;
-    this.showIcons=true;
-    console.log("start");
+    this.showIcons = true;
+    console.log('start');
   }
 
   dragEnd(event) {
     this.draggedCollaborateurDTO = null;
-    this.showIcons=false;
-    console.log("end");
+    this.showIcons = false;
+    console.log('end');
   }
 
   dropView(event){
-    console.log("view");
+    console.log('view');
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
@@ -69,7 +58,7 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   dropTransform(event){
-    console.log("transform");
+    console.log('transform');
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
@@ -78,7 +67,7 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   dropTrash(event) {
-    console.log("trash");
+    console.log('trash');
     if (this.draggedCollaborateurDTO) {
      this.collaborateur = this.draggedCollaborateurDTO;
      this.draggedCollaborateurDTO = null;
@@ -88,13 +77,22 @@ export class CollaboratorListComponent implements OnInit {
 
 
   dropEdit(event){
-    console.log("edit");
+    console.log('edit');
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
       const collaborateurUid = this.collaborateur.uid;
-      this.router.navigate(['/collaborateurs/'+collaborateurUid]);
+      this.router.navigate(['/collaborateurs/' + collaborateurUid]);
     }
+  }
+
+  viewDetailCollaborator(collaborateur: CollaborateurDTO){
+    this.collaborateur = collaborateur;
+    this.displayDetail = true;
+  }
+
+  viewDetailCollaboratorClose() {
+    this.displayDetail = false;
   }
 
   openTrash(collaborateur: CollaborateurDTO) {
@@ -110,7 +108,7 @@ export class CollaboratorListComponent implements OnInit {
     this.collaborateur = collaborateur;
     const collaborateurUid = this.collaborateur.uid;
     this.collaborateurService.deleteCollaborateutUid(collaborateurUid).subscribe(item => this.collaborateur = item);
-    console.log("delete: " + collaborateurUid);
+    console.log('delete: ' + collaborateurUid);
     this.closeTrash();
     location.reload();
   }
@@ -122,24 +120,18 @@ export class CollaboratorListComponent implements OnInit {
     this.collaborateurService.getOnetransformInput(collaborateurUid).subscribe((output) =>
     { this.output = output;
       this.displayTransform = true;
-      console.log("transform : " + collaborateurUid + ':');
+      console.log('transform : ' + collaborateurUid + ':');
       console.log(this.output);
     },
-    error => {this.msgs.push({severity: 'error', summary: '', detail:             this.errorService.getMessage(error)});
-              console.log(this.msgs);
-           //   console.log(this.errorService.getMessage(error));
-              this.onViewError(this.errorService.getMessage(error));
-
-
-  });
-
-  }
+    error => {this.viewTransformError(this.errorService.getMessage(error));
+    });
+   }
 
   viewTransformClose() {
     this.displayTransform = false;
   }
 
-  onViewError(error :string) {
+  viewTransformError(error: string) {
     console.log(error);
     this.displayTransformError = true;
     this.error = error;

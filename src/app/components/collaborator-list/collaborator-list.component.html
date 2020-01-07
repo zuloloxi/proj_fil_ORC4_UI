@@ -3,6 +3,7 @@
   <p-dialog header="Détail du collaborateur" [(visible)]="displayDetail" [style]="{width: '70%'}" [modal]="true" [maximizable]=true>
 
    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '100%'}" styleClass="ui-card-shadow">
+
        <p-header>
            <b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
        </p-header>
@@ -39,11 +40,10 @@
            <br><br>
            <p-button label="Retour"  (onClick)="viewDetailCollaboratorClose()"></p-button>
        </p-footer>
+
    </p-card>
 
    </p-dialog>
-
-
 
 </ng-container>
 
@@ -52,23 +52,21 @@
 
   <h2>{{collaborateurs.length }} Collaborateurs </h2>
 
-<ng-container *ngIf="showIcons">
+  <ng-container *ngIf="showIcons">
 
-  <span class="drop" pDroppable="collaborateur" (onDrop)="dropView($event)" ><i class="icone far fa-eye fa-lg" > </i></span>
-  &nbsp;&nbsp;
-  <span class="drop" pDroppable="collaborateur" (onDrop)="dropTransform($event)" ><i class="icone fas fa-exchange-alt fa-lg"></i> </span>
-  &nbsp;&nbsp;
-  <span class="drop" pDroppable="collaborateur" (onDrop)="dropEdit($event)" >
-    <i class="icone far fa-file fa-lg"></i>
- </span>
- &nbsp;&nbsp;
- <span class="drop" pDroppable="collaborateur" (onDrop)="dropTrash($event)" ><i class="icone icone far fa-trash-alt"></i></span>
+    <i class="icone far fa-eye fa-lg drop"  pDroppable="collaborateur" (onDrop)="dropView($event)"></i>
+    &nbsp;&nbsp;
+    <i class="icone fas fa-exchange-alt fa-lg drop" pDroppable="collaborateur" (onDrop)="dropTransform($event)"></i>
+    &nbsp;&nbsp;
+    <i class="icone far fa-file fa-lg drop"  pDroppable="collaborateur" (onDrop)="dropEdit($event)" ></i>
+    &nbsp;&nbsp;
+    <i class="icone far fa-trash-alt drop" pDroppable="collaborateur" (onDrop)="dropTrash($event)"></i>
 
-</ng-container>
+  </ng-container>
 
-<br>
+  <br>
 
-  <p-table #dt [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both">
+  <p-table #dt  [scrollable]="true" scrollHeight="400px" [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both" >
     <ng-template pTemplate="caption">
       <div style="text-align: right">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -91,8 +89,6 @@
             <th  [pSortableColumn]= "'aMigrer'">à Migrer<p-sortIcon [field]="'aMigrer'"></p-sortIcon></th>
 
             <th  [pSortableColumn]= ""></th>
-
-
         </tr>
     </ng-template>
     {{collaborateurs.length }}
@@ -124,14 +120,14 @@
    <br>
    <b>ATTENTION : </b> Cette action est irréversible
    <br><br>
-   SUPPRESSION :
+   SUPPRESSION : &nbsp;
    <p-button label="Non" (onClick)="closeTrash()"></p-button>
    &nbsp;&nbsp; ou &nbsp;&nbsp;
    <p-button label="Oui" styleClass="ui-button-danger" (click)="onDelete(collaborateur)"></p-button>
   </p-dialog>
 
 
-  <p-dialog *ngIf="output" header="Détail de la Transformation" [(visible)]="displayTransform" [style]="{width: '40%'}" [modal]="true" [maximizable]=true>
+  <p-dialog *ngIf="output" header="Détail de la Transformation" [(visible)]="displayTransform" [style]="{width: '40%'}" [modal]="true">
     <b>COLLABORATEUR :</b> {{output.identifiant}}
     <br>
     <b>NOM :</b> {{output.nom}}
@@ -149,17 +145,13 @@
     <p-button label="Retour"  (onClick)="viewTransformClose()"></p-button>
   </p-dialog>
 
-  
-
-    <p-dialog  header="Erreur sur la transformation" [(visible)]="displayTransformError" [style]="{width: '40%'}" [modal]="true">
+  <p-dialog  header="Erreur sur la transformation" [(visible)]="displayTransformError" [style]="{width: '40%'}" [modal]="true">
         <br>
         {{error}}
         <br><br>
-        <b>Message détaillé dans l'onglet Transformation</b>
+        <b>Message détaillé dans l'onglet <a [routerLink]="['/allTransformed']">Transformation</a></b>
         <br><br>
         <p-button label="Retour"  (onClick)="viewTransformErrorClose()"></p-button>
-
-    </p-dialog>
-
+  </p-dialog>
 
 </ng-container>

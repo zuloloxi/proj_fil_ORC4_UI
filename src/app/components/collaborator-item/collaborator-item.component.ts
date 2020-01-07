@@ -12,21 +12,21 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class CollaboratorItemComponent implements OnInit {
 
   collaborateur: CollaborateurDTO;
-  updateCollaborateur : CollaborateurDTO;
+  updateCollaborateur: CollaborateurDTO;
   collaborateurForm: FormGroup;
   collaborateurUid: string;
-  sauvegardeOK = false;
+  saveOK = false;
 
 
 
-  constructor(private router: Router, 
-             private fb: FormBuilder, 
-             private activateRoute: ActivatedRoute, 
-             private collaborateurService: CollaborateurService) { }
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private activateRoute: ActivatedRoute,
+              private collaborateurService: CollaborateurService) { }
 
   ngOnInit() {
     this.collaborateurUid = this.activateRoute.snapshot.paramMap.get('collaborateurUid');
-     this.collaborateurService.getOneCollaborateur(this.collaborateurUid).subscribe(collaborateur => this.collaborateur = collaborateur);
+    this.collaborateurService.getOneCollaborateur(this.collaborateurUid).subscribe(collaborateur => this.collaborateur = collaborateur);
     console.log(this.collaborateur);
 
     this.collaborateurForm = this.fb.group ({
@@ -34,22 +34,22 @@ export class CollaboratorItemComponent implements OnInit {
       nom: [],
       prenom: [],
       fonction: [],
-      telephone:[],
-      mail:[],
-      etage:[],
-      uoAffectation:[],
-      codeImmeubleEmplacementCollaborateur:[],
-      region:[],
-      codeRegion:[],
-      niveauTerritoire:[],
-      codeTerritoire:[],
-      niveauEntite:[],
-      codeEntite:[],
-      niveauAgence:[],
-      codeAgence:[],
-      localisationCollaborateur:[],
-      pj:[],
-      aMigrer:[],
+      telephone: [],
+      mail: [],
+      etage: [],
+      uoAffectation: [],
+      codeImmeubleEmplacementCollaborateur: [],
+      region: [],
+      codeRegion: [],
+      niveauTerritoire: [],
+      codeTerritoire: [],
+      niveauEntite: [],
+      codeEntite: [],
+      niveauAgence: [],
+      codeAgence: [],
+      localisationCollaborateur: [],
+      pj: [],
+      aMigrer: [],
     });
 
 
@@ -64,28 +64,27 @@ export class CollaboratorItemComponent implements OnInit {
           mail: [collab.mail],
           etage: [collab.etage],
           uoAffectation : [collab.uoAffectation],
-          codeImmeubleEmplacementCollaborateur:[collab.codeImmeubleEmplacementCollaborateur],
-          region:[collab.region],
-          codeRegion:[collab.codeRegion],
-          niveauTerritoire:[collab.niveauTerritoire],
-          codeTerritoire:[collab.codeTerritoire],
-          niveauEntite:[collab.niveauEntite],
-          codeEntite:[collab.codeEntite],
-          niveauAgence:[collab.niveauAgence],
-          codeAgence:[collab.codeAgence],
-          localisationCollaborateur:[collab.localisationCollaborateur],
-          pj:[collab.pj],
-          aMigrer:[collab.aMigrer],
+          codeImmeubleEmplacementCollaborateur: [collab.codeImmeubleEmplacementCollaborateur],
+          region: [collab.region],
+          codeRegion: [collab.codeRegion],
+          niveauTerritoire: [collab.niveauTerritoire],
+          codeTerritoire: [collab.codeTerritoire],
+          niveauEntite: [collab.niveauEntite],
+          codeEntite: [collab.codeEntite],
+          niveauAgence: [collab.niveauAgence],
+          codeAgence: [collab.codeAgence],
+          localisationCollaborateur: [collab.localisationCollaborateur],
+          pj: [collab.pj],
+          aMigrer: [collab.aMigrer],
         })
       );
     }
   }
 
   saveCollaborator() {
-     
      this.updateCollaborateur = new CollaborateurDTO (
        {
-        id:0,
+        id: 0,
         uid: this.collaborateurUid,
         civilite: this.collaborateurForm.get('civilite').value,
         nom: this.collaborateurForm.get('nom').value,
@@ -108,15 +107,13 @@ export class CollaboratorItemComponent implements OnInit {
          pj: this.collaborateurForm.get('pj').value,
          aMigrer: this.collaborateurForm.get('aMigrer').value
       });
-
-      this.collaborateurService.updateCollaborateurUid(this.collaborateurUid, this.updateCollaborateur).subscribe();
-      console.log("save");
-      this.sauvegardeOK=true;
+     this.collaborateurService.updateCollaborateurUid(this.collaborateurUid, this.updateCollaborateur).subscribe();
+     console.log('save');
+     this.saveOK = true;
    }
 
    onOK() {
-    this.router.navigate(['/collaborateurs/']);  
-     
+    this.router.navigate(['/collaborateurs/']);
    }
 
 }
