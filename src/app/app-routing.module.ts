@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'collaborateurs', component: CollaboratorListComponent },
   { path: 'collaborateurs/:collaborateurUid', component: CollaboratorItemComponent },
   { path: 'regles', component: ReglesListComponent },
+  { path: 'regles/competence/:competenceId', component: ReglesListComponent },
   { path: 'competences', component: CompetenceListComponent },
   { path: 'fichier', component: ReglesListComponent },
   { path: 'reglecreate', component: RegleFormComponent },

@@ -56,7 +56,8 @@
                 <td>
                     <ng-container *ngIf="competence !== competenceToModify; else modifyIcones">
                         <i class="icone far fa-edit" (click)="competenceToModify=competence"></i>&nbsp;&nbsp;
-                        <i class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></i>&nbsp;&nbsp;
+                        <a class="icone far fa-trash-alt" (click)="deleteCompetence(competence.id)"></a>&nbsp;&nbsp;
+                        <a class="icone fa fa-fw fa-exchange-alt" [routerLink]="['/regles/competence/',competence.id]" title="Liste des règles utilisant cette compétence"></a>&nbsp;&nbsp;
                     </ng-container>
                     <ng-template #modifyIcones>
                         <i class="icone pi pi-times" (click)="competenceToModify=null"></i>&nbsp;&nbsp;
