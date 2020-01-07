@@ -64,7 +64,7 @@ export class CompetenceListComponent implements OnInit {
     if (this.competencePostForm.get('competence').valid && this.competencePostForm.get('descriptif').valid) {
       const newCompetence = new CompetenceDTO({
         competence: this.competencePostForm.get('competence').value,
-        descriptif: this.competencePostForm.get('descriptif').value})
+        descriptif: this.competencePostForm.get('descriptif').value});
       return this.competenceService.saveCompetence(newCompetence).subscribe(
         competenceDTO => {
           this.showCompetenceInBeginningOfList(competenceDTO);
@@ -75,7 +75,7 @@ export class CompetenceListComponent implements OnInit {
     }
   }
 
-  showCompetenceInBeginningOfList(competenceDTO){
+  showCompetenceInBeginningOfList(competenceDTO) {
     this.competences.unshift(competenceDTO);
   }
 
@@ -83,7 +83,7 @@ export class CompetenceListComponent implements OnInit {
     if (this.descriptifPutForm.get('descriptif').valid) {
       const modifiedCompetence = new CompetenceDTO({
         competence: this.competenceToModify.competence,
-        descriptif: this.descriptifPutForm.get('descriptif').value})
+        descriptif: this.descriptifPutForm.get('descriptif').value});
       return this.competenceService.modifyCompetence(this.competenceToModify.id, modifiedCompetence).subscribe(
         competenceDTO => {
           const index = this.competences.findIndex(competence => competence.id === this.competenceToModify.id);

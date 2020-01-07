@@ -7,6 +7,7 @@ import { CompetenceListComponent } from './components/competence-list/competence
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { TransformListComponent } from './components/transform-list/transform-list.component';
 import { OutputListComponent } from './components/output-list/output-list.component';
+import { SaisieListComponent } from './components/saisie-list/saisie-list.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'resultat', component: OutputListComponent },
   { path: 'regledelete/:id', component: RegleFormComponent },
   { path: 'allTransformed', component: OutputListComponent },
+  { path: 'saisie', component: SaisieListComponent },
   { path: '', redirectTo: '/regles', pathMatch: 'full' }   // page par défaut
 ];
 

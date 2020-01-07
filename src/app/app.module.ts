@@ -31,6 +31,7 @@ import { TransformListComponent } from './components/transform-list/transform-li
 import { OutputListComponent } from './components/output-list/output-list.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { FormsModule }   from '@angular/forms';
+import { SaisieListComponent } from './components/saisie-list/saisie-list.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { FormsModule }   from '@angular/forms';
     RegleFormComponent,
     CompetencePipe,
     TransformListComponent,
-    OutputListComponent
+    OutputListComponent,
+    SaisieListComponent
   ],
   imports: [
     BrowserModule,

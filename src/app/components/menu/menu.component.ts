@@ -18,9 +18,10 @@ export class MenuComponent implements OnInit {
             {label: 'Collaborateurs', icon: 'fa fa-fw fas fa-users', routerLink: 'collaborateurs'},
             {label: 'Règles', icon: 'fa fa-fw fa-exchange-alt', routerLink: 'regles'},
             {label: 'Compétences', icon: 'fa fa-fw fa-book', routerLink: 'competences'},
-//             {label: 'Fichier WordLine', icon: 'fa fa-fw  fa-file', routerLink: 'fichier'},
             {label: 'Transformation', icon: 'fa fa-fw  fa-cogs', routerLink: 'allTransformed'},
 //             {label: 'Résultat', icon: 'fa fa-fw  fa-file-csv', routerLink: 'resultat'}
+            {label: 'Saisie Manuelle', icon: 'fas  fa-user-edit', routerLink: 'saisie'},
+
         ];
     }
 

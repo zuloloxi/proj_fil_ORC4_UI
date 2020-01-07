@@ -1,0 +1,82 @@
+<p-messages [(value)]="msgs"></p-messages>
+<p-confirmDialog header="Suppression de Compétence" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<ng-container *ngIf="saisies">
+
+    <h2>{{saisies.length }} Saisies </h2>
+
+    <form [formGroup]="saisieForm">
+
+    <p-table [value]="saisies">
+        <ng-template pTemplate="header">
+            <tr>
+                <th colspan="3">Uid
+                    <!-- <i class="icone icone-sort pi pi-sort-down" [hidden]="competenceSort" (click)="sortBy('COMPETENCE')"></i>
+                    <i class="icone icone-sort pi pi-sort-up" [hidden]="!competenceSort" (click)="sortBy('COMPETENCE')"></i> -->
+                </th>
+                <th colspan="3">Domaine
+                    <!-- <i class="icone icone-sort pi pi-sort-down" [hidden]=descriptifSort (click)="sortBy('DESCRIPTIF')"></i>
+                    <i class="icone icone-sort pi pi-sort-up" [hidden]=!descriptifSort (click)="sortBy('DESCRIPTIF')"></i> -->
+                </th>
+                <th colspan="3">Equipe</th>
+                <th colspan="3">Profil</th>
+                <th colspan="3">Competences</th>
+            </tr>
+        </ng-template>
+
+        {{saisies.length }}
+        <ng-template pTemplate="body" let-saisie>
+            <tr>
+                <td colspan="3">
+                        {{saisie.collaborateurUid}}
+                </td>
+                <td colspan="3">
+                    <ng-container *ngIf="saisie !== saisieToModify; else modifyDomaine">
+                        {{saisie.domaine}}
+                    </ng-container>
+                    <ng-template #modifyDomaine>
+                        <input type="text" formControlName="domaine" [value]="saisieToModify.domaine" (keyup.enter)="modifySaisie()">
+                    </ng-template>
+                </td>
+                 <td colspan="3">
+                    <ng-container *ngIf="saisie !== saisieToModify; else modifyEquipe">
+                        {{saisie.equipe}}
+                    </ng-container>
+                    <ng-template #modifyEquipe>
+                        <input type="text" formControlName="equipe" [value]="saisieToModify.equipe" (keyup.enter)="modifySaisie()">
+                    </ng-template>
+                </td>
+                <td colspan="3">
+                    <ng-container *ngIf="saisie !== saisieToModify; else modifyProfil">
+                        {{saisie.profil}}
+                    </ng-container>
+                    <ng-template #modifyProfil>
+                        <input type="text" formControlName="profil" [value]="saisieToModify.profil" (keyup.enter)="modifySaisie()">
+                    </ng-template>
+                </td>
+                <td colspan="3">
+                    <ng-container *ngIf="saisie !== saisieToModify; else modifyCompetences">
+                        {{saisie.competences}}
+                    </ng-container>
+                    <ng-template #modifyCompetences>
+                        <input type="text" formControlName="competences" [value]="saisieToModify.competences" (keyup.enter)="modifySaisie()">
+                    </ng-template>
+                </td>
+                <td>
+                    <ng-container *ngIf="saisie !== saisieToModify; else modifyIcones">
+                        <i class="icone far fa-edit" (click)="saisieToModify=saisie"></i>&nbsp;&nbsp;
+                        <i class="icone far fa-trash-alt" (click)="deleteSaisie(saisie.id)"></i>&nbsp;&nbsp;
+                    </ng-container>
+                    <ng-template #modifyIcones>
+                        <i class="icone pi pi-times" (click)="saisieToModify=null"></i>&nbsp;&nbsp;
+                        <i class="icone pi pi-check" (click)="modifySaisie()"></i>&nbsp;&nbsp;
+                    </ng-template>
+                </td>
+            </tr>
+        </ng-template>
+
+
+    </p-table>
+</form>
+  </ng-container>
+  <br>
+  <br>
