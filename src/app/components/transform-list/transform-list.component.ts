@@ -4,7 +4,6 @@ import { Output } from 'src/app/shared-data/output';
 import { OutputService } from 'src/app/services/output.service';
 import { SelectItem } from 'primeng/api';
 import { ToggleButtonModule } from 'primeng/togglebutton';
-// import { FormsModule }   from '@angular/forms';
 
 @Component({
   selector: 'app-transform-list',
@@ -20,8 +19,9 @@ export class TransformListComponent implements OnInit {
   valids: OutputDto[] = [];
   total: OutputDto[][];
   selectedOutputs: Output[];
-  checked1: boolean= true;
+  checked1: boolean = true;
   isChecked: boolean = true;
+  started: boolean = true;
 
   constructor(private outputService: OutputService) { }
 
@@ -30,14 +30,15 @@ export class TransformListComponent implements OnInit {
   }
 
   transform(){
-    this.domaines = [
-            { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
-            { label: 'ResBPFCBP', value: 'ResBPFCBP' },
-            { label: 'ResRetail', value: 'ResRetail' },
-            { label: 'ResCorpo', value: 'ResCorpo' }
-           ];
+      this.started = !this.started;
+      this.domaines = [
+              { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+              { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+              { label: 'ResRetail', value: 'ResRetail' },
+              { label: 'ResCorpo', value: 'ResCorpo' }
+             ];
 
-          this.updateCols();
+      this.updateCols();
 
           this.outputService.getAlltransformInputs().subscribe((outputs) =>
              { this.outputs = outputs;
