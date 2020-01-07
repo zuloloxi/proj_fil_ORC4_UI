@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CollaborateurService } from 'src/app/services/collaborateur.service';
 import { Router} from '@angular/router';
 import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
+import { OutputDto } from 'src/app/shared-data/output-dto';
+import { OutputService } from 'src/app/services/output.service';
+import { Message } from 'primeng/api/message';
+import { ErrorService } from 'src/app/services/error.service';
 
 
 @Component({
@@ -13,28 +17,34 @@ export class CollaboratorListComponent implements OnInit {
 
   collaborateurs: CollaborateurDTO[] = [];
   collaborateur: CollaborateurDTO;
-  display = false;
+  displayDetail = false;
   trash = false;
   showIcons=false;
   draggedCollaborateurDTO: null;
+  output: OutputDto;
+  displayTransform = false;
+  displayTransformError = false;
+  msgs: Message[] = [];
+  error: string;
 
-
-  constructor( private router: Router,private collaborateurService: CollaborateurService) { }
+  constructor( private router: Router,
+               private errorService: ErrorService,
+               private collaborateurService: CollaborateurService,
+               private outputService: OutputService) { }
 
   ngOnInit() {
     this.collaborateurService.getAllCollaborateurs().subscribe((collab) => {
       this.collaborateurs = collab;
     });
-
   }
 
   viewDetailCollaborator(collaborateur: CollaborateurDTO){
     this.collaborateur = collaborateur;
-    this.display = true;
+    this.displayDetail = true;
   }
 
   viewDetailCollaboratorClose() {
-    this.display = false;
+    this.displayDetail = false;
   }
 
   dragStart(event, collaborateur) {
@@ -54,7 +64,16 @@ export class CollaboratorListComponent implements OnInit {
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
-      this.display = true;
+      this.displayDetail = true;
+    }
+  }
+
+  dropTransform(event){
+    console.log("transform");
+    if (this.draggedCollaborateurDTO) {
+      this.collaborateur = this.draggedCollaborateurDTO;
+      this.draggedCollaborateurDTO = null;
+      this.getTransformByUid(this.collaborateur);
     }
   }
 
@@ -74,7 +93,7 @@ export class CollaboratorListComponent implements OnInit {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
       const collaborateurUid = this.collaborateur.uid;
-      this.router.navigate(['/collaborateurs/'+collaborateurUid]);      
+      this.router.navigate(['/collaborateurs/'+collaborateurUid]);
     }
   }
 
@@ -93,7 +112,42 @@ export class CollaboratorListComponent implements OnInit {
     this.collaborateurService.deleteCollaborateutUid(collaborateurUid).subscribe(item => this.collaborateur = item);
     console.log("delete: " + collaborateurUid);
     this.closeTrash();
-    location.reload(); 
+    location.reload();
   }
+
+  getTransformByUid(collaborateur: CollaborateurDTO) {
+    this.collaborateur = collaborateur;
+    const collaborateurUid = this.collaborateur.uid;
+
+    this.collaborateurService.getOnetransformInput(collaborateurUid).subscribe((output) =>
+    { this.output = output;
+      this.displayTransform = true;
+      console.log("transform : " + collaborateurUid + ':');
+      console.log(this.output);
+    },
+    error => {this.msgs.push({severity: 'error', summary: '', detail:             this.errorService.getMessage(error)});
+              console.log(this.msgs);
+           //   console.log(this.errorService.getMessage(error));
+              this.onViewError(this.errorService.getMessage(error));
+
+
+  });
+
+  }
+
+  viewTransformClose() {
+    this.displayTransform = false;
+  }
+
+  onViewError(error :string) {
+    console.log(error);
+    this.displayTransformError = true;
+    this.error = error;
+  }
+
+  viewTransformErrorClose() {
+    this.displayTransformError = false;
+  }
+
 
 }
