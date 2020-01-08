@@ -1,15 +1,15 @@
-  <ng-container *ngIf="!started;else start">
-    <br>
-    <br>
-    <br>
-    <div style="text-align:center">
-      <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"
-              style="width:270px;height:auto;font-size:200%;justify-content=auto;text-align:right"></button>
-    </div>
+<ng-container *ngIf="!started;else start">
+  <br>
+  <br>
+  <br>
+  <div style="text-align:center">
+    <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"
+            style="width:170px;height:auto;font-size:100%;justify-content=auto;text-align:right;border-radius:1000px"></button>
+  </div>
 
-  </ng-container>
+</ng-container>
 
-  <ng-template #start>
+<ng-template #start>
   <ng-container>
 
     <div style="float:right">
@@ -65,7 +65,7 @@
 
       <p-table #dt1 [columns]="cols" [value]="rejets" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="rejets.length" [rowsPerPageOptions]="[5,10,50,100,rejets.length]" paginatorPosition="bottom" sortMode="multiple"
-               selectionMode="false" [(selection)]="selectedOutputs" [resizableColumns]="false">
+               selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="false">
         <ng-template pTemplate="caption">
           <div style="display:flex;justify-content:space-between">
 
@@ -94,12 +94,18 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-rowData let-columns="columns">
-          <tr [pSelectableRow]="rowData">
+  <!--          <tr [pSelectableRow]="rowData">-->
+          <tr>
             <ng-container *ngFor="let col of columns">
 
               <td *ngIf="!col.hidden" class="ui-resizable-column">
 
                   <ng-container *ngIf="col.field == 'identifiant';else alter">
+                    <i class="pi pi-align-justify couleur" pDraggable="a" (onDragStart)="dragStart($event,{identifiant: rowData['identifiant'],
+                                       domaine: rowData['domaine'],
+                                       equipe: rowData['equipe'],
+                                       profil: rowData['profil'],
+                                       competences: rowData['competences']})" (onDragEnd)="dragEnd($event)"></i>&nbsp;
                     <a [routerLink]="['/saisie/output']"
                        [queryParams]="{identifiant: rowData['identifiant'],
                                        domaine: rowData['domaine'],
@@ -107,6 +113,7 @@
                                        profil: rowData['profil'],
                                        competences: rowData['competences']}"
                        queryParamsHandling="merge">{{rowData[col.field]}}</a>
+                    <i class="icone fas fa-pencil-alt fa-lg drop"  pDroppable="a" (onDrop)="dropEdit($event)" *ngIf="showIcons"></i>
                   </ng-container>
 
                   <ng-template #alter>
@@ -218,5 +225,5 @@
           </tr>
         </ng-template>
       </p-table>
-    </ng-template>
-
+  </ng-template>
+</ng-container>
