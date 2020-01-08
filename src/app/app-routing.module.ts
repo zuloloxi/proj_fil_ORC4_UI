@@ -6,7 +6,6 @@ import { CollaboratorItemComponent } from './components/collaborator-item/collab
 import { CompetenceListComponent } from './components/competence-list/competence-list.component';
 import { RegleFormComponent } from './components/regle-form/regle-form.component';
 import { TransformListComponent } from './components/transform-list/transform-list.component';
-import { OutputListComponent } from './components/output-list/output-list.component';
 import { SaisieListComponent } from './components/saisie-list/saisie-list.component';
 
 
@@ -20,9 +19,7 @@ const routes: Routes = [
   { path: 'reglecreate', component: RegleFormComponent },
   { path: 'regleupdate/:id', component: RegleFormComponent },
   { path: 'allTransformed', component: TransformListComponent },
-  { path: 'resultat', component: OutputListComponent },
   { path: 'regledelete/:id', component: RegleFormComponent },
-  { path: 'allTransformed', component: OutputListComponent },
   { path: 'saisie', component: SaisieListComponent },
   { path: 'saisie/output', component: SaisieListComponent },
   { path: '', redirectTo: '/regles', pathMatch: 'full' }   // page par défaut

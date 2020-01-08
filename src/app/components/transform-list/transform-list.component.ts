@@ -3,7 +3,9 @@ import { OutputDto } from 'src/app/shared-data/output-dto';
 import { Output } from 'src/app/shared-data/output';
 import { OutputService } from 'src/app/services/output.service';
 import { SelectItem } from 'primeng/api';
-import { ToggleButtonModule } from 'primeng/togglebutton';
+import { Router } from '@angular/router';
+import { UrlSerializer,UrlTree } from '@angular/router';
+import { HttpClient,HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-transform-list',
@@ -11,6 +13,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
   styleUrls: ['./transform-list.component.scss']
 })
 export class TransformListComponent implements OnInit {
+  draggedOutputDTO: OutputDto = null;
+  urlParam: any[] = [];
   outputs: OutputDto[] = [];
   outputList: Output[] = [];
   rejets: OutputDto[] = [];
@@ -22,16 +26,59 @@ export class TransformListComponent implements OnInit {
   checked1: boolean = true;
   isChecked: boolean = true;
   started: boolean = true;
+  showIcons = false;
 
-  constructor(private outputService: OutputService) { }
+  constructor(private router: Router,
+              private httpClient:HttpClient,
+              private serializer: UrlSerializer,
+              private outputService: OutputService) {}
 
   ngOnInit() {
-    this.transform();
+    this.started = !this.started;
+    this.domaines = [
+            { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+            { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+            { label: 'ResRetail', value: 'ResRetail' },
+            { label: 'ResCorpo', value: 'ResCorpo' }
+           ];
   }
 
-  maMethode(param){
-    console.log(param);
+  dragStart(event, urlParam) {
+    console.log('urlParamStart', urlParam)
+    this.urlParam = urlParam;
+    this.showIcons = true;
+    console.log('start');
   }
+
+  dragEnd(event) {
+    this.urlParam = null;
+    this.showIcons = false;
+    console.log('end');
+  }
+
+  dropEdit(event){
+//     let params = new HttpParams(this.urlParam);
+    console.log('edit');
+    console.log('urlParam from Edit', this.urlParam);
+//     const queryParamsString = this.urlParam.toString();
+
+//     this.router.createUrlTree([], this.urlParam );
+//     console.log(this.serializer.serialize(this.urlParam));
+    var queryString = Object.keys(this.urlParam).map(key => key + '=' + this.urlParam[key]).join('&');
+    console.log(queryString);
+//     this.router.navigate(['/saisie/output/'+ queryString]);
+//     HttpUtility.UrlEncode(encoding.RC2Encrypt(queryString.toString()))
+//     this.router.navigate([`saisie/output/enrollment/${4545455}`]);
+
+//     this.router.navigate( ['saisie/output', { q: 'asdf'}]);
+
+    this.router.navigate( ['saisie/output', this.urlParam]);
+
+    'class/1/enrollment/4545455'
+//     this.router.navigate([`class/${this.urlParam.profil}/enrollment/${4545455}`]);
+//     this.router.navigate(['/saisie/output?']);
+  }
+
 
   transform(){
       this.started = !this.started;

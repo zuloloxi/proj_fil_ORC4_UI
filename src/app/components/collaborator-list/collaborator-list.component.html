@@ -94,6 +94,7 @@
     {{collaborateurs.length }}
 
       <ng-template pTemplate="body" let-collaborateur>
+
           <tr>
               <td ><i class="pi pi-align-justify couleur" pDraggable="collaborateur" (onDragStart)="dragStart($event,collaborateur)" (onDragEnd)="dragEnd($event)"></i>&nbsp;&nbsp;{{collaborateur.uid}}</td>
               <td colspan="2">{{collaborateur.nom}}</td>
@@ -108,7 +109,6 @@
                 <i class="icone icone far fa-trash-alt" (click)="openTrash(collaborateur)"></i>
               </td>
           </tr>
-
 
       </ng-template>
 
