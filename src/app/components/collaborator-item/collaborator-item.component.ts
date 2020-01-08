@@ -108,7 +108,6 @@ export class CollaboratorItemComponent implements OnInit {
          aMigrer: this.collaborateurForm.get('aMigrer').value
       });
      this.collaborateurService.updateCollaborateurUid(this.collaborateurUid, this.updateCollaborateur).subscribe();
-     console.log('save');
      this.saveOK = true;
    }
 
