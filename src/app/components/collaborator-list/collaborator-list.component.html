@@ -66,7 +66,7 @@
 
   <br>
 
-  <p-table #dt  [scrollable]="true" scrollHeight="400px" [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both" >
+  <p-table #dt  [scrollable]="true" scrollHeight="400px" [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="bottom" >
     <ng-template pTemplate="caption">
       <div style="text-align: right">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
