@@ -23,24 +23,21 @@
 
     <form [formGroup]="descriptifPutForm">
 
-    <p-table [value]="competences">
-        <ng-template pTemplate="header">
+    <p-table #dt [columns]="cols" [value]="competences">
+        <ng-template pTemplate="header" let-columns>
             <tr>
-                <th colspan="3">Competence
-                    <i class="icone icone-sort pi pi-sort-down" [hidden]="competenceSort" (click)="sortBy('COMPETENCE')"></i>
-                    <i class="icone icone-sort pi pi-sort-up" [hidden]="!competenceSort" (click)="sortBy('COMPETENCE')"></i>
+                <th *ngFor="let col of columns" [colSpan]="col.colspan" pResizableColumn>
+                    {{col.header}}
                 </th>
-                <th colspan="9">Descriptif
-                    <i class="icone icone-sort pi pi-sort-down" [hidden]=descriptifSort (click)="sortBy('DESCRIPTIF')"></i>
-                    <i class="icone icone-sort pi pi-sort-up" [hidden]=!descriptifSort (click)="sortBy('DESCRIPTIF')"></i>
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" [ngSwitch]="col.field" [colSpan]="col.colspan">
+                    <input *ngSwitchCase="'competence'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    <input *ngSwitchCase="'descriptif'" pInputText type="text"  (input)="dt.filter($event.target.value, col.field, 'contains')">
                 </th>
             </tr>
         </ng-template>
 
-
-
-
-        {{competences.length }}
         <ng-template pTemplate="body" let-competence>
             <tr>
                 <td colspan="3">{{competence.competence}}</td>

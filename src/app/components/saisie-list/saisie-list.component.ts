@@ -177,7 +177,6 @@ export class SaisieListComponent implements OnInit {
       return this.saisieService.saveSaisie(newSaisie).subscribe(
         saisieDTO => {
           this.showNewSaisieInBeginningOfList(saisieDTO);
-          // this.competencePostForm.setValue({ competence: '', descriptif: ''});
           this.saisiePostForm.setValue({collaborateurUid: '', domaine: '', equipe: '', profil: '', competences: '', });
           this.addSaisie = false;
         },

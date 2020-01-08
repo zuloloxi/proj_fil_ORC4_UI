@@ -31,6 +31,10 @@ export class CompetenceListComponent implements OnInit {
   competenceSort: boolean;
   descriptifSort: boolean;
   competenceToModify: CompetenceDTO;
+  cols = [
+    { field: 'competence', header: 'Competence' , colspan: '3'},
+    { field: 'descriptif', header: 'Descriptif' , colspan: '9'},
+  ];
 
 
   constructor(private confirmationService: ConfirmationService,
@@ -68,6 +72,7 @@ export class CompetenceListComponent implements OnInit {
       return this.competenceService.saveCompetence(newCompetence).subscribe(
         competenceDTO => {
           this.showCompetenceInBeginningOfList(competenceDTO);
+          this.competencePostForm.setValue({ competence: '', descriptif: ''});
           this.addCompetence = false;
         },
         error => this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
@@ -95,24 +100,5 @@ export class CompetenceListComponent implements OnInit {
     } else {
       this.msgs.push({severity: 'warn', summary: '', detail: 'descriptif non renseigné'});
     }
-  }
-
-  sortBy(field: string) {
-    switch (field) {
-
-      case 'COMPETENCE' : {
-        const coef = this.competenceSort ? 1 : -1;
-        this.competences = this.competences.sort((a, b) => (a.competence.toUpperCase() >= b.competence.toUpperCase()) ? coef : -coef);
-        this.competenceSort = !this.competenceSort;
-        break;
-      }
-      case 'DESCRIPTIF' : {
-        const coef = this.descriptifSort ? 1 : -1;
-        this.competences = this.competences.sort((a, b) => (a.descriptif.toUpperCase() >= b.descriptif.toUpperCase()) ? coef : -coef);
-        this.descriptifSort = !this.descriptifSort;
-        break;
-      }
-    }
-
   }
 }
