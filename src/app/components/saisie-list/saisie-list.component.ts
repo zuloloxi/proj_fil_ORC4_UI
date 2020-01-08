@@ -63,6 +63,7 @@ export class SaisieListComponent implements OnInit {
     if (saisieToAdd.collaborateurUid) {
       const saisieIndex = this.getIndexIfCollaborateurAlreadyHasSaisie(saisieToAdd.collaborateurUid);
       if (saisieIndex > -1) {
+        saisieToAdd.id = this.saisies[saisieIndex].id;
         this.saisies.splice(saisieIndex, 1);
         this.activatePut(saisieToAdd);
       } else {
@@ -71,7 +72,7 @@ export class SaisieListComponent implements OnInit {
     }
   }
 
-  // exemple :  http://localhost:4200/saisie?identifiant=d84512&domaine=Domaine&equipe=Equipe&profil=Profil&competences=Competences
+  // exemple :  http://localhost:4200/saisie/output?identifiant=d84512&domaine=Domaine&equipe=Equipe&profil=Profil&competences=Competences
   private getUrlParams(): SaisieDTO {
     return new SaisieDTO({
       collaborateurUid: this.route.snapshot.queryParams.identifiant,
@@ -88,25 +89,11 @@ export class SaisieListComponent implements OnInit {
 
   private activatePut(saisieToModify: SaisieDTO) {
     this.saisies.splice(0, 0, saisieToModify);
-    console.log(this.saisies);
     this.showModifyForm(saisieToModify);
   }
 
   private activatePost(saisieToModify: SaisieDTO) {
     this.showPostForm(saisieToModify);
-  }
-
-  deleteSaisie(id: number) {
-    this.confirmationService.confirm({
-      message: 'Voulez-vous supprimer cette saisie ?',
-      accept: () => {
-                      return this.saisieService.deleteSaisie(id).subscribe(
-                      () => {this.saisies.splice(this.saisies.findIndex(saisie => saisie.id === id), 1);
-                            },
-                      error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
-                      );
-                    }
-      });
   }
 
   showModifyForm(saisie: SaisieDTO) {
@@ -128,6 +115,19 @@ export class SaisieListComponent implements OnInit {
       profil: saisie.profil,
       competences: saisie.competences
     });
+  }
+
+  deleteSaisie(id: number) {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous supprimer cette saisie ?',
+      accept: () => {
+                      return this.saisieService.deleteSaisie(id).subscribe(
+                      () => {this.saisies.splice(this.saisies.findIndex(saisie => saisie.id === id), 1);
+                            },
+                      error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
+                      );
+                    }
+      });
   }
 
   modifySaisie() {
