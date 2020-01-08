@@ -9,7 +9,6 @@
 
 </ng-container>
 
-<!--<ng-template>-->
 <ng-template #start>
   <ng-container>
 
@@ -103,14 +102,7 @@
               <td *ngIf="!col.hidden" class="ui-resizable-column">
 
                   <ng-container *ngIf="col.field == 'identifiant';else alter">
-                    <i class="icone fas fa-pencil-alt fa-lg"  iconPos="right" pDraggable="a" (onDragStart)="dragStart($event,{identifiant: rowData['identifiant'],
-                                       nom: rowData['nom'],
-                                       prenom: rowData['prenom'],
-                                       email: rowData['email'],
-                                       domaine: rowData['domaine'],
-                                       equipe: rowData['equipe'],
-                                       profil: rowData['profil'],
-                                       competences: rowData['competences']})" (onDragEnd)="dragEnd($event)"></i>
+
                     <a [routerLink]="['/saisie/output']"
                        [queryParams]="{identifiant: rowData['identifiant'],
                                        nom: rowData['nom'],
@@ -121,6 +113,15 @@
                                        profil: rowData['profil'],
                                        competences: rowData['competences']}"
                        queryParamsHandling="merge">{{rowData[col.field]}}</a>
+                       <i class="icone fas fa-pencil-alt fa-lg" style="float:right" pDraggable="a" (onDragStart)="dragStart($event,{identifiant: rowData['identifiant'],
+                                       nom: rowData['nom'],
+                                       prenom: rowData['prenom'],
+                                       email: rowData['email'],
+                                       domaine: rowData['domaine'],
+                                       equipe: rowData['equipe'],
+                                       profil: rowData['profil'],
+                                       competences: rowData['competences']})" (onDragEnd)="dragEnd($event)">
+                       </i>
                   </ng-container>
 
                   <ng-template #alter>

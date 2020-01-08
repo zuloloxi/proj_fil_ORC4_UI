@@ -17,8 +17,8 @@ export class OutputService {
     constructor(private http: HttpClient) { }
 
    // observable
-      getAlltransformInputs(): Observable<OutputDto[]> {
-      return this.http.get<OutputDto[]>('http://localhost:8080/inputs/transform');
+      getAlltransformInputs(): Observable<Output[]> {
+      return this.http.get<Output[]>('http://localhost:8080/transformedInputs');
     }
 
     // observable

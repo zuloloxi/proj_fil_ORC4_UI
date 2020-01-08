@@ -17,11 +17,11 @@ export class TransformListComponent implements OnInit {
   urlParam: OutputDto = null;
   outputs: OutputDto[] = [];
   outputList: Output[] = [];
-  rejets: OutputDto[] = [];
+  rejets: Output[] = [];
   cols: any[];
   domaines: SelectItem[];
-  valids: OutputDto[] = [];
-  total: OutputDto[][];
+  valids: Output[] = [];
+  total: Output[][];
   selectedOutputs: Output[];
   checked1: boolean = true;
   isChecked: boolean = true;
@@ -87,13 +87,15 @@ export class TransformListComponent implements OnInit {
 
       this.updateCols();
 
-          this.outputService.getAlltransformInputs().subscribe((outputs) =>
-             { this.outputs = outputs;
-               this.outputService.deleteOutputs().subscribe(
-                 ()=> {
-                  this.outputService.publishResults(outputs).subscribe(
-                    ()=> {
-                      this.outputService.getAllOutputs().subscribe((outputList) => {
+//              this.outputService.getAllOutputs().subscribe(outputs => this.outputs = outputs);
+
+//           this.outputService.getAlltransformInputs().subscribe((outputs) =>
+//              { this.outputs = outputs;
+//                this.outputService.deleteOutputs().subscribe(
+//                  ()=> {
+//                   this.outputService.publishResults(outputs).subscribe(
+//                     ()=> {
+                      this.outputService.getAlltransformInputs().subscribe((outputList) => {
                           this.outputList = outputList;
                           this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
                                                                       outputs.domaine.substr(0,6) !== 'ERREUR' &&
@@ -104,11 +106,11 @@ export class TransformListComponent implements OnInit {
                                                                       outputs.equipe.substr(0,6) === 'ERREUR' ||
                                                                       outputs.competences.substr(0,6) === 'ERREUR');
                           return this.total = [this.valids, this.rejets];
-                  });
-                });
-               });
-             }
-          );
+                      });
+//                 });
+//                });
+//              }
+//           );
   }
 
   handleChange(e) {
