@@ -65,7 +65,7 @@
 
       <p-table #dt1 [columns]="cols" [value]="rejets" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="rejets.length" [rowsPerPageOptions]="[5,10,50,100,rejets.length]" paginatorPosition="bottom" sortMode="multiple"
-               selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="false">
+               selectionMode="false" [(selection)]="selectedOutputs" [resizableColumns]="false">
         <ng-template pTemplate="caption">
           <div style="display:flex;justify-content:space-between">
 
@@ -91,15 +91,30 @@
               </th>
             </ng-container>
           </tr>
-
         </ng-template>
 
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr [pSelectableRow]="rowData">
             <ng-container *ngFor="let col of columns">
+
               <td *ngIf="!col.hidden" class="ui-resizable-column">
-                {{rowData[col.field]}}
+
+                  <ng-container *ngIf="col.field == 'identifiant';else alter">
+                    <a [routerLink]="['/saisie/output']"
+                       [queryParams]="{identifiant: rowData['identifiant'],
+                                       domaine: rowData['domaine'],
+                                       equipe: rowData['equipe'],
+                                       profil: rowData['profil'],
+                                       competences: rowData['competences']}"
+                       queryParamsHandling="merge">{{rowData[col.field]}}</a>
+                  </ng-container>
+
+                  <ng-template #alter>
+                    <a>{{rowData[col.field]}}</a>
+                  </ng-template>
+
               </td>
+
             </ng-container>
           </tr>
         </ng-template>
