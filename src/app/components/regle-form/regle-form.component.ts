@@ -110,5 +110,4 @@ export class RegleFormComponent implements OnInit {
        }
       });
       }
-
 }

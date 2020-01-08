@@ -61,17 +61,7 @@ export class ReglesListComponent implements OnInit {
   }
 
   deleteRegle(id: number) {
-    // this.confirmationService.confirm({
-    //   message: 'Êtes vous sur de vouloir supprimer la règle ?',
-    //   accept: () => {
-    //   return this.regleService.deleteRegle(id).subscribe(
-    //      () => {this.regles.splice(this.regles.findIndex(regle => regle.id === id), 1);
-    //       location.reload();
-    //            },
-    //            error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
-    //      );
-    //    }
-    //   });
+
     this.regleService.getRegle(id).subscribe (
       regleAPI => this.router.navigate(['/regledelete', regleAPI.id]),
       error => {this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)}); }

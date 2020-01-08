@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { RegleDTO, RegleViewList } from '../shared-data/regle-dto';
 import { Observable, Subject } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

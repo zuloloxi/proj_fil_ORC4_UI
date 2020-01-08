@@ -1,6 +1,8 @@
 
 <ng-container>
-    <br><br>
+    <br>
+    <p-messages [(value)]="msgs"></p-messages>
+    <br>
     <div *ngIf="(regleForm.get('posteType').dirty || regleForm.get('posteType').touched)  && regleForm.get('posteType').invalid" >
         <div *ngIf="regleForm.get('posteType').errors.required"  class="alert col-sm-2 col-form-label">Le poste type est obligatoire</div>
      </div>
