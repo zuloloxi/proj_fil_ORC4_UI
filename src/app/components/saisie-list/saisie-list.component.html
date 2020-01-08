@@ -76,7 +76,7 @@
                     </td>
                     <td colspan="5">
                         <ng-container *ngIf="saisie !== saisieToModify; else modifyCompetences">
-                            {{saisie.competences}}
+                            {{saisie.competences.replace(',',',\n')}}
                         </ng-container>
                         <ng-template #modifyCompetences>
                             <input type="text" formControlName="competences" (keyup.enter)="modifySaisie()">

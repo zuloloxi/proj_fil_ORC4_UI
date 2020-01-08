@@ -171,9 +171,9 @@ export class SaisieListComponent implements OnInit {
       const newSaisie = new SaisieDTO({
         collaborateurUid: this.saisiePostForm.get('collaborateurUid').value,
         domaine: this.saisiePostForm.get('domaine').value,
-        equipe: this.saisiePostForm.get('collaborateurUid').value,
+        equipe: this.saisiePostForm.get('equipe').value,
         profil: this.saisiePostForm.get('profil').value,
-        competences: this.saisiePostForm.get('competences').value});
+        competences: this.saisiePostForm.get('competences').value.replace(' ', '')});
       return this.saisieService.saveSaisie(newSaisie).subscribe(
         saisieDTO => {
           this.showNewSaisieInBeginningOfList(saisieDTO);

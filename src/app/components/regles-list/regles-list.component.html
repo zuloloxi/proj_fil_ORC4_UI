@@ -57,8 +57,8 @@
 <ng-container *ngIf="regles">
   <p-confirmDialog header="Suppression" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <h2>{{regles.length }} Règles </h2>
-    <!-- <span style="color:#FF0000;cursor:pointer" (click) ="goCreate()"> <b>Créer une règle</b></span> -->
-<h5><i class="icone far fa-plus-square fa-md" (click)="goCreate()"> Créer une règle</i></h5>
+    <h5><i class="icone far fa-plus-square fa-md" (click)="goCreate()"> Ajouter une règle</i></h5>
+    <br>
 
     <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="20" paginatorPosition="both" [resizableColumns]="true">
 
