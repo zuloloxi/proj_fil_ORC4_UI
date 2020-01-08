@@ -14,7 +14,7 @@ import { HttpClient,HttpParams } from '@angular/common/http';
 })
 export class TransformListComponent implements OnInit {
   draggedOutputDTO: OutputDto = null;
-  urlParam: any[] = [];
+  urlParam: OutputDto = null;
   outputs: OutputDto[] = [];
   outputList: Output[] = [];
   rejets: OutputDto[] = [];
@@ -57,28 +57,24 @@ export class TransformListComponent implements OnInit {
   }
 
   dropEdit(event){
-//     let params = new HttpParams(this.urlParam);
-    console.log('edit');
     console.log('urlParam from Edit', this.urlParam);
-//     const queryParamsString = this.urlParam.toString();
 
-//     this.router.createUrlTree([], this.urlParam );
-//     console.log(this.serializer.serialize(this.urlParam));
-    var queryString = Object.keys(this.urlParam).map(key => key + '=' + this.urlParam[key]).join('&');
-    console.log(queryString);
-//     this.router.navigate(['/saisie/output/'+ queryString]);
-//     HttpUtility.UrlEncode(encoding.RC2Encrypt(queryString.toString()))
-//     this.router.navigate([`saisie/output/enrollment/${4545455}`]);
+    const params = new HttpParams()
+          .set('identifiant', this.urlParam.identifiant)
+          .set('nom', this.urlParam.nom);
 
-//     this.router.navigate( ['saisie/output', { q: 'asdf'}]);
+    //         return this.httpClient.get<repos[]>('saisie/output'+ 'users/' + this.urlParam.identifiant + '/repos',{params})
+            console.log(params.toString()); //Returns page=3&sort=name
 
-    this.router.navigate( ['saisie/output', this.urlParam]);
-
-    'class/1/enrollment/4545455'
-//     this.router.navigate([`class/${this.urlParam.profil}/enrollment/${4545455}`]);
-//     this.router.navigate(['/saisie/output?']);
+//     this.router.navigate( ['saisie/output', {params.identifiant });
+//     this.router.navigate(['saisie/output', {p1: this.urlParam.identifiant, p2: this.urlParam.nom }]);
+        this.router.navigate(['saisie/output'], { queryParams: { identifiant: this.urlParam.identifiant,
+         domaine: this.urlParam.domaine,
+         equipe: this.urlParam.equipe,
+         profil: this.urlParam.profil,
+         competences: this.urlParam.competences,
+          } });
   }
-
 
   transform(){
       this.started = !this.started;
