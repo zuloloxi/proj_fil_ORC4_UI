@@ -66,7 +66,7 @@
 
   <br>
 
-  <p-table #dt  [scrollable]="true" scrollHeight="400px" [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="both" >
+  <p-table #dt  [scrollable]="true" scrollHeight="400px" [value]="collaborateurs" [globalFilterFields]="['uid','nom','prenom','fonction','codeAgence','aMigrer']" [paginator]="true" [rows]="collaborateurs.length" [rowsPerPageOptions]="[5,10,50,100,collaborateurs.length]" paginatorPosition="bottom" >
     <ng-template pTemplate="caption">
       <div style="text-align: right">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -96,7 +96,7 @@
       <ng-template pTemplate="body" let-collaborateur>
 
           <tr>
-              <td ><i class="pi pi-align-justify couleur" pDraggable="collaborateur" (onDragStart)="dragStart($event,collaborateur)" (onDragEnd)="dragEnd($event)"></i>&nbsp;&nbsp;{{collaborateur.uid}}</td>
+              <td ><i class="fas fa-grip-lines" pDraggable="collaborateur" (onDragStart)="dragStart($event,collaborateur)" (onDragEnd)="dragEnd($event)"></i>&nbsp;&nbsp;{{collaborateur.uid}}</td>
               <td colspan="2">{{collaborateur.nom}}</td>
               <td colspan="2">{{collaborateur.prenom}}</td>
               <td colspan="3">{{collaborateur.fonction}}</td>
@@ -136,21 +136,22 @@
     <br>
     <b>MAIL :</b> {{output.email}}
     <br>
-    <b>EQUIPE :</b> {{output.equipe}}
+    <b>EQUIPE :</b> <span *ngIf="!errorEquipe" class="black"> {{output.equipe}}</span> <b *ngIf="errorEquipe" class="red"> {{output.equipe}}</b>
     <br>
-    <b>PROFIL :</b> {{output.profil}}
+    <b>PROFIL :</b> <span *ngIf="!errorProfil" class="black"> {{output.profil}}</span> <b *ngIf="errorProfil" class="red"> {{output.profil}}</b>
     <br>
-    <b>COMPETENCES :</b> {{output.competences}}
+    <b>DOMAINE :</b> <span *ngIf="!errorDomain" class="black"> {{output.domaine}}</span> <b *ngIf="errorDomain" class="red"> {{output.domaine}}</b>
+    <br>
+    <b>COMPETENCES :</b> <span *ngIf="!errorCompetences" class="black"> {{output.competences}}</span> <b *ngIf="errorCompetences" class="red"> {{output.competences}}</b>
     <br><br>
     <p-button label="Retour"  (onClick)="viewTransformClose()"></p-button>
   </p-dialog>
 
-  <p-dialog  header="Erreur sur la transformation" [(visible)]="displayTransformError" [style]="{width: '40%'}" [modal]="true">
+  <p-dialog  header="ERREUR GLOBALE" [(visible)]="displayTransformError" [style]="{width: '40%'}" [modal]="true">
         <br>
-        {{error}}
+        <b class="red">{{error}}</b>
         <br><br>
-        <b>Message détaillé dans l'onglet <a [routerLink]="['/allTransformed']">Transformation</a></b>
-        <br><br>
+
         <p-button label="Retour"  (onClick)="viewTransformErrorClose()"></p-button>
   </p-dialog>
 

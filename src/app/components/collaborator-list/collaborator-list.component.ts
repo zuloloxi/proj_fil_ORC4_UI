@@ -3,7 +3,6 @@ import { CollaborateurService } from 'src/app/services/collaborateur.service';
 import { Router} from '@angular/router';
 import { CollaborateurDTO } from 'src/app/shared-data/collaborateur-dto';
 import { OutputDto } from 'src/app/shared-data/output-dto';
-import { Message } from 'primeng/api/message';
 import { ErrorService } from 'src/app/services/error.service';
 
 
@@ -16,15 +15,22 @@ export class CollaboratorListComponent implements OnInit {
 
   collaborateurs: CollaborateurDTO[] = [];
   collaborateur: CollaborateurDTO;
+  draggedCollaborateurDTO: null;
+  output: OutputDto;
+
+  displayTransform = false;
+  displayTransformError = false;
   displayDetail = false;
   trash = false;
   showIcons = false;
-  draggedCollaborateurDTO: null;
-  output: OutputDto;
-  displayTransform = false;
-  displayTransformError = false;
-  msgs: Message[] = [];
+
+  msgs: string;
   error: string;
+
+  errorProfil = false;
+  errorDomain = false;
+  errorEquipe = false;
+  errorCompetences = false;
 
   constructor( private router: Router,
                private errorService: ErrorService,
@@ -39,17 +45,14 @@ export class CollaboratorListComponent implements OnInit {
   dragStart(event, collaborateur) {
     this.draggedCollaborateurDTO = collaborateur;
     this.showIcons = true;
-    console.log('start');
   }
 
   dragEnd(event) {
     this.draggedCollaborateurDTO = null;
     this.showIcons = false;
-    console.log('end');
   }
 
-  dropView(event){
-    console.log('view');
+  dropView(event) {
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
@@ -57,8 +60,7 @@ export class CollaboratorListComponent implements OnInit {
     }
   }
 
-  dropTransform(event){
-    console.log('transform');
+  dropTransform(event) {
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
@@ -67,7 +69,6 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   dropTrash(event) {
-    console.log('trash');
     if (this.draggedCollaborateurDTO) {
      this.collaborateur = this.draggedCollaborateurDTO;
      this.draggedCollaborateurDTO = null;
@@ -76,8 +77,7 @@ export class CollaboratorListComponent implements OnInit {
   }
 
 
-  dropEdit(event){
-    console.log('edit');
+  dropEdit(event) {
     if (this.draggedCollaborateurDTO) {
       this.collaborateur = this.draggedCollaborateurDTO;
       this.draggedCollaborateurDTO = null;
@@ -86,7 +86,7 @@ export class CollaboratorListComponent implements OnInit {
     }
   }
 
-  viewDetailCollaborator(collaborateur: CollaborateurDTO){
+  viewDetailCollaborator(collaborateur: CollaborateurDTO) {
     this.collaborateur = collaborateur;
     this.displayDetail = true;
   }
@@ -108,7 +108,6 @@ export class CollaboratorListComponent implements OnInit {
     this.collaborateur = collaborateur;
     const collaborateurUid = this.collaborateur.uid;
     this.collaborateurService.deleteCollaborateutUid(collaborateurUid).subscribe(item => this.collaborateur = item);
-    console.log('delete: ' + collaborateurUid);
     this.closeTrash();
     location.reload();
   }
@@ -119,11 +118,18 @@ export class CollaboratorListComponent implements OnInit {
 
     this.collaborateurService.getOnetransformInput(collaborateurUid).subscribe((output) =>
     { this.output = output;
+
+      (this.output.profil.substr(0, 6) === 'ERREUR') ? this.errorProfil = true : this.errorEquipe = false;
+      (this.output.domaine.substr(0, 6) === 'ERREUR') ? this.errorDomain = true : this.errorDomain = false;
+      (this.output.equipe.substr(0, 6) === 'ERREUR') ? this.errorEquipe = true : this.errorEquipe = false;
+      (this.output.competences.substr(0, 6) === 'ERREUR') ? this.errorCompetences = true : this.errorCompetences = false;
+
       this.displayTransform = true;
-      console.log('transform : ' + collaborateurUid + ':');
-      console.log(this.output);
+
     },
-    error => {this.viewTransformError(this.errorService.getMessage(error));
+    error => {
+      this.msgs = this.errorService.getMessage(error).split(':')[1];
+      this.viewTransformError(this.msgs);
     });
    }
 
