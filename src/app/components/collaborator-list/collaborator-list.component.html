@@ -12,37 +12,37 @@
    <p-card [header]="collaborateur.civilite + ' ' + collaborateur.prenom + ' ' + collaborateur.nom" [subheader]="collaborateur.fonction" [style]="{width: '100%'}" styleClass="ui-card-shadow">
 
        <p-header>
-           <b><u>COLLABORATEUR</u></b> : {{collaborateur.uid}}
+         <h3><u>COLLABORATEUR</u> : <b>{{collaborateur.uid}}</b></h3>
        </p-header>
 
        <div>
-           {{collaborateur.telephone}} , {{collaborateur.mail}}
+           <b>{{collaborateur.telephone}} , {{collaborateur.mail}}</b>
         <br><br>
-       <b> LOCALISATION </b>: {{collaborateur.localisationCollaborateur}}
+       LOCALISATION : <b>{{collaborateur.localisationCollaborateur}}</b>
        <br>
-       <b>PJ </b>: {{collaborateur.pj}}
+       PJ : <b>{{collaborateur.pj}}</b>
        <br>
-       <b>UO AFFECTATION </b>: {{collaborateur.uoAffectation}}
+       UO AFFECTATION : <b>{{collaborateur.uoAffectation}}</b>
        <br>
-       <b>ETAGE </b>: {{collaborateur.etage}}
+       ETAGE : <b>{{collaborateur.etage}}</b>
        <br>
-       <b>CODE </b>: {{collaborateur.codeImmeubleEmplacementCollaborateur}}
+       CODE : <b>{{collaborateur.codeImmeubleEmplacementCollaborateur}}</b>
        <br>
-       <b>REGION </b>: {{collaborateur.region}} &nbsp;&nbsp;
-       <b>CODE REGION </b>: {{collaborateur.codeRegion}}
+       REGION : <b>{{collaborateur.region}}</b> &nbsp;&nbsp;
+       CODE REGION : <b>{{collaborateur.codeRegion}}</b>
        <br>
-       <b>TERRITOIRE </b>: {{collaborateur.niveauTerritoire}} &nbsp;&nbsp;
-       <b>CODE TERRITOIRE </b>: {{collaborateur.codeTerritoire}}
+       TERRITOIRE : <b>{{collaborateur.niveauTerritoire}}</b> &nbsp;&nbsp;
+       CODE TERRITOIRE : <b>{{collaborateur.codeTerritoire}}</b>
        <br>
-       <b>ENTITE </b>: {{collaborateur.niveauEntite}} &nbsp;&nbsp;
-       <b>CODE ENTITE </b>: {{collaborateur.codeEntite}}
+       ENTITE : <b>{{collaborateur.niveauEntite}}</b> &nbsp;&nbsp;
+       CODE ENTITE : <b>{{collaborateur.codeEntite}}</b>
        <br>
-       <b>AGENCE </b>: {{collaborateur.niveauAgence}} &nbsp;&nbsp;
-       <b>CODE AGENCE </b>: {{collaborateur.codeAgence}}
+       AGENCE : <b>{{collaborateur.niveauAgence}}</b> &nbsp;&nbsp;
+       CODE AGENCE : <b>{{collaborateur.codeAgence}}</b>
        </div>
 
        <p-footer>
-           <b> A MIGRER :</b> {{collaborateur.aMigrer}}
+           A MIGRER : <b>{{collaborateur.aMigrer}}</b>
            &nbsp;&nbsp;
            <br><br>
            <p-button label="Retour"  (onClick)="viewDetailCollaboratorClose()"></p-button>
@@ -135,21 +135,21 @@
 
 
   <p-dialog *ngIf="output" header="Détail de la Transformation" [(visible)]="displayTransform" [style]="{width: '40%'}" [modal]="true">
-    <b>COLLABORATEUR :</b> {{output.identifiant}}
+    COLLABORATEUR :  <b>{{output.identifiant}}</b>
     <br>
-    <b>NOM :</b> {{output.nom}}
+    NOM : <b>{{output.nom}}</b>>
     <br>
-    <b>PRENOM :</b> {{output.prenom}}
+    PRENOM : <b>{{output.prenom}}</b>
     <br>
-    <b>MAIL :</b> {{output.email}}
+    MAIL : <b>{{output.email}}</b>
     <br>
-    <b>EQUIPE :</b> <span *ngIf="!errorEquipe" class="black"> {{output.equipe}}</span> <b *ngIf="errorEquipe" class="red"> {{output.equipe}}</b>
+    EQUIPE : <b *ngIf="!errorEquipe" class="black"> {{output.equipe}}</b> <b *ngIf="errorEquipe" class="red"> {{output.equipe}}</b>
     <br>
-    <b>PROFIL :</b> <span *ngIf="!errorProfil" class="black"> {{output.profil}}</span> <b *ngIf="errorProfil" class="red"> {{output.profil}}</b>
+    PROFIL : <b *ngIf="!errorProfil" class="black"> {{output.profil}}</b> <b *ngIf="errorProfil" class="red"> {{output.profil}}</b>
     <br>
-    <b>DOMAINE :</b> <span *ngIf="!errorDomain" class="black"> {{output.domaine}}</span> <b *ngIf="errorDomain" class="red"> {{output.domaine}}</b>
+    DOMAINE : <b *ngIf="!errorDomain" class="black"> {{output.domaine}}</b> <b *ngIf="errorDomain" class="red"> {{output.domaine}}</b>
     <br>
-    <b>COMPETENCES :</b> <span *ngIf="!errorCompetences" class="black"> {{output.competences}}</span> <b *ngIf="errorCompetences" class="red"> {{output.competences}}</b>
+    COMPETENCES : <b *ngIf="!errorCompetences" class="black"> {{output.competences}}</b> <b *ngIf="errorCompetences" class="red"> {{output.competences}}</b>
     <br><br>
     <p-button label="Retour"  (onClick)="viewTransformClose()"></p-button>
   </p-dialog>
