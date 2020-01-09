@@ -55,11 +55,6 @@ export class ReglesListComponent implements OnInit {
 
   }
 
-  viewDetail(regle: RegleViewList) {
-    this.regleDetail = regle;
-    this.display = !this.display;
-  }
-
   deleteRegle(id: number) {
 
     this.regleService.getRegle(id).subscribe (
@@ -79,9 +74,15 @@ export class ReglesListComponent implements OnInit {
       error => {this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)}); }
     );
   }
-
+  7
   goCreate() {
     this.router.navigate(['/reglecreate']);
 }
 
+goView(id: number) {
+  this.regleService.getRegle(id).subscribe (
+    regleAPI => this.router.navigate(['/regleview', regleAPI.id]),
+    error => {this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)}); }
+  );
+}
 }

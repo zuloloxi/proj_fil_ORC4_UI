@@ -76,41 +76,78 @@ export class TransformListComponent implements OnInit {
           } });
   }
 
+//   transform(){
+//       this.started = !this.started;
+//       this.domaines = [
+//               { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+//               { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+//               { label: 'ResRetail', value: 'ResRetail' },
+//               { label: 'ResCorpo', value: 'ResCorpo' }
+//              ];
+//
+//       this.updateCols();
+//
+// //              this.outputService.getAllOutputs().subscribe(outputs => this.outputs = outputs);
+//
+// //           this.outputService.getAlltransformInputs().subscribe((outputs) =>
+// //              { this.outputs = outputs;
+// //                this.outputService.deleteOutputs().subscribe(
+// //                  ()=> {
+// //                   this.outputService.publishResults(outputs).subscribe(
+// //                     ()=> {
+//                       this.outputService.getAlltransformInputs().subscribe((outputList) => {
+//                           this.outputList = outputList;
+//                           this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
+//                                                                       outputs.domaine.substr(0,6) !== 'ERREUR' &&
+//                                                                       outputs.equipe.substr(0,6) !== 'ERREUR' &&
+//                                                                       outputs.competences.substr(0,6) !== 'ERREUR');
+//                           this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
+//                                                                       outputs.domaine.substr(0,6) === 'ERREUR' ||
+//                                                                       outputs.equipe.substr(0,6) === 'ERREUR' ||
+//                                                                       outputs.competences.substr(0,6) === 'ERREUR');
+//                           return this.total = [this.valids, this.rejets];
+//                       });
+// //                 });
+// //                });
+// //              }
+// //           );
+//   }
+
   transform(){
-      this.started = !this.started;
-      this.domaines = [
-              { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
-              { label: 'ResBPFCBP', value: 'ResBPFCBP' },
-              { label: 'ResRetail', value: 'ResRetail' },
-              { label: 'ResCorpo', value: 'ResCorpo' }
-             ];
+    this.started = !this.started;
+    this.domaines = [
+            { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+            { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+            { label: 'ResRetail', value: 'ResRetail' },
+            { label: 'ResCorpo', value: 'ResCorpo' }
+           ];
 
-      this.updateCols();
+    this.updateCols();
 
-//              this.outputService.getAllOutputs().subscribe(outputs => this.outputs = outputs);
+//     this.outputService.getAllOutputs().subscribe(outputs => this.outputs = outputs);
 
-//           this.outputService.getAlltransformInputs().subscribe((outputs) =>
-//              { this.outputs = outputs;
-//                this.outputService.deleteOutputs().subscribe(
-//                  ()=> {
-//                   this.outputService.publishResults(outputs).subscribe(
-//                     ()=> {
-                      this.outputService.getAlltransformInputs().subscribe((outputList) => {
-                          this.outputList = outputList;
-                          this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
-                                                                      outputs.domaine.substr(0,6) !== 'ERREUR' &&
-                                                                      outputs.equipe.substr(0,6) !== 'ERREUR' &&
-                                                                      outputs.competences.substr(0,6) !== 'ERREUR');
-                          this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
-                                                                      outputs.domaine.substr(0,6) === 'ERREUR' ||
-                                                                      outputs.equipe.substr(0,6) === 'ERREUR' ||
-                                                                      outputs.competences.substr(0,6) === 'ERREUR');
-                          return this.total = [this.valids, this.rejets];
-                      });
-//                 });
-//                });
-//              }
-//           );
+    this.outputService.getAlltransformInputs().subscribe((outputs) =>
+       { this.outputs = outputs;
+         this.outputService.deleteOutputs().subscribe(
+           ()=> {
+            this.outputService.publishResults(outputs).subscribe(
+              ()=> {
+                this.outputService.getAllOutputs().subscribe((outputList) => {
+                    this.outputList = outputList;
+                    this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
+                                                                outputs.domaine.substr(0,6) !== 'ERREUR' &&
+                                                                outputs.equipe.substr(0,6) !== 'ERREUR' &&
+                                                                outputs.competences.substr(0,6) !== 'ERREUR');
+                    this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
+                                                                outputs.domaine.substr(0,6) === 'ERREUR' ||
+                                                                outputs.equipe.substr(0,6) === 'ERREUR' ||
+                                                                outputs.competences.substr(0,6) === 'ERREUR');
+                    return this.total = [this.valids, this.rejets];
+                });
+              });
+         });
+       }
+    );
   }
 
   handleChange(e) {

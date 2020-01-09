@@ -74,8 +74,13 @@
                  <p >Compétences sélectionnées:
                      <span *ngIf="regleForm.value.competences"> {{regleForm.value.competences | competence}} </span></p>
 
-    <button *ngIf="regleAction=='update'" pButton type="button" label="Modifier" class="ui-button-rounded" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
+    <button *ngIf="regleAction=='update'" pButton type="button" label="Modifier" class="ui-button-rounded ui-button-success" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
     <button *ngIf="regleAction=='create'" pButton type="button" label="Créer" class="ui-button-rounded" (click)="saveRegle()" [disabled]="regleForm.invalid"></button>
     <button *ngIf="regleAction=='delete'" pButton type="button" label="Supprimer" class="ui-button-rounded ui-button-danger" (click)="deleteRegle()" ></button>
-    </form>
+    <button *ngIf="regleAction=='view'" pButton type="button" label="Modifier" class="ui-button-rounded " (click)="changeRegleAction('update')"></button>
+    &nbsp;&nbsp;
+    <button pButton type="button" label="Retour" class="ui-button-rounded" class="ui-button-rounded" [routerLink]="['/regles']"></button>
+
+
+</form>
 </ng-container>
