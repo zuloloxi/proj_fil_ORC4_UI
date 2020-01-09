@@ -1,4 +1,10 @@
+<ng-container *ngIf="collaborateurs.length === 0 ;else started">
+    <div class="center-spinner">
+        <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration="1s"></p-progressSpinner>
+    </div>
+  </ng-container>
 
+<ng-template #started>
 <ng-container *ngIf="collaborateur">
 
   <p-dialog header="Détail du collaborateur" [(visible)]="displayDetail" [style]="{width: '70%'}" [modal]="true" [maximizable]=true>
@@ -157,3 +163,5 @@
   </p-dialog>
 
 </ng-container>
+
+  </ng-template>
