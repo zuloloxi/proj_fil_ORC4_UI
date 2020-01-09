@@ -1,109 +1,104 @@
 
 <p-messages [(value)]="msgs"></p-messages>
 <ng-container *ngIf="regleDetail">
-
-    <p-dialog header="Détail de la Règle de gestion" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
-        <div class="container">
-            <div class="row">
-              <div class="col-3">Déploiement </div>
-              <div class="col-9">: {{regleDetail.deploiement}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Métier </div>
-              <div class="col-9">: {{regleDetail.metier}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Poste Type </div>
-              <div class="col-9">: {{regleDetail.posteType}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Domaine </div>
-              <div class="col-9">: {{regleDetail.domaine}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Strates Équipes </div>
-              <div class="col-9">: {{regleDetail.stratesEquipes}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Profil </div>
-              <div class="col-9">: {{regleDetail.profil}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Équipes Supervisées </div>
-              <div class="col-9">: {{regleDetail.equipesSupervisees}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Descriptif Équipes Supervisées </div>
-              <div class="col-9">: {{regleDetail.descriptifEquipesSupervisses}}</div>
-            </div>
-            <div class="row">
-              <div class="col-3">Competences  </div>
-              <div class="col-9">:</div>
-              <ng-container *ngFor="let competence of regleDetail.competences">
-                <div class="col-1"></div>
-                <div class="col-3">Competence </div>
-                <div class="col-8">: {{competence.competence}}</div>
-                <div class="col-1"></div>
-                <div class="col-3">Descriptif </div>
-                <div class="col-8">: {{competence.descriptif}}</div>
-                <div class="col-12"></div>
-              </ng-container>
-
-            </div>
-        </div>
-    </p-dialog>
+  <p-dialog header="Détail de la Règle de gestion" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
+    <div class="container">
+      <div class="row">
+        <div class="col-3">Déploiement </div>
+        <div class="col-9">: {{regleDetail.deploiement}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Métier </div>
+        <div class="col-9">: {{regleDetail.metier}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Poste Type </div>
+        <div class="col-9">: {{regleDetail.posteType}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Domaine </div>
+        <div class="col-9">: {{regleDetail.domaine}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Strates Équipes </div>
+        <div class="col-9">: {{regleDetail.stratesEquipes}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Profil </div>
+        <div class="col-9">: {{regleDetail.profil}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Équipes Supervisées </div>
+        <div class="col-9">: {{regleDetail.equipesSupervisees}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Descriptif Équipes Supervisées </div>
+        <div class="col-9">: {{regleDetail.descriptifEquipesSupervisses}}</div>
+      </div>
+      <div class="row">
+        <div class="col-3">Competences  </div>
+        <div class="col-9">:</div>
+        <ng-container *ngFor="let competence of regleDetail.competences">
+          <div class="col-1"></div>
+          <div class="col-3">Competence </div>
+          <div class="col-8">: {{competence.competence}}</div>
+          <div class="col-1"></div>
+          <div class="col-3">Descriptif </div>
+          <div class="col-8">: {{competence.descriptif}}</div>
+          <div class="col-12"></div>
+        </ng-container>
+      </div>
+    </div>
+  </p-dialog>
 </ng-container>
 
 <ng-container *ngIf="regles">
   <p-confirmDialog header="Suppression" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <h2>{{regles.length }} Règles </h2>
-    <h5><i class="icone far fa-plus-square fa-md" (click)="goCreate()"> Ajouter une règle</i></h5>
-    <br>
+  <h2>{{regles.length }} Règles </h2>
+  <h5><i class="icone far fa-plus-square fa-md" (click)="goCreate()"> Ajouter une règle</i></h5>
+  <br>
 
-    <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="20" paginatorPosition="both" [resizableColumns]="true">
-
-      <ng-template pTemplate="caption">
-        <div style="text-align: right">
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-        </div>
+  <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="20" paginatorPosition="both" [resizableColumns]="true">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
     </ng-template>
 
-      <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" pResizableColumn>
-                {{col.header}}
-            </th>
-        </tr>
-        <tr>
-            <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                <input *ngSwitchCase="'metier'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'posteType'" pInputText type="text" size="15"  (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'domaine'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'stratesEquipes'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'profil'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'equipesSupervisees'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'descriptifEquipesSupervisses'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-                <input *ngSwitchCase="'competencesForSearch'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
-            </th>
-        </tr>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [colSpan]="col.colspan" pResizableColumn>
+          {{col.header}}
+        </th>
+      </tr>
+      <tr>
+        <th *ngFor="let col of columns" [colSpan]="col.colspan" [ngSwitch]="col.field">
+          <input *ngSwitchCase="'metier'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'posteType'" pInputText type="text" size="15"  (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'domaine'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'stratesEquipes'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'profil'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'equipesSupervisees'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'descriptifEquipesSupervisses'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <input *ngSwitchCase="'competencesForSearch'" pInputText type="text" size="15" (input)="dt.filter($event.target.value, col.field, 'contains')">
+        </th>
+      </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData">
-          <td *ngFor="let col of columns; let i=index" class="ui-resizable-column" >
-            <span *ngIf="col.field === 'metier'"> {{reformatMetier(rowData.metier)}} </span>
-            <span *ngIf="col.field !== 'competences' && col.field !=='metier' && col.field !=='actions'">  {{rowData[col.field]}} </span>
-            <span *ngIf="col.field === 'competences'"> {{rowData.competences}} </span>
-            <span *ngIf="col.field === 'actions'">
-              <i class="icone far fa-eye fa-lg" (click)="viewDetail(rowData)"></i>&nbsp;&nbsp;
-              <i class="icone far fa-edit" (click)="goUpdate(rowData)" ></i>&nbsp;
-              <i class="icone icone far fa-trash-alt" (click)="deleteRegle(rowData.id)"></i>&nbsp; </span>
-          </td>
+        <td *ngFor="let col of columns; let i=index" class="ui-resizable-column" [colSpan]="col.colspan">
+          <span *ngIf="col.field === 'metier'"> {{reformatMetier(rowData.metier)}} </span>
+          <span *ngIf="col.field !== 'competences' && col.field !=='metier' && col.field !=='actions'">  {{rowData[col.field]}} </span>
+          <span *ngIf="col.field === 'competences'"> {{rowData.competences}} </span>
+          <span *ngIf="col.field === 'actions'">
+            <i class="icone far fa-eye fa-lg" (click)="viewDetail(rowData)"></i>&nbsp;&nbsp;
+            <i class="icone far fa-edit" (click)="goUpdate(rowData)" ></i>&nbsp;
+            <i class="icone icone far fa-trash-alt" (click)="deleteRegle(rowData.id)"></i>&nbsp; </span>
+        </td>
       </tr>
-  </ng-template>
-
-    </p-table>
-
-  </ng-container>
+    </ng-template>
+  </p-table>
+</ng-container>
 
