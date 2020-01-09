@@ -1,5 +1,5 @@
 <p-messages [(value)]="msgs"></p-messages>
-<p-confirmDialog header="Suppression de Saisie" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog header="Suppression de Saisie" acceptLabel="Oui" rejectLabel="Non" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <ng-container *ngIf="saisies">
     <h2>{{saisies.length }} Saisies </h2>
