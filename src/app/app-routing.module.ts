@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'regledelete/:id', component: RegleFormComponent },
   { path: 'saisie', component: SaisieListComponent },
   { path: 'saisie/output', component: SaisieListComponent },
-  { path: '', redirectTo: '/regles', pathMatch: 'full' }   // page par défaut
+  { path: '', redirectTo: '/collaborateurs', pathMatch: 'full' }   // page par défaut
 ];
 
 @NgModule({
