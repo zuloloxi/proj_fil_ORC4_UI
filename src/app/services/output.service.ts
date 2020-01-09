@@ -16,9 +16,14 @@ export class OutputService {
     searchValue: Subject<string> = new Subject<string>();
     constructor(private http: HttpClient) { }
 
+//    // observable
+//       getAlltransformInputs(): Observable<Output[]> {
+//       return this.http.get<Output[]>('http://localhost:8080/transformedInputs');
+//     }
+
    // observable
       getAlltransformInputs(): Observable<Output[]> {
-      return this.http.get<Output[]>('http://localhost:8080/transformedInputs');
+      return this.http.get<Output[]>('http://localhost:8080/inputs/transform');
     }
 
     // observable
