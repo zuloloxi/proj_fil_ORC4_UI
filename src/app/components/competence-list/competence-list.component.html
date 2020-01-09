@@ -8,13 +8,15 @@
         <h5><i class="icone far fa-plus-square fa-md" (click)="addCompetence=!addCompetence"> <span style="opacity:unset"> Ajouter une Compétence</span></i></h5>
     </ng-container>
     <ng-container *ngIf="addCompetence">
-        <h5><i class="icone far fa-minus-square fa-md" (click)="addCompetence=!addCompetence"></i> </h5>
+        <h5>
+            <i class="icone far fa-minus-square fa-md" (click)="addCompetence=!addCompetence"></i>
+        </h5>
         <form [formGroup]="competencePostForm" (ngSubmit)="saveCompetence()">
             <p-table [value]="competences">
                 <ng-template pTemplate="header">
-                        <th colspan="3"><input type="text" formControlName="competence" placeholder="Competence" (keyup.enter)="saveCompetence()"></th>
-                        <th colspan="9"><input type="text" formControlName="descriptif" placeholder="Descriptif" (keyup.enter)="saveCompetence()"></th>
-                        <th>&nbsp;&nbsp; <i class="icone far fa-check-square" (click)="saveCompetence()"></i></th>
+                    <th [colSpan]="cols[0].colspan"><input type="text" formControlName="competence" placeholder="Competence" (keyup.enter)="saveCompetence()"></th>
+                    <th [colSpan]="cols[1].colspan"><input type="text" formControlName="descriptif" placeholder="Descriptif" (keyup.enter)="saveCompetence()"></th>
+                    <th>&nbsp;&nbsp; <i class="icone far fa-check-square" (click)="saveCompetence()"></i></th>
                 </ng-template>
             </p-table>
         </form>
@@ -40,8 +42,8 @@
 
         <ng-template pTemplate="body" let-competence>
             <tr>
-                <td colspan="3">{{competence.competence}}</td>
-                <td colspan="9">
+                <td [colSpan]="cols[0].colspan">{{competence.competence}}</td>
+                <td [colSpan]="cols[1].colspan">
                     <ng-container *ngIf="competence !== competenceToModify; else modifyDescriptif">
                         {{competence.descriptif}}
                     </ng-container>
@@ -63,10 +65,8 @@
                 </td>
             </tr>
         </ng-template>
-
-
     </p-table>
 </form>
-  </ng-container>
-  <br>
-  <br>
+</ng-container>
+<br>
+<br>

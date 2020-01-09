@@ -42,15 +42,15 @@ export class ReglesListComponent implements OnInit {
    }
 
     this.cols = [
-      { field: 'metier', header: 'Métier' },
-      { field: 'posteType', header: 'Poste Type' },
-      { field: 'domaine', header: 'Domaine' },
-      { field: 'stratesEquipes', header: 'Strates Équipes' },
-      { field: 'profil', header: 'Profil' },
-      { field: 'equipesSupervisees', header: 'Équipes Supervisées' },
-      { field: 'descriptifEquipesSupervisses', header: 'Descriptif' },
-      { field: 'competencesForSearch', header: 'Compétences' },
-      { field: 'actions', header: 'Actions'}
+      { field: 'metier', header: 'Métier',  colspan: '1'},
+      { field: 'posteType', header: 'Poste Type',  colspan: '5' },
+      { field: 'domaine', header: 'Domaine',  colspan: '2' },
+      { field: 'stratesEquipes', header: 'Strates Équipes',  colspan: '3' },
+      { field: 'profil', header: 'Profil',  colspan: '4' },
+      { field: 'equipesSupervisees', header: 'Équipes Supervisées',  colspan: '2' },
+      { field: 'descriptifEquipesSupervisses', header: 'Descriptif',  colspan: '2' },
+      { field: 'competencesForSearch', header: 'Compétences',  colspan: '3' },
+      { field: 'actions', header: 'Actions',  colspan: '2'}
   ];
 
   }
