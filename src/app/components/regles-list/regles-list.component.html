@@ -96,7 +96,7 @@
             <span *ngIf="col.field !== 'competences' && col.field !=='metier' && col.field !=='actions'">  {{rowData[col.field]}} </span>
             <span *ngIf="col.field === 'competences'"> {{rowData.competences}} </span>
             <span *ngIf="col.field === 'actions'">
-              <i class="icone far fa-eye fa-lg" (click)="viewDetail(rowData)"></i>&nbsp;&nbsp;
+              <i class="icone far fa-eye fa-lg" (click)="goView(rowData.id)"></i>&nbsp;&nbsp;
               <i class="icone far fa-edit" (click)="goUpdate(rowData)" ></i>&nbsp;
               <i class="icone icone far fa-trash-alt" (click)="deleteRegle(rowData.id)"></i>&nbsp; </span>
           </td>

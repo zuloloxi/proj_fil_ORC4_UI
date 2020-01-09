@@ -38,6 +38,7 @@ export class RegleFormComponent implements OnInit {
       if (this.router.url.startsWith("/regleupdate")) {this.regleAction = RegleAction.Update; }
       if (this.router.url.startsWith("/reglecreate")) {this.regleAction = RegleAction.Create; }
       if (this.router.url.startsWith("/regledelete")) {this.regleAction = RegleAction.Delete; }
+      if (this.router.url.startsWith("/regleview")) {this.regleAction = RegleAction.View; }
 
       this.competenceService.getAllCompetences().subscribe(
         competencesList => {
@@ -109,5 +110,22 @@ export class RegleFormComponent implements OnInit {
          );
        }
       });
+      }
+
+      changeRegleAction(regleAction: string) {
+        switch (regleAction) {
+          case 'update' :
+            this.regleAction = RegleAction.Update;
+            break;
+          case 'delete' :
+              this.regleAction = RegleAction.Delete;
+              break;
+          case 'create' :
+              this.regleAction = RegleAction.Create;
+              break;
+          default:
+            this.regleAction = RegleAction.Create;
+            break;
+        }
       }
 }

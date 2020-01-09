@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'competences', component: CompetenceListComponent },
   { path: 'fichier', component: ReglesListComponent },
   { path: 'reglecreate', component: RegleFormComponent },
+  { path: 'regleview/:id', component: RegleFormComponent },
   { path: 'regleupdate/:id', component: RegleFormComponent },
   { path: 'allTransformed', component: TransformListComponent },
   { path: 'regledelete/:id', component: RegleFormComponent },
