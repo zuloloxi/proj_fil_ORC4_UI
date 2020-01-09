@@ -72,7 +72,7 @@
             <div>
               <button type="button" pButton icon="pi pi-file-o" iconPos="left" label="CSV" (click)="dt1.exportCSV()" style="margin-right: 0.5em;"></button>
               <button type="button" pButton icon="pi pi-file" iconPos="left" label="CSV - sélection" (click)="dt1.exportCSV({selectionOnly:true})" style="margin-right: 0.5em;"></button>
-              <i class="icone far fa-sticky-note fa-lg"  pDroppable="a" (onDrop)="dropEdit($event)" *ngIf="showIcons"></i>
+              <i class="icone fas fa-user-edit fa-lg"  pDroppable="a" (onDrop)="dropEdit($event)" *ngIf="showIcons"></i>
             </div>
 
             <div style="width:auto">
