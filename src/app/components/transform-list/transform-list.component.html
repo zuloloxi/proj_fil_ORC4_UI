@@ -1,26 +1,28 @@
-<ng-container *ngIf="!started;else start">
-  <br>
-  <br>
-  <br>
-  <div style="text-align:center">
-    <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"
-            style="width:170px;height:auto;font-size:100%;justify-content=auto;text-align:right;border-radius:1000px"></button>
-  </div>
+<!--<ng-container *ngIf="!started;else start">-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <div style="text-align:center">-->
+<!--    <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"-->
+<!--            style="width:170px;height:auto;font-size:100%;justify-content=auto;text-align:right;border-radius:1000px"></button>-->
+<!--  </div>-->
 
-</ng-container>
+<!--</ng-container>-->
 
-<ng-template #start>
+<!--<ng-template #start>-->
   <ng-container>
 
-    <div style="float:right">
-        <span style="width:auto;font-weight:400">
-          <p-toggleButton [(ngModel)]="checked1" onLabel=" => toutes les colonnes" offLabel=" => colonnes réduites"
-                          onIcon="fas fa-compress-arrows-alt" offIcon="fas fa-expand-arrows-alt" (onChange)="handleChange($event)"></p-toggleButton>
-        </span>
-    </div>
-
     <ng-container *ngIf="checked1;else etendu">
-      <h2>{{valids.length }} enregistrements valides</h2>
+      <br>
+      <div style="display:flex;justify-content:space-between;align-items-center">
+        <h2>{{valids.length }} enregistrements valides</h2>
+        <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"
+                style="width:170px;height:auto;font-size:100%;border-radius:1000px"></button>
+
+        <p-toggleButton [(ngModel)]="checked1" onLabel=" => toutes les colonnes" offLabel=" => colonnes réduites"
+                        onIcon="fas fa-compress-arrows-alt" offIcon="fas fa-expand-arrows-alt" (onChange)="handleChange($event)"></p-toggleButton>
+      </div>
+      <br>
       <p-table #dt2 [columns]="cols" [value]="valids" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="valids.length" [rowsPerPageOptions]="[5,10,50,100,valids.length]" paginatorPosition="bottom" sortMode="multiple"
                selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="false">
@@ -137,7 +139,16 @@
     </ng-container>
 
     <ng-template #etendu>
-      <h2>{{valids.length }} enregistrements valides</h2>
+      <br>
+      <div style="display:flex;justify-content:space-between;align-items-center">
+        <h2>{{valids.length }} enregistrements valides</h2>
+        <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"
+                style="width:170px;height:auto;font-size:100%;border-radius:1000px"></button>
+
+        <p-toggleButton [(ngModel)]="checked1" onLabel=" => toutes les colonnes" offLabel=" => colonnes réduites"
+                        onIcon="fas fa-compress-arrows-alt" offIcon="fas fa-expand-arrows-alt" (onChange)="handleChange($event)"></p-toggleButton>
+      </div>
+      <br>
       <p-table #dt2 [columns]="cols" [value]="valids" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="valids.length" [rowsPerPageOptions]="[5,10,50,100,valids.length]" paginatorPosition="bottom" sortMode="multiple"
                selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="true">
@@ -235,4 +246,4 @@
       </p-table>
     </ng-template>
   </ng-container>
-</ng-template>
+<!--</ng-template>-->

@@ -25,7 +25,7 @@ export class TransformListComponent implements OnInit {
   selectedOutputs: Output[];
   checked1: boolean = true;
   isChecked: boolean = true;
-  started: boolean = true;
+//   started: boolean = true;
   showIcons = false;
 
   constructor(private router: Router,
@@ -34,7 +34,7 @@ export class TransformListComponent implements OnInit {
               private outputService: OutputService) {}
 
   ngOnInit() {
-    this.started = !this.started;
+//     this.started = true;
     this.domaines = [
             { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
             { label: 'ResBPFCBP', value: 'ResBPFCBP' },
@@ -57,64 +57,46 @@ export class TransformListComponent implements OnInit {
   }
 
   dropEdit(event){
-    console.log('urlParam from Edit', this.urlParam);
-
     const params = new HttpParams()
-          .set('identifiant', this.urlParam.identifiant)
-          .set('nom', this.urlParam.nom);
-
-    //         return this.httpClient.get<repos[]>('saisie/output'+ 'users/' + this.urlParam.identifiant + '/repos',{params})
-            console.log(params.toString()); //Returns page=3&sort=name
-
-//     this.router.navigate( ['saisie/output', {params.identifiant });
-//     this.router.navigate(['saisie/output', {p1: this.urlParam.identifiant, p2: this.urlParam.nom }]);
-        this.router.navigate(['saisie/output'], { queryParams: { identifiant: this.urlParam.identifiant,
-         domaine: this.urlParam.domaine,
-         equipe: this.urlParam.equipe,
-         profil: this.urlParam.profil,
-         competences: this.urlParam.competences,
-          } });
+    this.router.navigate(['saisie/output'],
+       { queryParams:
+         { identifiant: this.urlParam.identifiant,
+           domaine: this.urlParam.domaine,
+           equipe: this.urlParam.equipe,
+           profil: this.urlParam.profil,
+           competences: this.urlParam.competences
+         }
+       }
+    );
   }
 
 //   transform(){
-//       this.started = !this.started;
-//       this.domaines = [
-//               { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
-//               { label: 'ResBPFCBP', value: 'ResBPFCBP' },
-//               { label: 'ResRetail', value: 'ResRetail' },
-//               { label: 'ResCorpo', value: 'ResCorpo' }
-//              ];
+//     this.started = !this.started;
+//     this.domaines =
+//       [
+//         { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+//         { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+//         { label: 'ResRetail', value: 'ResRetail' },
+//         { label: 'ResCorpo', value: 'ResCorpo' }
+//       ];
 //
-//       this.updateCols();
-//
-// //              this.outputService.getAllOutputs().subscribe(outputs => this.outputs = outputs);
-//
-// //           this.outputService.getAlltransformInputs().subscribe((outputs) =>
-// //              { this.outputs = outputs;
-// //                this.outputService.deleteOutputs().subscribe(
-// //                  ()=> {
-// //                   this.outputService.publishResults(outputs).subscribe(
-// //                     ()=> {
-//                       this.outputService.getAlltransformInputs().subscribe((outputList) => {
-//                           this.outputList = outputList;
-//                           this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
-//                                                                       outputs.domaine.substr(0,6) !== 'ERREUR' &&
-//                                                                       outputs.equipe.substr(0,6) !== 'ERREUR' &&
-//                                                                       outputs.competences.substr(0,6) !== 'ERREUR');
-//                           this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
-//                                                                       outputs.domaine.substr(0,6) === 'ERREUR' ||
-//                                                                       outputs.equipe.substr(0,6) === 'ERREUR' ||
-//                                                                       outputs.competences.substr(0,6) === 'ERREUR');
-//                           return this.total = [this.valids, this.rejets];
-//                       });
-// //                 });
-// //                });
-// //              }
-// //           );
+//     this.updateCols();
+//     this.outputService.getAlltransformInputs().subscribe((outputList) => {
+//       this.outputList = outputList;
+//       this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
+//                                                       outputs.domaine.substr(0,6) !== 'ERREUR' &&
+//                                                       outputs.equipe.substr(0,6) !== 'ERREUR' &&
+//                                                       outputs.competences.substr(0,6) !== 'ERREUR');
+//       this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
+//                                                       outputs.domaine.substr(0,6) === 'ERREUR' ||
+//                                                       outputs.equipe.substr(0,6) === 'ERREUR' ||
+//                                                       outputs.competences.substr(0,6) === 'ERREUR');
+//       return this.total = [this.valids, this.rejets];
+//     });
 //   }
 
   transform(){
-    this.started = !this.started;
+//     this.started = true;
     this.domaines = [
             { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
             { label: 'ResBPFCBP', value: 'ResBPFCBP' },
@@ -123,8 +105,6 @@ export class TransformListComponent implements OnInit {
            ];
 
     this.updateCols();
-
-//     this.outputService.getAllOutputs().subscribe(outputs => this.outputs = outputs);
 
     this.outputService.getAlltransformInputs().subscribe((outputs) =>
        { this.outputs = outputs;
