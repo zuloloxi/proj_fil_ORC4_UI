@@ -1,11 +1,4 @@
-<ng-container *ngIf="regles.length === 0 ;else started">
-    <div class="center-spinner">
-        <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration="1s"></p-progressSpinner>
-    </div>
-  </ng-container>
 
-
-  <ng-template #started>
 <p-messages [(value)]="msgs"></p-messages>
 
 <ng-container *ngIf="regles">
@@ -14,7 +7,7 @@
   <h5><i class="icone far fa-plus-square fa-md" (click)="goCreate()"> Ajouter une règle</i></h5>
   <br>
 
-  <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="20" paginatorPosition="both" [resizableColumns]="true">
+  <p-table  #dt [columns]="cols" [value]="regles" [paginator]="true" [rows]="regles.length" [rowsPerPageOptions]="[5,10,100]" paginatorPosition="bottom" [resizableColumns]="true">
     <ng-template pTemplate="caption">
       <div style="text-align: right">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -57,5 +50,4 @@
     </ng-template>
   </p-table>
 </ng-container>
-</ng-template>
 
