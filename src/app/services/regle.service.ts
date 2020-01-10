@@ -12,7 +12,6 @@ export class RegleService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  refreshRegles = new Subject<string>();
 
   constructor(private http: HttpClient,
               @Inject('BACKEND_URL') private baseUrl: string) { }
@@ -58,21 +57,13 @@ export class RegleService {
 
  }
 
- saveRegle(regle: RegleDTO): any  {
+ saveRegle(regle: RegleDTO): any {
 
   const url = `${this.baseUrl}/regles` + (regle.id !== 0 ? `/${regle.id}` : '');
 
   const method = regle.id === 0 ? 'post' : 'put';
 
-
-  return this.http.request(method, url, {body: regle}).subscribe(
-    () => {
-      this.refreshRegles.next('refresh');
-    },
-    (error) => {
-      console.log('Erreur ! : ' + error);
-    }
-  );
+  return this.http.request(method, url, {body: regle});
 }
 
   deleteRegle(id: number): Observable<RegleDTO> {

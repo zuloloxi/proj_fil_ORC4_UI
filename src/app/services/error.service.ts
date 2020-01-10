@@ -14,7 +14,7 @@ export class ErrorService {
     'ERR_0002.1' : 'La compétence sélectionnée a changé',
     'ERR_0002.2' : 'La compétence à supprimer est encore utilisée par une règle',
     'ERR_0002.3' : 'La compétence à créer existe déjà',
-    'ERR_0003.3' : 'Régle non supprimable',
+    'ERR_0003.3' : 'Régle non modifiable',
 
   };
 

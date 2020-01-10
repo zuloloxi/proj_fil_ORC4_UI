@@ -92,9 +92,11 @@ export class RegleFormComponent implements OnInit {
         competences: this.regleForm.get('competences').value}
       );
          if (this.regleToCreate.competences == null) {this.regleToCreate.competences = [] }  ;
-         this.regleService.saveRegle(this.regleToCreate);
-         this.regleService.refreshRegles.subscribe(
-           refresh => this.router.navigate(['/regles']) );
+         this.regleService.saveRegle(this.regleToCreate).subscribe(
+          () => {this.router.navigate(['/regles'])},
+           error =>  this.msgs.push({severity: 'error', summary: '', detail: this.errorService.getMessage(error)})
+                    );
+
          }
 
       }
