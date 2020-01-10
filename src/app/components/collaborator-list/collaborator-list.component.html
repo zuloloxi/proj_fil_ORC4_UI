@@ -1,10 +1,10 @@
-<ng-container *ngIf="collaborateurs.length === 0 ;else started">
+<ng-container *ngIf="showSpinner ;else started">
     <div class="center-spinner">
         <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration="1s"></p-progressSpinner>
     </div>
   </ng-container>
 
-<ng-template #started>
+
 <ng-container *ngIf="collaborateur">
 
   <p-dialog header="Détail du collaborateur" [(visible)]="displayDetail" [style]="{width: '70%'}" [modal]="true" [maximizable]=true>
@@ -100,7 +100,7 @@
     </ng-template>
     {{collaborateurs.length }}
 
-      <ng-template pTemplate="body" let-collaborateur>
+      <ng-template #started pTemplate="body" let-collaborateur >
 
           <tr>
               <td ><i class="fas fa-grip-lines" pDraggable="collaborateur" (onDragStart)="dragStart($event,collaborateur)" (onDragEnd)="dragEnd($event)"></i>&nbsp;&nbsp;{{collaborateur.uid}}</td>
@@ -164,4 +164,3 @@
 
 </ng-container>
 
-  </ng-template>

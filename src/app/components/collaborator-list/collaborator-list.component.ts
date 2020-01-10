@@ -32,6 +32,8 @@ export class CollaboratorListComponent implements OnInit {
   errorEquipe = false;
   errorCompetences = false;
 
+ showSpinner = true;
+
   constructor( private router: Router,
                private errorService: ErrorService,
                private collaborateurService: CollaborateurService) { }
@@ -39,7 +41,9 @@ export class CollaboratorListComponent implements OnInit {
   ngOnInit() {
     this.collaborateurService.getAllCollaborateurs().subscribe((collab) => {
       this.collaborateurs = collab;
+      this.showSpinner = false;
     });
+
   }
 
   dragStart(event, collaborateur) {
