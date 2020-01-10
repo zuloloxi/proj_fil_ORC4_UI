@@ -1,56 +1,12 @@
+<ng-container *ngIf="regles.length === 0 ;else started">
+    <div class="center-spinner">
+        <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="8" fill="#EEEEEE" animationDuration="1s"></p-progressSpinner>
+    </div>
+  </ng-container>
 
+
+  <ng-template #started>
 <p-messages [(value)]="msgs"></p-messages>
-<ng-container *ngIf="regleDetail">
-  <p-dialog header="Détail de la Règle de gestion" [(visible)]="display" [style]="{width: '80%'}" [modal]="true" [maximizable]=true>
-    <div class="container">
-      <div class="row">
-        <div class="col-3">Déploiement </div>
-        <div class="col-9">: {{regleDetail.deploiement}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Métier </div>
-        <div class="col-9">: {{regleDetail.metier}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Poste Type </div>
-        <div class="col-9">: {{regleDetail.posteType}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Domaine </div>
-        <div class="col-9">: {{regleDetail.domaine}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Strates Équipes </div>
-        <div class="col-9">: {{regleDetail.stratesEquipes}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Profil </div>
-        <div class="col-9">: {{regleDetail.profil}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Équipes Supervisées </div>
-        <div class="col-9">: {{regleDetail.equipesSupervisees}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Descriptif Équipes Supervisées </div>
-        <div class="col-9">: {{regleDetail.descriptifEquipesSupervisses}}</div>
-      </div>
-      <div class="row">
-        <div class="col-3">Competences  </div>
-        <div class="col-9">:</div>
-        <ng-container *ngFor="let competence of regleDetail.competences">
-          <div class="col-1"></div>
-          <div class="col-3">Competence </div>
-          <div class="col-8">: {{competence.competence}}</div>
-          <div class="col-1"></div>
-          <div class="col-3">Descriptif </div>
-          <div class="col-8">: {{competence.descriptif}}</div>
-          <div class="col-12"></div>
-        </ng-container>
-      </div>
-    </div>
-  </p-dialog>
-</ng-container>
 
 <ng-container *ngIf="regles">
   <p-confirmDialog header="Suppression" icon="pi pi-exclamation-triangle"></p-confirmDialog>
@@ -101,4 +57,5 @@
     </ng-template>
   </p-table>
 </ng-container>
+</ng-template>
 

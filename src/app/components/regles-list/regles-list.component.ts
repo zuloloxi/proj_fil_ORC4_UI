@@ -16,7 +16,6 @@ export class ReglesListComponent implements OnInit {
 
   regles: RegleViewList[] = [];
   display: boolean;
-  regleDetail: RegleViewList;
   httpMessage: string;
   msgs: Message[] = [];
   comptetenceID: number;
