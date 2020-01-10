@@ -32,6 +32,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { FormsModule }   from '@angular/forms';
 import { SaisieListComponent } from './components/saisie-list/saisie-list.component';
 
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { SaisieListComponent } from './components/saisie-list/saisie-list.compon
     DragDropModule,
     DropdownModule,
     ToggleButtonModule,
+    ProgressSpinnerModule,
     FormsModule
   ],
   providers: [
