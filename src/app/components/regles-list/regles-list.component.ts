@@ -35,7 +35,7 @@ export class ReglesListComponent implements OnInit {
       );
     } else {
     this.regleService.getAllRegles().subscribe(
-      regleList => this.regles = regleList,
+      regleList => this.regles = regleList.filter(regle => !regle.domaine.startsWith('ERREUR')),
       error => console.log(error)
     );
    }
