@@ -1,15 +1,10 @@
-<!--<ng-container *ngIf="!started;else start">-->
-<!--  <br>-->
-<!--  <br>-->
-<!--  <br>-->
-<!--  <div style="text-align:center">-->
-<!--    <button type="button" pButton icon="fas fa-cogs" iconPos="left" label="Transformer"(click)="transform()"-->
-<!--            style="width:170px;height:auto;font-size:100%;justify-content=auto;text-align:right;border-radius:1000px"></button>-->
-<!--  </div>-->
+<ng-container *ngIf="spinner;else started">
+  <div class="center-spinner">
+      <p-progressSpinner  [style]="{width: '100px', height: '100px',margin: '0 auto'}" strokeWidth="8" fill="#EEEEEE" animationDuration="1s"></p-progressSpinner>
+  </div>
+</ng-container>
 
-<!--</ng-container>-->
-
-<!--<ng-template #start>-->
+<ng-template #started>
   <ng-container>
 
     <ng-container *ngIf="checked1;else etendu">
@@ -246,4 +241,4 @@
       </p-table>
     </ng-template>
   </ng-container>
-<!--</ng-template>-->
+</ng-template>

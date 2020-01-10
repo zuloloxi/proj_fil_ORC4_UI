@@ -25,22 +25,22 @@ export class TransformListComponent implements OnInit {
   selectedOutputs: Output[];
   checked1: boolean = true;
   isChecked: boolean = true;
-//   started: boolean = true;
+  spinner: boolean = true;
   showIcons = false;
-
   constructor(private router: Router,
               private httpClient:HttpClient,
               private serializer: UrlSerializer,
               private outputService: OutputService) {}
 
   ngOnInit() {
-//     this.started = true;
-    this.domaines = [
-            { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
-            { label: 'ResBPFCBP', value: 'ResBPFCBP' },
-            { label: 'ResRetail', value: 'ResRetail' },
-            { label: 'ResCorpo', value: 'ResCorpo' }
-           ];
+  this.updateCols();
+  this.getOutputs();
+  this.domaines = [
+          { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+          { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+          { label: 'ResRetail', value: 'ResRetail' },
+          { label: 'ResCorpo', value: 'ResCorpo' }
+         ];
   }
 
   dragStart(event, urlParam) {
@@ -97,13 +97,13 @@ export class TransformListComponent implements OnInit {
 
   transform(){
 //     this.started = true;
-    this.domaines = [
-            { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
-            { label: 'ResBPFCBP', value: 'ResBPFCBP' },
-            { label: 'ResRetail', value: 'ResRetail' },
-            { label: 'ResCorpo', value: 'ResCorpo' }
-           ];
-
+//     this.domaines = [
+//             { label: 'Tous les domaines', value: 'ResBPFCBP'&&'ResRetail'&&'ResCorpo' },
+//             { label: 'ResBPFCBP', value: 'ResBPFCBP' },
+//             { label: 'ResRetail', value: 'ResRetail' },
+//             { label: 'ResCorpo', value: 'ResCorpo' }
+//            ];
+    this.spinner= true;
     this.updateCols();
 
     this.outputService.getAlltransformInputs().subscribe((outputs) =>
@@ -112,22 +112,28 @@ export class TransformListComponent implements OnInit {
            ()=> {
             this.outputService.publishResults(outputs).subscribe(
               ()=> {
-                this.outputService.getAllOutputs().subscribe((outputList) => {
-                    this.outputList = outputList;
-                    this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
-                                                                outputs.domaine.substr(0,6) !== 'ERREUR' &&
-                                                                outputs.equipe.substr(0,6) !== 'ERREUR' &&
-                                                                outputs.competences.substr(0,6) !== 'ERREUR');
-                    this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
-                                                                outputs.domaine.substr(0,6) === 'ERREUR' ||
-                                                                outputs.equipe.substr(0,6) === 'ERREUR' ||
-                                                                outputs.competences.substr(0,6) === 'ERREUR');
-                    return this.total = [this.valids, this.rejets];
-                });
+                this.getOutputs();
               });
          });
        }
     );
+  }
+
+  getOutputs(){
+    this.outputService.getAllOutputs().subscribe((outputList) => {
+                        this.outputList = outputList;
+                        this.valids = this.outputList.filter(outputs => outputs.profil.substr(0,6) !== 'ERREUR' &&
+                                                                    outputs.domaine.substr(0,6) !== 'ERREUR' &&
+                                                                    outputs.equipe.substr(0,6) !== 'ERREUR' &&
+                                                                    outputs.competences.substr(0,6) !== 'ERREUR');
+                        this.rejets = this.outputList.filter(outputs => outputs.profil.substr(0,6) === 'ERREUR' ||
+                                                                    outputs.domaine.substr(0,6) === 'ERREUR' ||
+                                                                    outputs.equipe.substr(0,6) === 'ERREUR' ||
+                                                                    outputs.competences.substr(0,6) === 'ERREUR');
+                        this.spinner= false;
+                        return this.total = [this.valids, this.rejets];
+                    });
+
   }
 
   handleChange(e) {
