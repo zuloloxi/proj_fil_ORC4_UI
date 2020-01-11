@@ -142,7 +142,6 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   viewTransformError(error: string) {
-    console.log(error);
     this.displayTransformError = true;
     this.error = error;
   }
