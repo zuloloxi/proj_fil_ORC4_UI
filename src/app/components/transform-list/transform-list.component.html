@@ -18,7 +18,7 @@
                         onIcon="fas fa-compress-arrows-alt" offIcon="fas fa-expand-arrows-alt" (onChange)="handleChange($event)"></p-toggleButton>
       </div>
       <br>
-      <p-table #dt2 [columns]="cols" [value]="valids" [scrollable]="true" scrollHeight="300px"
+      <p-table #dt2 [columns]="cols1" [value]="valids" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="valids.length" [rowsPerPageOptions]="[5,10,50,100,valids.length]" paginatorPosition="bottom" sortMode="multiple"
                selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="false">
         <ng-template pTemplate="caption">
@@ -39,7 +39,7 @@
         <ng-template pTemplate="header" let-columns>
           <tr>
             <ng-container *ngFor="let col of columns">
-              <th [pSortableColumn]="col.field" *ngIf="!col.hidden" pResizableColumn>
+              <th [pSortableColumn]="col.field" pResizableColumn>
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
@@ -50,7 +50,7 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr [pSelectableRow]="rowData">
             <ng-container *ngFor="let col of columns">
-              <td *ngIf="!col.hidden"  class="ui-resizable-column">
+              <td  class="ui-resizable-column">
                 {{rowData[col.field]}}
               </td>
             </ng-container>
@@ -60,7 +60,7 @@
 
       <h2>{{rejets.length }} enregistrements en erreur</h2>
 
-      <p-table #dt1 [columns]="cols" [value]="rejets" [scrollable]="true" scrollHeight="300px"
+      <p-table #dt1 [columns]="cols1" [value]="rejets" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="rejets.length" [rowsPerPageOptions]="[5,10,50,100,rejets.length]" paginatorPosition="bottom" sortMode="multiple"
                selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="false">
         <ng-template pTemplate="caption">
@@ -83,7 +83,7 @@
         <ng-template pTemplate="header" let-columns>
           <tr>
             <ng-container *ngFor="let col of columns">
-              <th [pSortableColumn]="col.field" *ngIf="!col.hidden" pResizableColumn>
+              <th [pSortableColumn]="col.field" pResizableColumn>
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
@@ -96,7 +96,7 @@
           <tr>
             <ng-container *ngFor="let col of columns">
 
-              <td *ngIf="!col.hidden" class="ui-resizable-column">
+              <td class="ui-resizable-column">
 
                   <ng-container *ngIf="col.field == 'identifiant';else alter">
 
@@ -144,7 +144,7 @@
                         onIcon="fas fa-compress-arrows-alt" offIcon="fas fa-expand-arrows-alt" (onChange)="handleChange($event)"></p-toggleButton>
       </div>
       <br>
-      <p-table #dt2 [columns]="cols" [value]="valids" [scrollable]="true" scrollHeight="300px"
+      <p-table #dt2 [columns]="cols2" [value]="valids" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="valids.length" [rowsPerPageOptions]="[5,10,50,100,valids.length]" paginatorPosition="bottom" sortMode="multiple"
                selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="true">
         <ng-template pTemplate="caption">
@@ -171,7 +171,7 @@
         <ng-template pTemplate="header" let-columns>
           <tr>
             <ng-container *ngFor="let col of columns">
-              <th [pSortableColumn]="col.field" *ngIf="!col.hidden" pResizableColumn>
+              <th [pSortableColumn]="col.field" pResizableColumn>
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
@@ -182,7 +182,7 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr [pSelectableRow]="rowData">
             <ng-container *ngFor="let col of columns">
-              <td *ngIf="!col.hidden"  class="ui-resizable-column">
+              <td  class="ui-resizable-column">
                 {{rowData[col.field]}}
               </td>
             </ng-container>
@@ -192,7 +192,7 @@
 
       <h2>{{rejets.length }} enregistrements en erreur</h2>
 
-      <p-table #dt1 [columns]="cols" [value]="rejets" [scrollable]="true" scrollHeight="300px"
+      <p-table #dt1 [columns]="cols2" [value]="rejets" [scrollable]="true" scrollHeight="300px"
                [paginator]="true" [rows]="rejets.length" [rowsPerPageOptions]="[5,10,50,100,rejets.length]" paginatorPosition="bottom" sortMode="multiple"
                selectionMode="multiple" [(selection)]="selectedOutputs" [resizableColumns]="true">
         <ng-template pTemplate="caption">
@@ -220,7 +220,7 @@
         <ng-template pTemplate="header" let-columns>
           <tr>
             <ng-container *ngFor="let col of columns">
-              <th [pSortableColumn]="col.field" *ngIf="!col.hidden" pResizableColumn>
+              <th [pSortableColumn]="col.field" pResizableColumn>
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
@@ -232,7 +232,7 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr [pSelectableRow]="rowData">
             <ng-container *ngFor="let col of columns">
-              <td *ngIf="!col.hidden" class="ui-resizable-column">
+              <td class="ui-resizable-column">
                 {{rowData[col.field]}}
               </td>
             </ng-container>
