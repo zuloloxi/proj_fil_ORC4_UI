@@ -107,16 +107,13 @@ export class TransformListComponent implements OnInit {
   }
 
   dragStart(event, urlParam) {
-    console.log('urlParamStart', urlParam)
     this.urlParam = urlParam;
     this.showIcons = true;
-    console.log('start');
   }
 
   dragEnd(event) {
     this.urlParam = null;
     this.showIcons = false;
-    console.log('end');
   }
 
   dropEdit(event){
